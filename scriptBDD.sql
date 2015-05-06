@@ -42,6 +42,18 @@ constraint fk_note_utilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU
 
 ) ;
 
+create table Avis (
+idDonneur int,
+idReceveur int,
+idT int,
+texte varchar(500),
+note int,
+constraint pk_avis PRIMARY KEY(idDonneur, idReceveur, idT),
+constraint fk_idDonneur FOREIGN KEY(idDonneur) REFERENCES CompteUtilisateur(idU),
+constraint fk_idReceveur FOREIGN KEY(idReceveur) REFERENCES CompteUtilisateur(idU),
+constraint fk_idT FOREIGN KEY(idT) REFERENCES Trajets(idT)
+) ;
+
 create table Trajets (
 idT int,
 dateT date,
