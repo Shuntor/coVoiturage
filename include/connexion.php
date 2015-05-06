@@ -1,5 +1,5 @@
 <?php 
 
-echo "Bienvenue sur la page de connexion ! modi de merde"
+echo "Bienvenue sur la page de connexion ! "
 
 ?>

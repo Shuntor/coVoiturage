@@ -40,7 +40,7 @@
           <h3 class="logo"><img src="images/logo2.png" alt="Acceuil du site" href="?p=" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
             <ul class="nav pull-right">
             <?php if (!(isset($_SESSION['login']))){?>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="?p=connexion" role="button">Se Connecter!</a>
+              <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="?p=identification" role="button">Se Connecter!</a>
               <a class="btn btn-lg btn-success bouton boutonConnexion " href="?p=inscription" role="button">S'inscrire!</a>
             <?php }else{ ?>
               <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="deconnexion.html" role="button">Se Deconnecter!</a>
@@ -73,6 +73,8 @@
           {include("./include/connexion.php");}
         else if($_GET['p']=='inscription')
           {include("./include/inscription.php");}
+        else if($_GET['p']=='identification')
+          {include("./include/identification.php");}
       ?>
      
 
