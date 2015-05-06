@@ -1,0 +1,108 @@
+
+h3
+{
+display:inline;
+}
+
+body
+{
+background-color:#b4b4b4;
+}
+
+.annonce
+{
+font-size: 10px; 
+Background-color: #eeeeee;
+border-radius: 15px 15px 15px 15px; 
+box-shadow:5px 5px #a0a0a0;
+padding:5px;
+padding-left:20px;
+list-style-type:none; 
+font-weight: bold;
+
+}
+
+.bouton
+{
+background-color: #008ebd;
+border:none;
+
+}
+
+.bouton:hover
+{
+background-color: #007eb0;
+}
+
+.footer
+{
+border-top: 2px solid grey;
+padding:15px;
+margin-top:40px;
+}
+
+.rechercher
+{
+margin-top:40px;
+}
+
+.formRecherche
+{
+margin-top:100px;
+box-shadow:5px 5px #a0a0a0;
+}
+
+.seConnecter
+{
+background-color:#00b4dc;
+border:none;
+}
+
+.seConnecter:hover
+{
+background-color: #008ebd;
+    
+}
+
+.boutonConnexion
+{
+background-color: #008ebd;
+border: none;
+border-radius: 5px 5px 5px 5px;
+font-weight: bold;
+color: white;
+margin-left:20px;
+
+}
+
+.connexion
+{
+margin-left:100px;
+}
+
+
+.boutonConnexion:hover
+{
+background-color: #007eb0;
+}
+
+h1
+{
+margin-bottom:40px;
+}
+
+.logo
+{
+margin-top: 0px;
+font-weight:600;
+font-size:32px;
+}
+
+.cadre_logo
+{
+background-color:black;
+color:white;
+border-radius: 0px 0px 5px 5px;
+}
+
+
