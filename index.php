@@ -37,11 +37,11 @@
       <div class="header">
         
         <div class="form-group col-lg-12 cadre_logo">
-          <h3 class="logo"><img src="images/logo2.png" alt="Acceuil du site" href="index.html" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
+          <h3 class="logo"><img src="images/logo2.png" alt="Acceuil du site" href="?p=" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
             <ul class="nav pull-right">
             <?php if (!(isset($_SESSION['login']))){?>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="connexion.html" role="button">Se Connecter!</a>
-              <a class="btn btn-lg btn-success bouton boutonConnexion " href="inscription.html" role="button">S'inscrire!</a>
+              <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="?p=connexion" role="button">Se Connecter!</a>
+              <a class="btn btn-lg btn-success bouton boutonConnexion " href="?p=inscription" role="button">S'inscrire!</a>
             <?php }else{ ?>
               <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="deconnexion.html" role="button">Se Deconnecter!</a>
             <?php } ?>
@@ -69,6 +69,10 @@
           {include("./include/resultatRecherche.php");}
         else if($_GET['p']=='trajetDetails')
           {include("./include/trajetDetails.php");}
+        else if($_GET['p']=='connexion')
+          {include("./include/connexion.php");}
+        else if($_GET['p']=='inscription')
+          {include("./include/inscription.php");}
       ?>
      
 
