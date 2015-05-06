@@ -1,3 +1,4 @@
+
  <!--<!DOCTYPE html> -->
 <html lang="fr">
   <head>
@@ -61,3 +62,4 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+
