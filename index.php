@@ -8,7 +8,11 @@
     <meta name="description" content="Site de covoiturage étudiant">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <title>CovoiturageEtudiant.com</title>
 
     <!-- Bootstrap core CSS -->
@@ -37,11 +41,31 @@
       <div class="header">
         
         <div class="form-group col-lg-12 cadre_logo">
-          <h3 class="logo"><img src="images/logo2.png" alt="Acceuil du site" href="?p=" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
+          <h3 class="logo"><img src="static/images/logo2.png" alt="Acceuil du site" href="?p=" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
             <ul class="nav pull-right">
             <?php if (!(isset($_SESSION['login']))){?>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="?p=identification" role="button">Se Connecter!</a>
-              <a class="btn btn-lg btn-success bouton boutonConnexion " href="?p=inscription" role="button">S'inscrire!</a>
+              
+                
+            <a class="btn btn-lg btn-success bouton boutonConnexion connexion " data-placement="bottom" data-toggle="popover" data-title="Login" data-container="body" type="button" data-html="true" role="button" id="login">Se Connecter!</a>
+            <div id="popover-content" class="hide">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="mail" class="col-lg-12">Adresse e-mail :</label>
+                        <input placeholder="adresseMail" class="form-control" maxlength="5" type="text">
+                    </div>
+                        <br><br>
+                    <div class="form-group">
+                        <label for="password" class="col-lg-12">Mot de Passe :</label>
+                        <input placeholder="Password" class="form-control" maxlength="5" type="password">
+                    </div>
+                        <br><br>
+                        <button type="submit" class="btn boutonConnexion">Se connecter! »</button>                                  
+                    
+                </form>
+            </div>
+                
+                
+            <a class="btn btn-lg btn-success bouton boutonConnexion " href="?p=inscription" role="button">S'inscrire!</a>
             <?php }else{ ?>
               <a class="btn btn-lg btn-success bouton boutonConnexion connexion " href="deconnexion.html" role="button">Se Deconnecter!</a>
             <?php } ?>
@@ -94,3 +118,19 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+<!-- Script du volet connexion -->
+<script>
+$("[data-toggle=popover]").popover({
+    html: true, 
+	content: function() {
+          return $('#popover-content').html();
+        }
+});
+</script>
+
+<!-- Script des volets Date -->
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>

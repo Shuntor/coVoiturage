@@ -14,7 +14,7 @@
                 </div> 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Date (jj/mm/aaaa) :</label> 
-                    <input id= "text" type="text" class="form-control" placeholder="Ex: 18/11/2015,...">
+                    <input type="text" class="form-control" id ="datepicker" placeholder="Ex: 18/11/2015,...">
                 </div> 
             </form>
         </section>
