@@ -13,6 +13,13 @@ h5
     margin-bottom:60px;
 }
 
+h6
+{
+font-size:40px;
+font-weight: bold;
+
+}
+
 body
 {
 background-color:#b4b4b4;
@@ -102,6 +109,11 @@ color: white;
 margin-top:10px;
 }
 
+.boutonConnexion:focus
+{
+background-color: #00b4dc;
+}
+
 h1
 {
 margin-bottom:40px;
@@ -131,4 +143,8 @@ padding-bottom:25px;
 background-color:black;
 color:white;
 }
+
+
+
+
 
