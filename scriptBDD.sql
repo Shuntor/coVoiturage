@@ -9,9 +9,9 @@ adresse varchar(400),
 ville varchar(150),
 pays varchar(150),
 cp int,
+mail varchar (150),
+telephone varchar (150),
 mdp varchar(150),
-mail varchar(150),
-numTel varchar(150), 
 constraint pk_compteUtilisateur PRIMARY KEY(idU)
 ) ;
 
@@ -27,9 +27,10 @@ constraint fk_voitures_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtili
 ) ;
 
 create table Villes (
+idVille int,
 nomV varchar(150),
 cp int,
-constraint pk_villes PRIMARY KEY(cp)
+constraint pk_villes PRIMARY KEY(idVille)
 ) ;
 
 create table Notes (
@@ -41,26 +42,38 @@ constraint fk_note_utilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU
 
 ) ;
 
+create table Avis (
+idDonneur int,
+idReceveur int,
+idT int,
+texte varchar(500),
+note int,
+constraint pk_avis PRIMARY KEY(idDonneur, idReceveur, idT),
+constraint fk_idDonneur FOREIGN KEY(idDonneur) REFERENCES CompteUtilisateur(idU),
+constraint fk_idReceveur FOREIGN KEY(idReceveur) REFERENCES CompteUtilisateur(idU),
+constraint fk_idT FOREIGN KEY(idT) REFERENCES Trajets(idT)
+) ;
+
 create table Trajets (
 idT int,
 dateT date,
 heure int,
-destination varchar(150),
-depart varchar(150),
+idVilleDestination int,
+idVilleDepart int,
 idConducteur int,
 constraint pk_trajet PRIMARY KEY(idT),
 constraint fk_trajet_compteUtilisateur FOREIGN KEY(idConducteur) REFERENCES CompteUtilisateur(idU),
-constraint fk_trajet_ville_depart FOREIGN KEY(depart) REFERENCES Villes(nomV),
-constraint fk_trajet_ville_destination FOREIGN KEY(destination) REFERENCES Villes(nomV)
+constraint fk_trajet_ville_depart FOREIGN KEY(idVilleDepart) REFERENCES Villes(idVille),
+constraint fk_trajet_ville_destination FOREIGN KEY(idVilleDestination) REFERENCES Villes(idVille)
 ) ;
 
 create table Etapes (
-ville varchar(150),
+idVilleEtapes int,
 heurePassage int,
 idT int,
 constraint fk_etapes_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
-constraint fk_etape_ville FOREIGN KEY(ville) REFERENCES Villes(nomV),
-constraint pk_etapes PRIMARY KEY(idT,ville)
+constraint fk_etape_ville FOREIGN KEY(idVilleEtapes) REFERENCES Villes(idVille),
+constraint pk_etapes PRIMARY KEY(idT,idVilleEtapes)
 ) ;
 
 create table Postuler (
