@@ -1,8 +1,8 @@
 
 <?
 
-include 'connect.php';
-if (isset($_POST['nomq']))
+include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
+if (isset($_POST['nom']))
 {
           $nom = $_POST ['nom'];
 }
@@ -30,9 +30,9 @@ if (isset($_POST['cp']))
 {
           $cp = $_POST ['cp'];
 }
-if (isset($_POST['sexe']))
+if (isset($_POST['genre']))
 {
-          $sexe = $_POST ['sexe'];
+          $genre = $_POST ['genre'];
 }
 if (isset($_POST['mail']))
 {
@@ -52,7 +52,8 @@ if (isset($_POST['inscriptionConfMdp']))
           $inscriptionConfMdp = $_POST ['inscriptionConfMdp'];
 }
 
-mysqli_query($conn, "INSERT INTO compteutilisateur (nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$nom', '$prenom', '$adresse', '$age', '$sexe', '$ville', '$pays', '$cp', '$mail', '$telephone', '$inscriptionMdp')");
+$query= "INSERT INTO CompteUtilisateur (nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone', '$inscriptionMdp')";
+mysqli_query($conn, $query) or die ("echec de la requete inscription");
 
 mysqli_close($conn);
 

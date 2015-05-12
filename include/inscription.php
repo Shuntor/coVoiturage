@@ -31,12 +31,12 @@
                 <input type="text" name="pays" id="pays" /></p>
                 <br><br>
                 
-                <p><label for="dateNaissance" class="col-lg-3">Age :</label>
-                <input type="text" name="dateNaissance" id="dateNaissance" /></p>
+                <p><label for="age" class="col-lg-3">Age :</label>
+                <input type="text" name="age" id="age" /></p>
                 <br><br>
                 
-                <p><label for="sexe" class="col-lg-3">Sexe :</label>
-                <input type="text" name="sexe" id="sexe" /></p>
+                <p><label for="genre" class="col-lg-3">Genre :</label>
+                <input type="text" name="genre" id="genre" /></p>
                 <br><br>
                 
                  <p><label for="telephone" class="col-lg-3">Téléphone :</label>
