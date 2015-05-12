@@ -20,6 +20,13 @@ font-weight: bold;
 
 }
 
+h8
+{
+font-size: 40px;
+font-weight: bold;
+
+}
+
 body
 {
 background-color:#b4b4b4;
@@ -144,7 +151,21 @@ background-color:black;
 color:white;
 }
 
+.prochainsVoyageDetails
+{
 
+background-color:#d4d4d4;
+margin-top:90px;
+    margin-right:40px;
+    margin-left:30px;
+}
 
+.voyagesEffectuesDetails
+{
+background-color:#d4d4d4;
+margin-top:90px;
+margin-right:40px;
+margin-left:30px;   
+}
 
 

@@ -1,4 +1,5 @@
-       <div class="row marketing">
+
+<div class="row marketing">
     <div class="col-lg-12">
         <div class="form-group annonce">
             <h6>Mes Reservations...</h6>
@@ -10,6 +11,7 @@
     <div class="col-lg-12">
         <div class="form-group annonce prochainsVoyages">
           <h8 class="col-lg-12">Mes prochains voyages </h8>
+          
           <div class="form-group annonce prochainsVoyageDetails">
           <h4>TOULOUSE > LE MANS</h4>
           <ul >
@@ -21,6 +23,7 @@
             <li class="list-unstyled">Heure d'Arrrivée prévue : 22h15 </li>
           </ul>
           </div>
+            
         </div>
     </div>
             
