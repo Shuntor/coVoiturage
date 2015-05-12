@@ -34,7 +34,7 @@
 
   <body>
 
-  <?php include 'connect.php';/*include 'fonctions.php'; session_start(); */?>
+  <?php include 'connect.php';/*include 'fonctions.php'; */session_start(); ?>
 
 
    <div class="container">
