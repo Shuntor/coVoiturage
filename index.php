@@ -34,7 +34,11 @@
 
   <body>
 
+<<<<<<< HEAD
   <?php /*$_SESSION['login']="rgerdgred";*/ include 'connect.php';/*include 'fonctions.php'; session_start(); */?>
+=======
+  <?php include 'connect.php';/*include 'fonctions.php'; */session_start(); ?>
+>>>>>>> 23159087051c8db09d08d078aee0d2daca4b8516
 
 
    <div class="container">
