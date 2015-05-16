@@ -1,3 +1,5 @@
+
+
 <?
 if (isset($_POST['valider']))
 {
@@ -8,17 +10,56 @@ function checkAdrMail($mail)
 {
 	if(strpos($mail, "@") === false)
 	{
-		echo "<h2>Adresse invalide</h2>";
+		echo "<h2>Adresse Mail invalide</h2>";
 	}
-	else
-	{
-		//echo "<h1>Adresse valide</h1>";
-		list ($nom, $domaine)=explode("@",$mail);
-		//echo "<p>nom: $nom</p>";
-		//echo "<p>domaine: $domaine</p>";
-	}
+	
 }
 
+function checkAge($age)
+{
+   if (is_int($age) === true || $age < 18 || $age > 115)
+	{
+		echo "<h2>Age non valide</h2>";
+	}  
+}
+
+function checkCp($cp)
+{
+   if (is_int($cp) === true || $cp < 1000 || $cp > 96000)
+	{
+		echo "<h2>Code Postal non valide</h2>";
+	}  
+    
+}
+
+function checkTel($telephone)
+{
+   if (is_int($telephone) === true)
+	{
+		echo "<h2>Numéro de téléphone non valide</h2>";
+	}  
+    
+}
+
+function verifMdp($inscriptionMdp, $inscriptionConfMdp)
+{
+    if($inscriptionMdp == $inscriptionConfMdp)
+{
+    }
+        else
+        {
+            echo "<h2>Mots de passes différents</h2>";
+        }
+    
+}
+    
+if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) || empty($_POST['age']) || empty($_POST['pays']) || empty($_POST['ville']) || empty($_POST['cp']) || empty($_POST['genre']) || empty($_POST['mail'])|| empty($_POST['telephone']) || empty($_POST['inscriptionMdp']) || empty($_POST['inscriptionConfMdp']))
+	{
+		echo "<h2>ERREUR : tous les champs n'ont pas été renseignés</h2>";
+	}
+    
+    
+    else {  
 if (isset($_POST['nom']))
 {
           $nom = $_POST ['nom'];
@@ -34,6 +75,7 @@ if (isset($_POST['adresse']))
 if (isset($_POST['age']))
 {
           $age = $_POST ['age'];
+          checkAge($age);
 }
 if (isset($_POST['pays']))
 {
@@ -47,6 +89,7 @@ if (isset($_POST['ville']))
 if (isset($_POST['cp']))
 {
           $cp = $_POST ['cp'];
+          checkCp($cp);
 }
 if (isset($_POST['genre']))
 {
@@ -60,6 +103,7 @@ if (isset($_POST['mail']))
 if (isset($_POST['telephone']))
 {
           $telephone = $_POST ['telephone'];
+          checkTel($telephone);
 }
 if (isset($_POST['inscriptionMdp']))
 {
@@ -71,20 +115,24 @@ if (isset($_POST['inscriptionConfMdp']))
           $inscriptionConfMdp = $_POST ['inscriptionConfMdp'];
 }
 
+        verifMdp($inscriptionMdp, $inscriptionConfMdp);
+            
 $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone', '$inscriptionMdp')";
 mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 mysqli_close($conn);
-    
+    }
 }
 ?>
+
+
 
  <div class="row marketing">
         <div class="col-lg-12">
           <div class="form-group annonce">
           <h6>M'inscrire...</h6>
           <ul >
-            <form method="post" action="" class="col-lg-8">
+            <form method="post" action="" class="col-lg-8" onSubmit="valider_formulaire(this)">
         
                 <p><label for="nom" class="col-lg-3">Nom :</label>
                 <input type="text" name="nom" id="nom" /></p>
@@ -115,10 +163,11 @@ mysqli_close($conn);
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <input type="text" name="genre" id="genre" /></p>
+                <INPUT type="radio" name="genre" value="1"> Homme 
+                <INPUT type="radio" name="genre" value="2"> Femme </p>
                 <br><br>
                 
-                 <p><label for="telephone" class="col-lg-3">Téléphone :</label>
+                 <p><label for="telephone" class="col-lg-3">Téléphone (ex:0102030405) :</label>
                 <input type="text" name="telephone" id="telephone" /></p>
                 <br><br>
                 
@@ -142,3 +191,4 @@ mysqli_close($conn);
           </div>                 
         </div>
       </div>
+
