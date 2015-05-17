@@ -24,8 +24,8 @@ if(isset($_POST["bp_valider"])){
 			$data=mysqli_fetch_array($req);
 			echo ("Bravo <strong>".$data['prenomU']."</strong>, vous vous êtes connecté !<br/>
 				   Nous sommes très heureux de vous revoir !");
-			$_SESSION['nom']=$data['nomU'];
-			$_SESSION['prenom']=$data['prenomU'];
+			$_SESSION['nomU']=$data['nomU'];
+			$_SESSION['prenomU']=$data['prenomU'];
 			$host  = $_SERVER['HTTP_HOST'];
 			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 			$extra = 'index.php?p=';

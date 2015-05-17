@@ -2,35 +2,36 @@
 <?php
 	if(isset($_POST["bp_valider"]))
 			{
+
+				echo $_POST['dateTrajet']." - ".$_POST['lieuDepart']." - ".$_POST['hD']." - ".$_POST['lieuArrivee']." - ".$_POST['hA']." - ".$_POST['voiture'];
+
+
+				//On transforme la date en timestamp
+				$timestamp = strtotime($_POST['dateTrajet']);
+
 				//requete permettant d insérer le trajet dans la base de donnée
-				$requete="insert into client values(NULL,'".$_POST['nom']."','".$_POST['adresse']."','".$_POST['tel']."','".$_POST['mail']."')";
-				$resultat = mysql_query($requete) OR DIE ("Erreur, probleme de requete sur client");
+				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDestination, idVilleDepart, idConducteur) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$_POST['lieuDepart']."','".$_POST['lieuArrivee']."','".$_SESSION['idU']."')";
+				$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
+
+				?>
+
+				<!-- Il faut décorer ça  -->
+				<strong> Saisie enregistrée ! </strong><br>
+				<a href="index.php?p="> Retourner à l'accueil </a>
 				
-				
-				$requete4="SELECT LAST_INSERT_ID() FROM client ";
-				$resultat4 = mysql_query($requete4) OR DIE ("Erreur, probleme de requete4");
-				$ligne2 = mysql_fetch_array($resultat4);
-				
-				//requete permettant d'enregistrer la demande de visite dans la base de donnée
-				$datenow=date("Y-m-d H:i:s");
-				$requete2="insert into demande values(NULL,'".$datenow."' ,'".$_POST['dispo']."', LAST_INSERT_ID())";
-				$resultat2 = mysql_query($requete2) OR DIE ("Erreur, probleme de requete lors de l'insertion dans la base demande. ");
-		
-				$demande="SELECT LAST_INSERT_ID() FROM demande ";
-				$resultat5 = mysql_query($demande) OR DIE ("Erreur, probleme de requete5");
-				$ligne3 = mysql_fetch_array($resultat5);
-				
-				//Insertion dans Visiter
-				$requeteVis = "insert into visiter values('".$_POST['idbien']."','".$ligne3['LAST_INSERT_ID()']."',1)";
-				$resReqVis=mysql_query($requeteVis) OR DIE ("Erreur, probleme de requete lors de l'insertion dans la base Visite. ");
 				
 								
-				
-			}
+				<?php
+			}else{
+				$req="SELECT * FROM Voitures WHERE idU=".$_SESSION['idU'];
+				$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
+				/*$res=mysqli_fetch_array($req);*/
+				$reqVilles="SELECT * FROM Villes ;";
+				$reqVilles=mysqli_query($conn, $reqVilles) or die('Erreur select : '.mysqli_error($conn));
+				while ($res = mysqli_fetch_array($reqVilles)){ 
+					$villes[] = $res;
+				}
 ?>					
-
-
-
 
 						<!-- création du formulaire de saisie -->
 
@@ -39,14 +40,34 @@
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
 
 		<center><table class="table table-bordered">
-		<caption>Saisie des informations du trajet de <?php echo $SESSION_["prenomU"]." ".$SESSION_["nomU"] ?> </caption>
+		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
 		<tr><td>Quel jour souhaitez vous voyager ? <input type="date" name="dateTrajet"></td></tr>
-		<tr><td>Lieu de départ</td><td> <input type='text' name='lieuDepart' required/></td><td>Heure : <input type="time" name="hD"></td></tr>
+		<tr><td>Lieu de départ :</td>
+			<td>
+				<select class="form-control" name="lieuDepart">
+				<?php foreach ($villes as $res) {?>
+							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
+				<?php }?>
+			</select></td>
+			<td>Heure : <input type="time" name="hD" value""></td>
+		</tr>
 		
-		<tr><td>Lieu d'arrivée :</td><td> <input type='text' name='lieuArrivee' required /></td><td>Heure : <input type="time" name="hA"></td></tr>
-		
-		<tr><td>Voiture</td><td> <input type='text' name='voit' required/></td></tr>
-		
+		<tr><td>Lieu d'arrivée :</td>
+			<td>
+				<select class="form-control" name="lieuArrivee">
+				<?php foreach ($villes as $res) {?>
+							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
+				<?php }?>
+			</select></td>
+			<td>Heure : <input type="time" name="hA"></td>
+		</tr>
+		<tr><td>Voiture : </td><td>
+			<select class="form-control" name="voiture">
+			<?php while ($res = mysqli_fetch_array($req)){ ?>
+						  <option value=<?php echo $res['idV']; ?> ><?php echo $res['marque']." ".$res['couleur']." (".$res['nbPLace'].")"; ?></option>
+			<?php }?>
+			</select></td>
+		</tr>
 		</table>
 		
 		<!--bloc contenant le bouton valider-->
@@ -54,3 +75,6 @@
 			<input type='submit' value='Valider' name='bp_valider' />
 		</div>
 	</form>
+
+	<?php
+}?>

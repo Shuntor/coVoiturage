@@ -123,6 +123,8 @@
 
       <footer class="footer">
         <p>&copy; STRI 2015</p>
+
+        <?php echo $_SESSION['idU']." - ".$_SESSION['prenomU']." - ".$_SESSION['nomU']; ?>
       </footer>
 
     </div> <!-- /container -->

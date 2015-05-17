@@ -16,7 +16,7 @@ constraint pk_compteUtilisateur PRIMARY KEY(idU)
 ) ;
 
 create table Voitures (
-idV int,
+idV int NOT NULL AUTO_INCREMENT,
 couleur varchar(150),
 marque varchar(150),
 nbPLace int,
@@ -27,7 +27,7 @@ constraint fk_voitures_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtili
 ) ;
 
 create table Villes (
-idVille int,
+idVille int NOT NULL AUTO_INCREMENT,
 nomV varchar(150),
 cp int,
 constraint pk_villes PRIMARY KEY(idVille)
@@ -43,9 +43,10 @@ constraint fk_note_utilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU
 ) ;
 
 create table Trajets (
-idT int,
-dateT date,
-heure int,
+idT int NOT NULL AUTO_INCREMENT,
+dateT int,
+heureD time,
+heureA time,
 idVilleDestination int,
 idVilleDepart int,
 idConducteur varchar(150),
@@ -84,3 +85,14 @@ constraint fk_postuler_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
 constraint fk_postuler_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU),
 constraint pk_postuler PRIMARY KEY(idT,idU)
 ) ;
+
+/* INSERTIONS */
+
+INSERT INTO compteutilisateur(idU, mail,prenomU,nomU,mdp)VALUES("1","a","Victor","Iungmann","a");
+INSERT INTO Voitures VALUES(1, "rouge", "Renault", 4, 1999, "1");
+INSERT INTO Villes(nomV,cp) VALUES	("Toulouse", "31000"),
+									("La Rochelle", "17000"),
+									("Pamiers", "09100"),
+									("Rochefort", "17300"),
+									("Bordeaux", "33000");
+
