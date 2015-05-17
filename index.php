@@ -34,10 +34,12 @@
 
   <body>
 
+
   <?php include 'connect.php';/*include 'fonctions.php'; */session_start(); ?>
 <?php 
  
 ?>
+
 
 
    <div class="container">
@@ -49,6 +51,7 @@
           <?php if (!(isset($_SESSION['idU']))){?> 
           <ul class="nav navVisiteur">    
             <nav>     
+
               <ul class="nav  nav-justified">
                <li><a class= "boutonNav" href="#" data-placement="bottom" data-toggle="popover" data-title="Login" data-container="body" type="button" data-html="true" role="button" id="login">Se Connecter!</a></li>
                 <div id="popover-content" class="hide">
@@ -70,6 +73,7 @@
               <li><a class= "boutonNav" href="?p=gestionProfil">S'inscrire!</a></li>
             </ul>
            </nav>
+
           </ul>
             <?php }else{ ?>
                 
