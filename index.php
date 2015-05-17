@@ -34,91 +34,62 @@
 
   <body>
 
-<<<<<<< HEAD
-  <?php /*$_SESSION['login']="rgerdgred";*/ include 'connect.php';/*include 'fonctions.php'; session_start(); */?>
-=======
   <?php include 'connect.php';/*include 'fonctions.php'; */session_start(); ?>
->>>>>>> 23159087051c8db09d08d078aee0d2daca4b8516
+<?php 
+ 
+?>
 
 
    <div class="container">
       <div class="header">
         
         <div class="form-group col-lg-12 cadre_logo">
-          <h3 class="logo"><img src="static/images/logo2.png" alt="Acceuil du site" href="?p=" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
-            <ul class="nav navVisiteur">
-            <?php if (!(isset($_SESSION['login']))){?>
-              
-                
+          <h3 class="logo"><a href="index.php?p="> <img src="static/images/logo2.png" alt="Acceuil du site" /> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
+         <!-- Cas d'un visiteur -->  
+          <?php if (!(isset($_SESSION['idU']))){?> 
+          <ul class="nav navVisiteur">    
             <nav>     
-          <ul class="nav  nav-justified">
-            <li><a class= "boutonNav" href="#" data-placement="bottom" data-toggle="popover" data-title="Login" data-container="body" type="button" data-html="true" role="button" id="login">Se Connecter!</a></li>
-              <div id="popover-content" class="hide">
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="mail" class="col-lg-12">Adresse e-mail :</label>
-                        <input placeholder="adresseMail" class="form-control" maxlength="5" type="text">
-                    </div>
-                        <br><br>
-                    <div class="form-group">
-                        <label for="password" class="col-lg-12">Mot de Passe :</label>
-                        <input placeholder="Password" class="form-control" maxlength="5" type="password">
-                    </div>
-                        <br><br>
-                        <button type="submit" class="btn boutonConnexion">Se connecter! »</button>                                  
-                    
-                </form>
-            </div>
-            <li><a class= "boutonNav" href="?p=gestionProfil">S'inscrire!</a></li>
+              <ul class="nav  nav-justified">
+               <li><a class= "boutonNav" href="#" data-placement="bottom" data-toggle="popover" data-title="Login" data-container="body" type="button" data-html="true" role="button" id="login">Se Connecter!</a></li>
+                <div id="popover-content" class="hide">
+                  <form class="form-inline" role="form" method="post" action="index.php?p=connexion" onSubmit="return verif(this)">
+                      <div class="form-group">
+                          <label for="mail" class="col-lg-12" >Adresse e-mail :</label>
+                          <input placeholder="adresseMail" class="form-control" maxlength="5" type="text" name="mail">
+                      </div>
+                          <br><br>
+                      <div class="form-group">
+                          <label for="password" class="col-lg-12" >Mot de Passe :</label>
+                          <input placeholder="Password" class="form-control" maxlength="5" type="password" name="mdp">
+                      </div>
+                          <br><br>
+                          <button type="submit" class="btn boutonConnexion" name="bp_valider">Se connecter! »</button>                                  
+                      
+                  </form>
+              </div>
+              <li><a class= "boutonNav" href="?p=gestionProfil">S'inscrire!</a></li>
+            </ul>
+           </nav>
           </ul>
-         </nav>
-                
-                <!-- <a class="btn btn-lg btn-success bouton boutonConnexion connexion " data-placement="bottom" data-toggle="popover" data-title="Login" data-container="body" type="button" data-html="true" role="button" id="login">Se Connecter!</a>
-            <div id="popover-content" class="hide">
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <label for="mail" class="col-lg-12">Adresse e-mail :</label>
-                        <input placeholder="adresseMail" class="form-control" maxlength="5" type="text">
-                    </div>
-                        <br><br>
-                    <div class="form-group">
-                        <label for="password" class="col-lg-12">Mot de Passe :</label>
-                        <input placeholder="Password" class="form-control" maxlength="5" type="password">
-                    </div>
-                        <br><br>
-                        <button type="submit" class="btn boutonConnexion">Se connecter! »</button>                                  
-                    
-                </form>
-            </div>
-                
-            <a class="btn btn-lg btn-success bouton boutonConnexion " href="?p=inscription" role="button">S'inscrire!</a> -->
             <?php }else{ ?>
                 
                 
          <nav>     
-          <ul class="nav nav-justified">
-            <li><a class= "boutonNav" href="#">Accueil</a></li>
+          <ul class="nav nav-justified right">
+            <li><a class= "boutonNav" href="index.php?p=">Accueil</a></li>
             <li><a class= "boutonNav" href="?p=gestionProfil">Mon Compte</a></li>
             <li><a class= "boutonNav" href="?p=mesTrajets">Mes Trajets</a></li>
             <li><a class= "boutonNav" href="?p=mesReservations">Mes Réservations</a></li>
             <li><a class= "boutonNav" href="?p=mesAvis">Mes Avis</a></li>
-            <li><a class= "boutonNav" href="Deconnexion.php">Se Deconnecter!</a></li>
+            <li><a class= "boutonNav" href="?p=deconnexion">Se Deconnecter!</a></li>
           </ul>
          </nav>  
-        
-             <!--  <div classe="barreNav">
-                <a class="btn btn-lg btn-success bouton boutonConnexion connexion boutonNav" href="deconnexion.html" role="button">Se Deconnecter!</a>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion boutonNav " href="deconnexion.html" role="button">Rechercher</a>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion boutonNav" href="deconnexion.html" role="button">Mes trajets</a>  
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion boutonNav" href="deconnexion.html" role="button">Mes Compte</a>
-              <a class="btn btn-lg btn-success bouton boutonConnexion connexion boutonNav" href="deconnexion.html" role="button">Mes reservations</a>
-              </div> -->
             <?php } ?>
-            </ul>
+            
         </div>
       </div>
       <div class="container">
-
+<!-- ___________________________________________________________________________________________________________________________________________________ -->
        <?php 
         if(empty($_GET['p']))
           {include("./include/accueil.php");}
@@ -144,13 +115,11 @@
           {include("./include/inscription.php");}
         else if($_GET['p']=='identification')
           {include("./include/identification.php");}
+        else if($_GET['p']=='deconnexion')
+          {include("./include/deconnexion.php");}
       ?>
-     
-
-      </div>
-
-
-
+<!-- ___________________________________________________________________________________________________________________________________________________ -->
+</div>
 
       <footer class="footer">
         <p>&copy; STRI 2015</p>
