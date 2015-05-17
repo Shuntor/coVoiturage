@@ -128,7 +128,7 @@
       <footer class="footer">
         <p>&copy; STRI 2015</p>
 
-        <?php echo $_SESSION['idU']." - ".$_SESSION['prenomU']." - ".$_SESSION['nomU']; ?>
+        <?php echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>"; ?>
       </footer>
 
     </div> <!-- /container -->
