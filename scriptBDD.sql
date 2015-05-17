@@ -88,7 +88,9 @@ constraint pk_postuler PRIMARY KEY(idT,idU)
 
 /* INSERTIONS */
 
-INSERT INTO compteutilisateur(idU, mail,prenomU,nomU,mdp)VALUES("1","a","Victor","Iungmann","a");
+INSERT INTO compteutilisateur(idU, mail,prenomU,nomU,mdp)VALUES("0","Admin","Admin","Admin","root"),
+																("1","a","Victor","Iungmann","a");
+
 INSERT INTO Voitures VALUES(1, "rouge", "Renault", 4, 1999, "1");
 INSERT INTO Villes(nomV,cp) VALUES	("Toulouse", "31000"),
 									("La Rochelle", "17000"),

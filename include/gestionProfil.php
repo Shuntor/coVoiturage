@@ -3,7 +3,7 @@ $_SESSION['idU'] = 0;
 
 $query = "SELECT *
 FROM CompteUtilisateur
-WHERE idU = '" . mysqli_real_escape_string($mysqli, $_SESSION['idU']) . "';";
+WHERE idU = '".mysqli_real_escape_string($mysqli, $_SESSION['idU']) . "';";
 
 $result = mysqli_query($mysqli,$query) or die (mysqli_error($mysqli));
 

@@ -70,7 +70,7 @@
                       
                   </form>
               </div>
-              <li><a class= "boutonNav" href="?p=gestionProfil">S'inscrire!</a></li>
+              <li><a class= "boutonNav" href="?p=inscription">S'inscrire!</a></li>
             </ul>
            </nav>
 

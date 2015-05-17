@@ -63,8 +63,8 @@
 		</tr>
 		<tr><td>Voiture : </td><td>
 			<select class="form-control" name="voiture">
-			<?php while ($res = mysqli_fetch_array($req)){ ?>
-						  <option value=<?php echo $res['idV']; ?> ><?php echo $res['marque']." ".$res['couleur']." (".$res['nbPLace'].")"; ?></option>
+			<?php while ($resVoitures = mysqli_fetch_array($req)){ ?>
+						  <option value=<?php echo $resVoitures['idV']; ?> ><?php echo $resVoitures['marque']." ".$resVoitures['couleur']." (".$resVoitures['nbPLace'].")"; ?></option>
 			<?php }?>
 			</select></td>
 		</tr>
