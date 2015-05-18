@@ -128,7 +128,12 @@
       <footer class="footer">
         <p>&copy; STRI 2015</p>
 
-        <?php echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>"; ?>
+        <?php
+            if (isset($_SESSION['idU']))
+                echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>";
+            else
+                echo "Vous n'êtes pas connecté";
+            ?>
       </footer>
 
     </div> <!-- /container -->

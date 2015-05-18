@@ -7,6 +7,7 @@ if(isset($_POST["bp_valider"])){
 		$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
 		$data=mysqli_fetch_array($req);
 		echo $data['prenomU'];
+        echo "</br>";
 
 
 
