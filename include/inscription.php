@@ -8,48 +8,66 @@ include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
 
 function checkAdrMail($mail)
 {
-	if(strpos($mail, "@") === false)
+	if(filter_var($mail, FILTER_VALIDATE_EMAIL))
 	{
-		echo "<h2>Adresse Mail invalide</h2>";
+		return 1;
+        
 	}
+    else
+    {
+        return 0;
+    }
 	
 }
 
 function checkAge($age)
 {
-   if (is_int($age) === true || $age < 18 || $age > 115)
+   if (is_numeric($age))
 	{
-		echo "<h2>Age non valide</h2>";
+		return 1;
 	}  
+    else
+    {
+        return 0;   
+    }
 }
 
 function checkCp($cp)
 {
-   if (is_int($cp) === true || $cp < 1000 || $cp > 96000)
+   if (is_numeric($cp) )
 	{
-		echo "<h2>Code Postal non valide</h2>";
+		return 1;
 	}  
+    else
+    {
+        return 0;   
+    } 
     
 }
 
 function checkTel($telephone)
 {
-   if (is_int($telephone) === true)
+   if (is_numeric($telephone))
 	{
-		echo "<h2>Numéro de téléphone non valide</h2>";
+		return 1;
 	}  
+    else
+    {
+        return 0;   
+    }   
     
 }
 
 function verifMdp($inscriptionMdp, $inscriptionConfMdp)
 {
     if($inscriptionMdp == $inscriptionConfMdp)
-{
-    }
-        else
-        {
-            echo "<h2>Mots de passes différents</h2>";
-        }
+    {
+		return 1;
+	}  
+    else
+    {
+        return 0;   
+    } 
     
 }
     
@@ -59,68 +77,106 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
 	}
     
     
-    else {  
-if (isset($_POST['nom']))
-{
+    else { 
+        
+        if (isset($_POST['nom']))
+        {
           $nom = $_POST ['nom'];
-}
-if (isset($_POST['prenom']))
-{
+        }
+        if (isset($_POST['prenom']))
+        {
           $prenom = $_POST ['prenom'];
-}
-if (isset($_POST['adresse']))
-{
+        }
+        if (isset($_POST['adresse']))
+        {
           $adresse = $_POST ['adresse'];
-}
-if (isset($_POST['age']))
-{
+        }
+        if (isset($_POST['age']))
+        {
           $age = $_POST ['age'];
-          checkAge($age);
-}
-if (isset($_POST['pays']))
-{
+        }
+        if (isset($_POST['pays']))
+        {
           $pays = $_POST ['pays'];
-}
-if (isset($_POST['ville']))
-{
+        }
+        if (isset($_POST['ville']))
+        {
           $ville = $_POST ['ville'];
           $ville = addslashes($ville);
-}
-if (isset($_POST['cp']))
-{
+        }
+        if (isset($_POST['cp']))
+        {
           $cp = $_POST ['cp'];
-          checkCp($cp);
-}
-if (isset($_POST['genre']))
-{
+          
+        }
+        if (isset($_POST['genre']))
+        {
           $genre = $_POST ['genre'];
-}
-if (isset($_POST['mail']))
-{
+        }
+        if (isset($_POST['mail']))
+        {
           $mail = $_POST ['mail'];
-          checkAdrMail($mail);
-}
-if (isset($_POST['telephone']))
-{
+        }
+        if (isset($_POST['telephone']))
+        {
           $telephone = $_POST ['telephone'];
-          checkTel($telephone);
-}
-if (isset($_POST['inscriptionMdp']))
-{
+          
+        }
+        if (isset($_POST['inscriptionMdp']))
+        {
           $inscriptionMdp = $_POST ['inscriptionMdp'];
-}
+        }
 
-if (isset($_POST['inscriptionConfMdp']))
-{
+        if (isset($_POST['inscriptionConfMdp']))
+        {
           $inscriptionConfMdp = $_POST ['inscriptionConfMdp'];
-}
+        }
+        
+        
+        if ( checkAdrMail($mail) === 1)
+        {
+            if (checkAge($age) === 1)
+            {
+                 if (checkCp($cp) === 1)
+                 {
+                     if (checkTel($telephone) === 1)
+                     {
+                         if (verifMdp($inscriptionMdp, $inscriptionConfMdp) === 1)
+                         {
+                             $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone',  '$inscriptionMdp')";
+        mysqli_query($conn, $query) or die (mysqli_error($conn));
 
-        verifMdp($inscriptionMdp, $inscriptionConfMdp);
-            
-$query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone', '$inscriptionMdp')";
-mysqli_query($conn, $query) or die (mysqli_error($conn));
-
-mysqli_close($conn);
+        mysqli_close($conn);
+                             
+                             header('Location: index.php');
+                         }
+                         else
+                         {
+                             echo "<h2>Mots de passes différents</h2>";
+                         }
+                     }
+                     else
+                     {
+                         echo "<h2>Numéro de téléphone non valide</h2>";
+                     }
+                 }
+                else
+                {
+                    echo "<h2>Code Postal non valide</h2>";
+                }
+            }
+            else 
+            {
+                echo "<h2>Age non valide</h2>";
+            }
+        }
+        else 
+        {
+            echo "<h2>Adresse Mail invalide</h2>"; 
+        }
+        
+  
+        
     }
 }
 ?>
