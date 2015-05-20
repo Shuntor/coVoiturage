@@ -2,6 +2,9 @@
 
 // TODO : tests des valeurs + garder le zéro devant le CP
 
+if (!isset($_SESSION['idU']))
+    header ("Location: index.php");
+
 $query = "SELECT *
 FROM CompteUtilisateur
 WHERE idU = '".mysqli_real_escape_string($conn, $_SESSION['idU']) . "';";
