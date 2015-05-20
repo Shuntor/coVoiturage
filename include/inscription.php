@@ -1,10 +1,10 @@
 
 
-<?
+<?php
 if (isset($_POST['valider']))
 {
 
-include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
+//include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
 
 function checkAdrMail($mail)
 {
