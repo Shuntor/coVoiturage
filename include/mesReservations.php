@@ -7,7 +7,7 @@
 */
 
 /* Requete sur Postuler, on récupère tous les trajets */ 
-$reqPostuler="SELECT * FROM Postuler WHERE idU=".$_SESSION['idU'].";";
+$reqPostuler="SELECT * FROM Postuler WHERE idU='".$_SESSION['idU']."';";
 $reqPostuler=mysqli_query($conn, $reqPostuler) or die('Erreur select : '.mysqli_error($conn));
 if(mysqli_num_rows($reqPostuler)==0){
                     echo "C'est vide !";
@@ -26,7 +26,7 @@ if(mysqli_num_rows($reqPostuler)==0){
 
       
       /* Requete sur CompteUtilisateur */
-      $reqCU="SELECT prenomU, nomU FROM CompteUtilisateur WHERE idU=".$trajet['idConducteur'].";";
+      $reqCU="SELECT prenomU, nomU FROM CompteUtilisateur WHERE idU='".$trajet['idConducteur']."';";
       $reqCU=mysqli_query($conn, $reqCU) or die('Erreur select : '.mysqli_error($conn));
       $compteUtilisateur=mysqli_fetch_array($reqCU);
 

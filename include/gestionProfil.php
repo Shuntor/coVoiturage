@@ -7,7 +7,7 @@ if (!isset($_SESSION['idU']))
 
 $query = "SELECT *
 FROM CompteUtilisateur
-WHERE idU = '".mysqli_real_escape_string($conn, $_SESSION['idU']) . "';";
+WHERE idU = '".addslashes($_SESSION['idU']) . "';";
 
 $result = mysqli_query($conn,$query) or die (mysqli_error($conn));
 
@@ -18,51 +18,87 @@ $utilisateur = $row;
 $modifValides = TRUE;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
+    // prenom
     if (empty($_POST['prenom']))
     {
         echo "Prenom vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //nom
     if (empty($_POST['nom']))
     {
         echo "Nom vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //adresse
     if (empty($_POST['adresse']))
     {
         echo "Adresse vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //ville
     if (empty($_POST['ville']))
     {
         echo "Ville vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //cp
     if (empty($_POST['cp']))
     {
         echo "Code postal vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //pays
     if (empty($_POST['pays']))
     {
         echo "Payse vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //genre
     if (empty($_POST['genre']))
     {
         echo "Genre vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //mail
     if (empty($_POST['mail']))
     {
         echo "Mail vide !<br/>";
         $modifValides = FALSE;
     }
+    if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL))
+    {
+        echo "Mail invalide !<br />";
+        $modifValides = FALSE;
+    }
+    
+    //telephone
     if (empty($_POST['telephone']))
     {
         echo "Téléphone vide !<br/>";
         $modifValides = FALSE;
     }
+    
+    //age
+    if (empty($_POST['age']))
+    {
+        echo "Age vide !<br />";
+        $modifValides = FALSE;
+    }
+    if (!filter_var($_POST['age'], FILTER_VALIDATE_INT) || $_POST['age'] < 0 || $_POST['age'] > 200)
+    {
+        echo "Age invalide !<br />";
+        $modifValides = FALSE;
+    }
+    
+    //mdp
     if (!empty($_POST['nouveauMdp']))
     {
         if ($_POST['ancienMdp'] != $utilisateur['mdp'])
@@ -76,23 +112,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $modifValides = FALSE;
         }
     }
+    
     if ($modifValides)
     {
         $query  = "UPDATE compteutilisateur SET ";
-        $query .= "nomU='" . mysqli_real_escape_string($conn, $_POST['nom']) . "', ";
-        $query .= "prenomU='" . mysqli_real_escape_string($conn, $_POST['prenom']) . "', ";
-        $query .= "age='" . mysqli_real_escape_string($conn, $_POST['age']) . "', ";
-        $query .= "genre='" . mysqli_real_escape_string($conn, $_POST['genre']) . "', ";
-        $query .= "adresse='" . mysqli_real_escape_string($conn, $_POST['adresse']) . "', ";
-        $query .= "ville='" . mysqli_real_escape_string($conn, $_POST['ville']) . "', ";
-        $query .= "pays='" . mysqli_real_escape_string($conn, $_POST['pays']) . "', ";
-        $query .= "cp='" . mysqli_real_escape_string($conn, $_POST['cp']) . "', ";
-        $query .= "mail='" . mysqli_real_escape_string($conn, $_POST['mail']) . "', ";
+        $query .= "nomU='" . addslashes($_POST['nom']) . "', ";
+        $query .= "prenomU='" . addslashes($_POST['prenom']) . "', ";
+        $query .= "age='" . addslashes($_POST['age']) . "', ";
+        $query .= "genre='" . addslashes($_POST['genre']) . "', ";
+        $query .= "adresse='" . addslashes($_POST['adresse']) . "', ";
+        $query .= "ville='" . addslashes($_POST['ville']) . "', ";
+        $query .= "pays='" . addslashes($_POST['pays']) . "', ";
+        $query .= "cp='" . addslashes($_POST['cp']) . "', ";
+        $query .= "mail='" . addslashes($_POST['mail']) . "', ";
         if (!empty($_POST['nouveauMdp']))
-            $query .= "mdp='" . mysqli_real_escape_string($conn, $_POST['nouveauMdp']) . "', ";
-        $query .= "telephone='" . mysqli_real_escape_string($conn, $_POST['telephone']) . "' ";
-        $query .= "WHERE idU=" . $_SESSION['idU'] . ";";
-        
+            $query .= "mdp='" . addslashes($_POST['nouveauMdp']) . "', ";
+        $query .= "telephone='" . addslashes($_POST['telephone']) . "' ";
+        $query .= "WHERE idU='" . $_SESSION['idU'] . "';";
         
         mysqli_query($conn,$query) or die (mysqli_error($conn));
         //print_r($result);
@@ -104,15 +140,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     
 $query = "SELECT *
 FROM CompteUtilisateur
-WHERE idU = '".mysqli_real_escape_string($conn, $_SESSION['idU']) . "';";
+WHERE idU = '".addslashes($_SESSION['idU']) . "';";
 
 $result = mysqli_query($conn,$query) or die (mysqli_error($conn));
 
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 $utilisateur = $row;
-        
-    
+
 
 /*
 echo '<pre>';
@@ -131,7 +166,7 @@ echo '</pre>';
           <div class="form-group annonce">
           <h6>Gerer Mon Profil...</h6>
           <ul >
-            <form method="post" action="?p=gestionProfil" class="col-lg-8">
+            <form method="post" action="?p=gestionProfil">
         
                 <p><label for="nom" class="col-lg-3">Nom :</label>
                 <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($utilisateur['nomU']) ?>"/></p>
@@ -162,9 +197,10 @@ echo '</pre>';
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <input type="text" name="genre" id="genre" value="<?= htmlspecialchars($utilisateur['genre']) ?>"/></p>
+                <INPUT type="radio" name="genre" value="1" <?php if ($utilisateur['genre'] == 1) echo 'checked' ?> > Homme 
+                <INPUT type="radio" name="genre" value="2" <?php if ($utilisateur['genre'] == 2) echo 'checked' ?> > Femme </p>
                 <br><br>
-                
+
                 <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>
                 <input type="text" name="mail" id="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>"/></p>
                 <br><br>
