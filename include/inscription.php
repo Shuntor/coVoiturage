@@ -4,7 +4,7 @@
 if (isset($_POST['valider']))
 {
 
-//include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
+include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
 
 function checkAdrMail($mail)
 {
@@ -69,6 +69,19 @@ function verifMdp($inscriptionMdp, $inscriptionConfMdp)
         return 0;   
     } 
     
+}
+
+function verifIdLibre($mail, $conn)
+{
+   $result = mysqli_query($conn, "SELECT idU FROM CompteUtilisateur WHERE idU='$mail'");
+if(mysqli_num_rows($result)>=1)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
 }
     
 if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) || empty($_POST['age']) || empty($_POST['pays']) || empty($_POST['ville']) || empty($_POST['cp']) || empty($_POST['genre']) || empty($_POST['mail'])|| empty($_POST['telephone']) || empty($_POST['inscriptionMdp']) || empty($_POST['inscriptionConfMdp']))
@@ -143,12 +156,19 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                      {
                          if (verifMdp($inscriptionMdp, $inscriptionConfMdp) === 1)
                          {
+                             if (verifIdLibre($mail, $conn) === 1)
+                             {
                              $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone',  '$inscriptionMdp')";
         mysqli_query($conn, $query) or die (mysqli_error($conn));
 
         mysqli_close($conn);
-                             
-                             header('Location: index.php');
+                                  header('Location: index.php');
+                             }
+                             else
+                             {
+                                 echo "<h2>Adresse mail déja utilisée</h2>";
+                             }
+                            
                          }
                          else
                          {
@@ -237,7 +257,7 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                 <input type="password" name="inscriptionConfMdp" id="inscriptionConfMdp" /></p>
                 <br><br>
                 
-                <input type="submit" value="Valider"  name="valider">
+                <input type="submit" value="Valider"  name="valider" >
                 
             </form>
             
