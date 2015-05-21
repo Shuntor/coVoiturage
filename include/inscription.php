@@ -4,8 +4,6 @@
 if (isset($_POST['valider']))
 {
 
-include 'C:/wamp/www/Projet Covoiturage/coVoiturage/connect.php';
-
 function checkAdrMail($mail)
 {
 	if(filter_var($mail, FILTER_VALIDATE_EMAIL))
