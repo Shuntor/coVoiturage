@@ -33,15 +33,6 @@ cp int,
 constraint pk_villes PRIMARY KEY(idVille)
 ) ;
 
-create table Notes (
-moyenne varchar(150),
-nbrNotes int,
-idU varchar(150),
-constraint pk_notes PRIMARY KEY(idU, moyenne),
-constraint fk_note_utilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU)
-
-) ;
-
 create table Trajets (
 idT int NOT NULL AUTO_INCREMENT,
 dateT int,
