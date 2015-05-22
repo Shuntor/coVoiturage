@@ -2,24 +2,23 @@
          <section>
          <h1>RECHERCHE</h1>
          <p class="lead">Rechercher votre trajet.</p>
-            <form>
+            <form method="post" action="index.php?p=resultatRecherche" onSubmit="return verif(this)">
                 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Départ :</label> 
-                    <input id= "text" type="text" class="form-control" placeholder="Ex: Toulouse,Paris,...">
+                    <input value="Toulouse" id= "text" type="text" name="villeDepart" class="form-control" placeholder="Ex: Toulouse,Paris,...">
                 </div> 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Arrivée :</label> 
-                    <input id= "text" type="text" class="form-control" placeholder="Ex: Toulouse,Paris,...">
+                    <input value="Bordeaux" id= "text" type="text" name="villeDestination" class="form-control" placeholder="Ex: Toulouse,Paris,...">
                 </div> 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Date (jj/mm/aaaa) :</label> 
-                    <input type="text" class="form-control" id ="datepicker" placeholder="Ex: 18/11/2015,...">
+                    <input type="text" class="form-control" name="date" id ="datepicker" placeholder="Ex: 18/11/2015,...">
                 </div> 
-            </form>
+                <input class="btn btn-lg btn-success bouton rechercher" type='submit' value='Rechercher !' name='bp_rechercher' />
+          </form>
         </section>
-        <p><a class="btn btn-lg btn-success bouton rechercher" href="inscription.html" role="button">Rechercher!</a></p>
-          
  </div>
 
       <div class="row marketing">

@@ -1,39 +1,45 @@
-       <div class="row marketing">
-    <div class="col-lg-12">
-        <div class="form-group annonce">
-            <h6>Mes avis...</h6>
-        </div>                 
+<?php
+
+
+/*
+    Afficher les avis qu'on a reçu
+    Afficher les avis qu'on peut faire
+
+*/
+/*
+INSERT INTO Avis(texte, idDonneur, idReceveur, idT, note) VALUES("SUPER !", 1, 1, 1,3)
+
+*/
+
+/* Affichage des avis qu'on a reçu */
+$req="SELECT * FROM Avis WHERE idReceveur = ".$_SESSION['idU'];
+$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
+    while ($res = mysqli_fetch_array($req)){  
+    /* On selectionne les infos de l'utilisateur qui a donné la note */
+    $reqDonneur="SELECT * FROM CompteUtilisateur WHERE idU = ".$res['idDonneur'];
+    $reqDonneur=mysqli_query($conn, $reqDonneur) or die('Erreur select : '.mysqli_error($conn));
+    $donneur=mysqli_fetch_row($reqDonneur);
+
+    ?>        
+
+    <div class="row marketing">
+        <div class="col-lg-12">
+            <div class="form-group annonce avis">
+                <li ><strong> <?php echo $donneur[1]." ".$donneur[2]; ?> </strong></li>
+                <li ><i> note : <?php echo $res['note']; ?>/5</i></li>
+                <p ><?php echo $donneur['nomU'] ?><i><?php echo $res['texte']; ?></i> </p>
+            </div>                 
+        </div>
     </div>
-</div>
-
-<div class="row marketing">
-    <div class="col-lg-12">
-        <div class="form-group annonce avis">
-            <h8 class="col-lg-6">Lauren.B: <i>"Très bon moment!"</i></h8>
-            <div class="note clo-lg-6"><i>note: 2,5 /5</i></div>
-            <p class="col-lg-12">Lauren.B: <i>"Excellent conducteur qui sait respecter le code de la route, très simpas. A refaire!"</i> </p>
-        </div>                 
-    </div>
-</div>
 
 
-<div class="row marketing">
-    <div class="col-lg-12">
-        <div class="form-group annonce avis">
-            <h8 class="col-lg-6">Lauren.B: <i>"Très bon moment!"</i></h8>
-            <div class="note clo-lg-6"><i>note: 2,5 /5</i></div>
-            <p class="col-lg-12">Lauren.B: <i>"Excellent conducteur qui sait respecter le code de la route, très simpas. A refaire!"</i> </p>
-        </div>                 
-    </div>
-</div>
+    <?php
+    }
 
 
-<div class="row marketing">
-    <div class="col-lg-12">
-        <div class="form-group annonce avis">
-            <h8 class="col-lg-6">Lauren.B: <i>"Très bon moment!"</i></h8>
-            <div class="note clo-lg-6"><i>note: 2,5 /5</i></div>
-            <p class="col-lg-12">Lauren.B: <i>"Excellent conducteur qui sait respecter le code de la route, très simpas. A refaire!"</i> </p>
-        </div>                 
-    </div>
-</div>
+
+
+
+
+
+?>
