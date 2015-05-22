@@ -58,12 +58,12 @@
                   <form class="form-inline" role="form" method="post" action="index.php?p=connexion" onSubmit="return verif(this)">
                       <div class="form-group">
                           <label for="mail" class="col-lg-12" >Adresse e-mail :</label>
-                          <input placeholder="adresseMail" class="form-control" maxlength="5" type="text" name="mail">
+                          <input placeholder="adresseMail" class="form-control" maxlength="30" type="text" name="mail">
                       </div>
                           <br><br>
                       <div class="form-group">
                           <label for="password" class="col-lg-12" >Mot de Passe :</label>
-                          <input placeholder="Password" class="form-control" maxlength="5" type="password" name="mdp">
+                          <input placeholder="Password" class="form-control" maxlength="30" type="password" name="mdp">
                       </div>
                           <br><br>
                           <button type="submit" class="btn boutonConnexion" name="bp_valider">Se connecter! »</button>                                  

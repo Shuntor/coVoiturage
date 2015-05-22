@@ -23,7 +23,7 @@
 								
 				<?php
 			}else{
-				$req="SELECT * FROM Voitures WHERE idU=".$_SESSION['idU'];
+				$req="SELECT * FROM Voitures WHERE idU='" . $_SESSION['idU'] . "'";
 				$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
 				/*$res=mysqli_fetch_array($req);*/
 				$reqVilles="SELECT * FROM Villes ;";
