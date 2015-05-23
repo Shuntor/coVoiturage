@@ -210,8 +210,8 @@ echo '</pre>';
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <INPUT type="radio" name="genre" value="1" <?php if ($utilisateur['genre'] == 1) echo 'checked' ?> > Homme 
-                <INPUT type="radio" name="genre" value="2" <?php if ($utilisateur['genre'] == 2) echo 'checked' ?> > Femme </p>
+                <INPUT type="radio" name="genre" value="m" <?php if ($utilisateur['genre'] == 'm') echo 'checked' ?> > Homme 
+                <INPUT type="radio" name="genre" value="f" <?php if ($utilisateur['genre'] == 'f') echo 'checked' ?> > Femme </p>
                 <br><br>
 
                 <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>

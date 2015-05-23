@@ -28,7 +28,7 @@ if(mysqli_num_rows($reqPostuler)==0){
       /* Requete sur CompteUtilisateur */
       $reqCU="SELECT prenomU, nomU FROM CompteUtilisateur WHERE idU='".$trajet['idConducteur']."';";
       $reqCU=mysqli_query($conn, $reqCU) or die('Erreur select : '.mysqli_error($conn));
-      $compteUtilisateur=mysqli_fetch_array($reqCU);
+      $compteUtilisateur=mysqli_fetch_array($reqCU, MYSQLI_ASSOC);
 
       /* Requete sur les villes */
       $reqVilleD="SELECT * FROM Villes WHERE idVille=".$trajet['idVilleDepart'].";";

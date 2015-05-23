@@ -18,17 +18,25 @@ insert into compteutilisateur (idU, nomU, prenomU, moyenne, age, genre, adresse,
 insert into voitures (couleur, marque, nbPlace, annee, idU) values
 ('rouge', 'ferrari', 2, 1999, 'emeric.tosi@gmail.com'),
 ('marron', 'renault 4L', 4, 1973, 'massip.thomas@gmail.com'),
-('noire', 'K2000', 3, 1980, 'cantal.guillaume@gmail.com');
+('noire', 'K2000', 3, 1980, 'cantal.guillaume@gmail.com'),
+("rouge", "Faucon Millenium", 10, 3032, "a");
+/*("Gold Edition", "Faucon", 4, 1999, "a"); /* une voiture par utilisateur ! */
 
 
 insert into trajets (idT, dateT, heureD, heureA, idVilleDestination, idVilleDepart, idConducteur) VALUES
 (100, 1432857600, '14:00:00', '18:00:00', 100, 101, 'emeric.tosi@gmail.com'),
-(101, 1432867600, '15:00:00', '17:00:00', 102, 103, 'cantal.guillaume@gmail.com');
+(101, 1432867600, '15:00:00', '17:00:00', 102, 103, 'cantal.guillaume@gmail.com'),
+(102, 1432867600, '15:00:00', '17:00:00', 102, 103, 'a'),
+(103, 1432867600, '13:00:00', '15:00:00', 5, 1, 'cantal.guillaume@gmail.com');
 
 insert into postuler (nbPlace, idU, idT) values
 (1, 'emeric.tosi@gmail.com', 101),
 (1, 'cantal.guillaume@gmail.com', 100),
-(1, 'massip.thomas@gmail.com', 100);
+(1, 'massip.thomas@gmail.com', 100),
+(1, 'a', 100),
+(1, 'a', 101),
+(2, 'a', 103),
+(1, 'cantal.guillaume@gmail.com', 102);
 
 
 

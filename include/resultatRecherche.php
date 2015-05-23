@@ -10,12 +10,19 @@ if(isset($_POST["bp_rechercher"])){
 	$idVilleA=$idVilleA[0];
 
 	// echo $_POST['date'];
+    if (!empty($_POST['date']))
+    {
 	$date=strtotime($_POST['date']);
 
 	$req="SELECT * FROM Trajets WHERE idVilleDepart=".$idVilleD." 
 			AND idVilleDestination=".$idVilleA." 
 			AND dateT BETWEEN ".($date)." AND ".($date+86400).";";
-
+    }
+    else
+    {
+	$req="SELECT * FROM Trajets WHERE idVilleDepart=".$idVilleD." 
+			AND idVilleDestination=".$idVilleA.";";
+    }
 
 	$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
 
@@ -27,9 +34,9 @@ if(isset($_POST["bp_rechercher"])){
 
 	while ($res = mysqli_fetch_array($req)){ 
 		/*On va cherchr les informations relatifs au conducteur */
-		$reqConducteur="SELECT * from CompteUtilisateur WHERE idU =".$res['idConducteur'];
+		$reqConducteur="SELECT * from CompteUtilisateur WHERE idU ='".$res['idConducteur'] . "'";
 		$reqConducteur=mysqli_query($conn, $reqConducteur);
-		$conducteur=mysqli_fetch_row($reqConducteur);
+		$conducteur=mysqli_fetch_array($reqConducteur, MYSQLI_ASSOC);
 		?>
 		<div class="form-group annonce">
           <h4><?php echo $_POST['villeDepart']." > ".$_POST['villeDestination']; ?></h4>

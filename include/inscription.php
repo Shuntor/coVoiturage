@@ -237,8 +237,8 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <INPUT type="radio" name="genre" value="1"> Homme 
-                <INPUT type="radio" name="genre" value="2"> Femme </p>
+                <INPUT type="radio" name="genre" value="m"> Homme 
+                <INPUT type="radio" name="genre" value="f"> Femme </p>
                 <br><br>
                 
                  <p><label for="telephone" class="col-lg-3">Téléphone (ex:0102030405) :</label>
