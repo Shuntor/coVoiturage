@@ -1,3 +1,10 @@
+create table Villes (
+idVille int NOT NULL AUTO_INCREMENT,
+nomV varchar(150),
+cp int,
+constraint pk_villes PRIMARY KEY(idVille)
+) ;
+
 create table CompteUtilisateur (
 idU varchar(150),
 nomU varchar(150),
@@ -6,13 +13,14 @@ moyenne float,
 age int, 
 genre varchar(1),
 adresse varchar(400),
-ville varchar(150),
+ville int,
 pays varchar(150),
 cp int,
 mail varchar (150),
 telephone varchar (150),
 mdp varchar(150),
-constraint pk_compteUtilisateur PRIMARY KEY(idU)
+constraint pk_compteUtilisateur PRIMARY KEY(idU),
+constraint fk_compteUtilisateur_villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
 ) ;
 
 create table Voitures (
@@ -24,13 +32,6 @@ annee int,
 idU varchar(150),
 constraint pk_voitures PRIMARY KEY(idV),
 constraint fk_voitures_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU)
-) ;
-
-create table Villes (
-idVille int NOT NULL AUTO_INCREMENT,
-nomV varchar(150),
-cp int,
-constraint pk_villes PRIMARY KEY(idVille)
 ) ;
 
 create table Trajets (
@@ -90,7 +91,6 @@ INSERT INTO Villes(nomV,cp) VALUES	("Toulouse", "31000"),
 									("Rochefort", "17300"),
 									("Bordeaux", "33000");
 
-INSERT INTO Postuler VALUES(1, 1,8);
 
 
 
