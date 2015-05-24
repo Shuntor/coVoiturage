@@ -99,7 +99,7 @@ else
                 <li class="list-unstyled"><strong><?=$conducteur['prenomU']?> <?=$conducteur['nomU']?> (<?=$conducteur['idU']?>)</strong></li>
                 <li class="list-unstyled">Genre : <strong><?= $conducteur['genre'] == 'm' ? 'Homme' : 'Femme' ?></strong></li>
                 <li class="list-unstyled">Age : <strong><?=$conducteur['age'] ?> ans</strong></li>
-                <li class="list-unstyled">Moyenne : <strong><?=$conducteur['moyenne']?>/5</strong></li>
+                <li class="list-unstyled">Moyenne : <strong><?=$conducteur['moyenne'] == '' ? '-' : $conducteur['moyenne']?>/5</strong></li>
                 <li class="list-unstyled">Pays : <strong><?=$conducteur['pays']?></strong></li>
                 <li class="list-unstyled">Téléphone : <strong>0<?=$conducteur['telephone']?></strong></li>
                 </ul>

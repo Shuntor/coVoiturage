@@ -34,7 +34,7 @@
 				$timestamp = strtotime($exp_date);
 
 				//requete permettant d insérer le trajet dans la base de donnée
-				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$_POST['lieuDepart']."','".$_POST['lieuArrivee']."','".$_SESSION['idU']."')";
+				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur, idVoiture) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$_POST['lieuDepart']."','".$_POST['lieuArrivee']."','".$_SESSION['idU']."','".$_POST['voiture']."')";
 				$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
 
 				?>
