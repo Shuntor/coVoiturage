@@ -1,7 +1,7 @@
 <?php
 
 /* Affichage des avis qu'on a reçu */
-$req="SELECT * FROM Avis WHERE idReceveur = ".$_SESSION['idU'];
+$req="SELECT * FROM Avis WHERE idReceveur = '".$_SESSION['idU']."'";
 $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
     while ($res = mysqli_fetch_array($req)){  
     /* On selectionne les infos de l'utilisateur qui a donné la note */
