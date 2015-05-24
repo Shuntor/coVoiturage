@@ -34,27 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $modifValides = FALSE;
         }
         
-        //adresse
-        if (empty($_POST['adresse']))
-        {
-            echo "Adresse vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
-        //ville
-        if (empty($_POST['ville']))
-        {
-            echo "Ville vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
-        //cp
-        if (empty($_POST['cp']))
-        {
-            echo "Code postal vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
         //pays
         if (empty($_POST['pays']))
         {
@@ -122,10 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $query .= "prenomU='" . addslashes($_POST['prenom']) . "', ";
             $query .= "age='" . addslashes($_POST['age']) . "', ";
             $query .= "genre='" . addslashes($_POST['genre']) . "', ";
-            $query .= "adresse='" . addslashes($_POST['adresse']) . "', ";
-            $query .= "ville='" . addslashes($_POST['ville']) . "', ";
             $query .= "pays='" . addslashes($_POST['pays']) . "', ";
-            $query .= "cp='" . addslashes($_POST['cp']) . "', ";
             $query .= "mail='" . addslashes($_POST['mail']) . "', ";
             if (!empty($_POST['nouveauMdp']))
                 $query .= "mdp='" . addslashes($_POST['nouveauMdp']) . "', ";
@@ -187,18 +163,6 @@ echo '</pre>';
                 
                 <p><label for="prenom" class="col-lg-3">Prénom :</label>
                 <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($utilisateur['prenomU']) ?>"/></p>
-                <br><br>
-                
-                <p><label for="adresse" class="col-lg-3">Adresse :</label>
-                <input type="text" name="adresse" id="adresse" value="<?= htmlspecialchars($utilisateur['adresse']) ?>"/></p>
-                <br><br>
-                
-                <p><label for="ville" class="col-lg-3">Ville :</label>
-                <input type="text" name="ville" id="ville" value="<?= htmlspecialchars($utilisateur['ville']) ?>"/></p>
-                <br><br>
-                
-                <p><label for="cp" class="col-lg-3">Code postale :</label>
-                <input type="text" name="cp" id="cp" value="<?= htmlspecialchars($utilisateur['cp']) ?>"/></p>
                 <br><br>
                 
                 <p><label for="pays" class="col-lg-3">Pays :</label>

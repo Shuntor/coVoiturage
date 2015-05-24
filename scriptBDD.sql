@@ -12,15 +12,11 @@ prenomU varchar(150),
 moyenne float,
 age int, 
 genre varchar(1),
-adresse varchar(400),
-ville int,
 pays varchar(150),
-cp int,
 mail varchar (150),
 telephone varchar (150),
 mdp varchar(150),
 constraint pk_compteUtilisateur PRIMARY KEY(idU),
-constraint fk_compteUtilisateur_villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
 ) ;
 
 create table Voitures (
@@ -42,10 +38,12 @@ heureA time,
 idVilleDestination int,
 idVilleDepart int,
 idConducteur varchar(150),
+idVoiture int,
 constraint pk_trajet PRIMARY KEY(idT),
 constraint fk_trajet_compteUtilisateur FOREIGN KEY(idConducteur) REFERENCES CompteUtilisateur(idU),
 constraint fk_trajet_ville_depart FOREIGN KEY(idVilleDepart) REFERENCES Villes(idVille),
-constraint fk_trajet_ville_destination FOREIGN KEY(idVilleDestination) REFERENCES Villes(idVille)
+constraint fk_trajet_ville_destination FOREIGN KEY(idVilleDestination) REFERENCES Villes(idVille),
+constraint fk_trajet_id_voiture FOREIGN KEY(idVoiture) REFERENCES Voitures(idV)
 ) ;
 
 create table Avis (

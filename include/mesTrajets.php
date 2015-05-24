@@ -90,7 +90,7 @@
     <?php
     
     /* On récupère les trajets de l'utilisateur courant */
-    $reqTrajets="select v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee from trajets t, villes v1, villes v2 where t.idConducteur = '" . $_SESSION['idU'] . "' and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 20";
+    $reqTrajets="select v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from trajets t, villes v1, villes v2 where t.idConducteur = '" . $_SESSION['idU'] . "' and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 20";
     
     
 				$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
@@ -104,8 +104,8 @@
             <li class="list-unstyled">Date : <?php echo date('d/m/Y', $trajet['date']); ?></li>
             <li class="list-unstyled">Heure de Départ : <?php echo $trajet['heureDepart'] ?> </li>
             <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $trajet['heureArrivee'] ?> 
-            <a class="btn btn-lg btn-success bouton" href="" role="button">Voir Détails...</a></li>
           </ul>
+            <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
           </div> 
 				<?php
                 }

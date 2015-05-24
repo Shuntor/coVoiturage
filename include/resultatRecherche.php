@@ -47,8 +47,8 @@ if(isset($_POST["bp_rechercher"])){
             <li class="list-unstyled">Date : <?php echo date('d/m/Y', $res['dateT']); ?></li>
             <li class="list-unstyled">Heure de Départ : <?php echo $res['heureD'] ?> </li>
             <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $res['heureA'] ?> 
-            <a class="btn btn-lg btn-success bouton" href="" role="button">Voir Détails...</a></li>
           </ul>
+            <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$res['idT']?>" role="button">Voir Détails...</a></li>
           </div> 
 		<?php
 					// echo "Date : ".$res['dateT']."  Heure de depart : ".$res['heureD']."  Heure d'arrivée : ".$res['heureA'];
