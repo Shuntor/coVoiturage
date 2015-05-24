@@ -117,13 +117,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
     else if (isset($_POST['voiture']))
     {
-        $query = "INSERT INTO voitures (couleur, marque, nbPlace, annee) VALUES (";
+        $query = "INSERT INTO voitures (couleur, marque, nbPlace, annee, idU) VALUES (";
         $query .= "'" . addslashes($_POST['couleur']) . "', ";
         $query .= "'" . addslashes($_POST['marque']) . "', ";
         $query .= "'" . addslashes($_POST['nbPlace']) . "', ";
-        $query .= "'" . addslashes($_POST['annee']) . "');";
+        $query .= "'" . addslashes($_POST['annee']) . "', ";
+        $query .= "'" . ($_SESSION['idU']) . "');";
         mysqli_query($conn,$query) or die (mysqli_error($conn));
-        print_r($query);
+        ?>
+        <div class="col-lg-12 alert alert-success">Voiture inséré avec succés !</div>
+        <?php
     }
 }
     

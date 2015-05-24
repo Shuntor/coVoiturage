@@ -1,15 +1,37 @@
 
 <?php
+    $req="SELECT 1 FROM Voitures WHERE idU='".$_SESSION['idU'] ."'";
+    $res=mysqli_query($conn, $req) or die ('Erreur select check voiture'.mysqli_error($conn));
+    if (mysqli_num_rows($res) < 1)
+    {
+        echo "<div class='col-lg-12 alert alert-danger'>Pas de voiture ! Ajoutez une voiture avant de continuer !<br/>
+        <a href='?p=gestionProfil'>Aller à la gestion de mon profil...</a></div>";
+    }
+        
 	if(isset($_POST["bp_valider"]))
 			{
 
-				echo $_POST['dateTrajet']." - ".$_POST['lieuDepart']." - ".$_POST['hD']." - ".$_POST['lieuArrivee']." - ".$_POST['hA']." - ".$_POST['voiture'];
-
-                if (preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hA']) && preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hD']))
+				//echo $_POST['dateTrajet']." - ".$_POST['lieuDepart']." - ".$_POST['hD']." - ".$_POST['lieuArrivee']." - ".$_POST['hA']." - ".$_POST['voiture'];
+                $formValide=true;
+                if (empty($_POST['voiture']))
+                {
+                    $formValide=false;
+                    echo "<div class='col-lg-12 alert alert-danger'><strong>Pas de voiture ! Ajoutez une voiture avant de continuer !<br/>
+                    <a href='?p=gestionProfil'>Aller à la gestion de mon profil...</a></strong></div>";
+                }
+                if (empty($_POST['dateTrajet']))
+                {
+                    $formValide=false;
+                    echo "<div class='col-lg-12 alert alert-danger'>Date vide !</div>";
+                }
+                if (preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hA']) && preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hD']) && $formValide)
                 {
                 
 				//On transforme la date en timestamp
-				$timestamp = strtotime($_POST['dateTrajet']);
+                
+                date_default_timezone_set('Europe/Paris');
+                $exp_date = str_replace('/', '-', $_POST['dateTrajet']);
+				$timestamp = strtotime($exp_date);
 
 				//requete permettant d insérer le trajet dans la base de donnée
 				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$_POST['lieuDepart']."','".$_POST['lieuArrivee']."','".$_SESSION['idU']."')";
