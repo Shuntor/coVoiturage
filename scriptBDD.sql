@@ -12,11 +12,13 @@ prenomU varchar(150),
 moyenne float,
 age int, 
 genre varchar(1),
+ville int,
 pays varchar(150),
 mail varchar (150),
 telephone varchar (150),
 mdp varchar(150),
 constraint pk_compteUtilisateur PRIMARY KEY(idU),
+constraint fk_compteUtilisateur_villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
 ) ;
 
 create table Voitures (
