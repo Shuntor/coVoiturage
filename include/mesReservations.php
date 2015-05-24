@@ -28,7 +28,7 @@ if(mysqli_num_rows($reqPostuler)==0){
       /* Requete sur CompteUtilisateur */
       $reqCU="SELECT prenomU, nomU FROM CompteUtilisateur WHERE idU='".$trajet['idConducteur']."';";
       $reqCU=mysqli_query($conn, $reqCU) or die('Erreur select : '.mysqli_error($conn));
-      $compteUtilisateur=mysqli_fetch_array($reqCU);
+      $compteUtilisateur=mysqli_fetch_array($reqCU, MYSQLI_ASSOC);
 
       /* Requete sur les villes */
       $reqVilleD="SELECT * FROM Villes WHERE idVille=".$trajet['idVilleDepart'].";";
@@ -54,9 +54,10 @@ if(mysqli_num_rows($reqPostuler)==0){
                 <li class="list-unstyled">Point d'Arrivée : <?php echo $villeA['nomV']." - ".$villeA['cp']; ?></li>
                 <li class="list-unstyled">Date : <?php echo date('d/m/Y', $trajet['dateT']); ?></li>
                 <li class="list-unstyled">Heure de Départ : <?php echo $trajet['heureD'] ;?> </li>
-                <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $trajet['heureA']; ?> </li>
-              </ul>
-              </div>
+                <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $trajet['heureA']; ?> </li> 
+          </ul>
+            <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
+          </div> 
                 
             </div>
         </div>         

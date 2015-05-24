@@ -17,8 +17,8 @@ INSERT INTO Avis(texte, idDonneur, idReceveur, idT, note) VALUES("SUPER !", 1, 1
         <div class="offset2 span8">
             <div class="tabbable">
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#0" data-toggle="tab">Donner un avis</a></li>
-                    <li><a href="#1" data-toggle="tab">Avis reçus</a></li>
+                    <li><a href="#0" data-toggle="tab">Donner un avis</a></li>
+                    <li class="active"><a href="#1" data-toggle="tab">Avis reçus</a></li>
                     <li><a href="#2" data-toggle="tab">Avis donnés</a></li>
                  
                 </ul>

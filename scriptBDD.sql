@@ -12,15 +12,11 @@ prenomU varchar(150),
 moyenne float,
 age int, 
 genre varchar(1),
-adresse varchar(400),
-ville int,
 pays varchar(150),
-cp int,
 mail varchar (150),
 telephone varchar (150),
 mdp varchar(150),
 constraint pk_compteUtilisateur PRIMARY KEY(idU),
-constraint fk_compteUtilisateur_villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
 ) ;
 
 create table Voitures (
@@ -42,10 +38,12 @@ heureA time,
 idVilleDestination int,
 idVilleDepart int,
 idConducteur varchar(150),
+idVoiture int,
 constraint pk_trajet PRIMARY KEY(idT),
 constraint fk_trajet_compteUtilisateur FOREIGN KEY(idConducteur) REFERENCES CompteUtilisateur(idU),
 constraint fk_trajet_ville_depart FOREIGN KEY(idVilleDepart) REFERENCES Villes(idVille),
-constraint fk_trajet_ville_destination FOREIGN KEY(idVilleDestination) REFERENCES Villes(idVille)
+constraint fk_trajet_ville_destination FOREIGN KEY(idVilleDestination) REFERENCES Villes(idVille),
+constraint fk_trajet_id_voiture FOREIGN KEY(idVoiture) REFERENCES Voitures(idV)
 ) ;
 
 create table Avis (
@@ -77,21 +75,3 @@ constraint fk_postuler_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
 constraint fk_postuler_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU),
 constraint pk_postuler PRIMARY KEY(idT,idU)
 ) ;
-
-/* INSERTIONS */
-
-INSERT INTO compteutilisateur(idU, mail,prenomU,nomU,mdp)VALUES("0","Admin","Admin","Admin","root"),
-																("1","a","Victor","Iungmann","a");
-
-INSERT INTO Voitures VALUES (1, "rouge", "Faucon Millenium", 10, 3032, "1"),
-							(0, "Gold Edition", "Faucon", 4, 1999, "0");
-INSERT INTO Villes(nomV,cp) VALUES	("Toulouse", "31000"),
-									("La Rochelle", "17000"),
-									("Pamiers", "09100"),
-									("Rochefort", "17300"),
-									("Bordeaux", "33000");
-
-
-
-
-

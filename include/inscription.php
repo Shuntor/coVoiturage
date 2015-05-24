@@ -82,7 +82,7 @@ if(mysqli_num_rows($result)>=1)
     }
 }
     
-if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) || empty($_POST['age']) || empty($_POST['pays']) || empty($_POST['ville']) || empty($_POST['cp']) || empty($_POST['genre']) || empty($_POST['mail'])|| empty($_POST['telephone']) || empty($_POST['inscriptionMdp']) || empty($_POST['inscriptionConfMdp']))
+if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || empty($_POST['pays']) || empty($_POST['genre']) || empty($_POST['mail'])|| empty($_POST['telephone']) || empty($_POST['inscriptionMdp']) || empty($_POST['inscriptionConfMdp']))
 	{
 		echo "<h2>ERREUR : tous les champs n'ont pas été renseignés</h2>";
 	}
@@ -98,10 +98,6 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
         {
           $prenom = $_POST ['prenom'];
         }
-        if (isset($_POST['adresse']))
-        {
-          $adresse = $_POST ['adresse'];
-        }
         if (isset($_POST['age']))
         {
           $age = $_POST ['age'];
@@ -109,16 +105,6 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
         if (isset($_POST['pays']))
         {
           $pays = $_POST ['pays'];
-        }
-        if (isset($_POST['ville']))
-        {
-          $ville = $_POST ['ville'];
-          $ville = addslashes($ville);
-        }
-        if (isset($_POST['cp']))
-        {
-          $cp = $_POST ['cp'];
-          
         }
         if (isset($_POST['genre']))
         {
@@ -148,19 +134,20 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
         {
             if (checkAge($age) === 1)
             {
-                 if (checkCp($cp) === 1)
-                 {
                      if (checkTel($telephone) === 1)
                      {
                          if (verifMdp($inscriptionMdp, $inscriptionConfMdp) === 1)
                          {
                              if (verifIdLibre($mail, $conn) === 1)
                              {
-                             $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone',  '$inscriptionMdp')";
+                             $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, age, genre, pays, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$age', '$genre', '$pays', '$mail', '$telephone',  '$inscriptionMdp')";
         mysqli_query($conn, $query) or die (mysqli_error($conn));
 
         mysqli_close($conn);
-                                  header('Location: index.php');
+                                  //header('Location: index.php');
+                                  
+            echo "<h2>Inscription réalisé avec succés !</h2>";
+            echo "<a href='?p='>Retour à l'accueil</a>";
                              }
                              else
                              {
@@ -177,11 +164,6 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                      {
                          echo "<h2>Numéro de téléphone non valide</h2>";
                      }
-                 }
-                else
-                {
-                    echo "<h2>Code Postal non valide</h2>";
-                }
             }
             else 
             {
@@ -216,18 +198,6 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                 <input type="text" name="prenom" id="prenom" /></p>
                 <br><br>
                 
-                <p><label for="adresse" class="col-lg-3">Adresse :</label>
-                <input type="text" name="adresse" id="adresse" /></p>
-                <br><br>
-                
-                <p><label for="ville" class="col-lg-3">Ville :</label>
-                <input type="text" name="ville" id="ville" /></p>
-                <br><br>
-                
-                <p><label for="cp" class="col-lg-3">Code Postal :</label>
-                <input type="text" name="cp" id="cp" /></p>
-                <br><br>
-                
                   <p><label for="pays" class="col-lg-3">Pays :</label>
                 <input type="text" name="pays" id="pays" /></p>
                 <br><br>
@@ -237,8 +207,8 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['adresse']) 
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <INPUT type="radio" name="genre" value="1"> Homme 
-                <INPUT type="radio" name="genre" value="2"> Femme </p>
+                <INPUT type="radio" name="genre" value="m"> Homme 
+                <INPUT type="radio" name="genre" value="f"> Femme </p>
                 <br><br>
                 
                  <p><label for="telephone" class="col-lg-3">Téléphone (ex:0102030405) :</label>

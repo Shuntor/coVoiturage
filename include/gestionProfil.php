@@ -34,27 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $modifValides = FALSE;
         }
         
-        //adresse
-        if (empty($_POST['adresse']))
-        {
-            echo "Adresse vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
-        //ville
-        if (empty($_POST['ville']))
-        {
-            echo "Ville vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
-        //cp
-        if (empty($_POST['cp']))
-        {
-            echo "Code postal vide !<br/>";
-            $modifValides = FALSE;
-        }
-        
         //pays
         if (empty($_POST['pays']))
         {
@@ -122,10 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $query .= "prenomU='" . addslashes($_POST['prenom']) . "', ";
             $query .= "age='" . addslashes($_POST['age']) . "', ";
             $query .= "genre='" . addslashes($_POST['genre']) . "', ";
-            $query .= "adresse='" . addslashes($_POST['adresse']) . "', ";
-            $query .= "ville='" . addslashes($_POST['ville']) . "', ";
             $query .= "pays='" . addslashes($_POST['pays']) . "', ";
-            $query .= "cp='" . addslashes($_POST['cp']) . "', ";
             $query .= "mail='" . addslashes($_POST['mail']) . "', ";
             if (!empty($_POST['nouveauMdp']))
                 $query .= "mdp='" . addslashes($_POST['nouveauMdp']) . "', ";
@@ -141,13 +117,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
     else if (isset($_POST['voiture']))
     {
-        $query = "INSERT INTO voitures (couleur, marque, nbPlace, annee) VALUES (";
+        $query = "INSERT INTO voitures (couleur, marque, nbPlace, annee, idU) VALUES (";
         $query .= "'" . addslashes($_POST['couleur']) . "', ";
         $query .= "'" . addslashes($_POST['marque']) . "', ";
         $query .= "'" . addslashes($_POST['nbPlace']) . "', ";
-        $query .= "'" . addslashes($_POST['annee']) . "');";
+        $query .= "'" . addslashes($_POST['annee']) . "', ";
+        $query .= "'" . ($_SESSION['idU']) . "');";
         mysqli_query($conn,$query) or die (mysqli_error($conn));
-        print_r($query);
+        ?>
+        <div class="col-lg-12 alert alert-success">Voiture inséré avec succés !</div>
+        <?php
     }
 }
     
@@ -189,18 +168,6 @@ echo '</pre>';
                 <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($utilisateur['prenomU']) ?>"/></p>
                 <br><br>
                 
-                <p><label for="adresse" class="col-lg-3">Adresse :</label>
-                <input type="text" name="adresse" id="adresse" value="<?= htmlspecialchars($utilisateur['adresse']) ?>"/></p>
-                <br><br>
-                
-                <p><label for="ville" class="col-lg-3">Ville :</label>
-                <input type="text" name="ville" id="ville" value="<?= htmlspecialchars($utilisateur['ville']) ?>"/></p>
-                <br><br>
-                
-                <p><label for="cp" class="col-lg-3">Code postale :</label>
-                <input type="text" name="cp" id="cp" value="<?= htmlspecialchars($utilisateur['cp']) ?>"/></p>
-                <br><br>
-                
                 <p><label for="pays" class="col-lg-3">Pays :</label>
                 <input type="text" name="pays" id="pays" value="<?= htmlspecialchars($utilisateur['pays']) ?>"/></p>
                 <br><br>
@@ -210,8 +177,8 @@ echo '</pre>';
                 <br><br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
-                <INPUT type="radio" name="genre" value="1" <?php if ($utilisateur['genre'] == 1) echo 'checked' ?> > Homme 
-                <INPUT type="radio" name="genre" value="2" <?php if ($utilisateur['genre'] == 2) echo 'checked' ?> > Femme </p>
+                <INPUT type="radio" name="genre" value="m" <?php if ($utilisateur['genre'] == 'm') echo 'checked' ?> > Homme 
+                <INPUT type="radio" name="genre" value="f" <?php if ($utilisateur['genre'] == 'f') echo 'checked' ?> > Femme </p>
                 <br><br>
 
                 <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>

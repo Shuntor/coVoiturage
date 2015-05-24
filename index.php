@@ -9,10 +9,32 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
+	<script> $.datepicker.regional['fr'] = {clearText: 'Effacer', clearStatus: '',
+    closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+    prevText: '&lt;Préc', prevStatus: 'Voir le mois précédent',
+    nextText: 'Suiv&gt;', nextStatus: 'Voir le mois suivant',
+    currentText: 'Courant', currentStatus: 'Voir le mois courant',
+    monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+    monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+    'Jul','Aoû','Sep','Oct','Nov','Déc'],
+    monthStatus: 'Voir un autre mois', yearStatus: 'Voir un autre année',
+    weekHeader: 'Sm', weekStatus: '',
+    dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+    dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+    dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+    dayStatus: 'Utiliser DD comme premier jour de la semaine', dateStatus: 'Choisir le DD, MM d',
+    dateFormat: 'dd/mm/yy', firstDay: 1, 
+    initStatus: 'Choisir la date', isRTL: false};
+ $.datepicker.setDefaults($.datepicker.regional['fr']);
+		$(function() {
+			$("#datepicker").datepicker();
+		});
+	</script>
     <title>CovoiturageEtudiant.com</title>
 
     <!-- Bootstrap core CSS -->
