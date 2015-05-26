@@ -22,11 +22,10 @@ if(isset($_POST["bp_valider"])){
 
 	$reqPostuler="SELECT * FROM Postuler p, Trajets t WHERE (p.idU='".$_SESSION['idU']."' AND p.idT=t.idT AND p.idT NOT IN (SELECT idT FROM Avis WHERE idDonneur ='".$_SESSION['idU']."' ));";
 	$reqPostuler = mysqli_query($conn, $reqPostuler) OR die('Erreur select : '.mysqli_error($conn));
-    
 
-
-?>
-<legend>Saisie d'un avis</legend>
+?> 
+<div class="page-header">
+    <h1>Saisie d'un avis :</h1>
 	<form method="post" action="index.php?p=mesAvis" onSubmit="return verif(this)">
 		
 		<p><label for="trajet" class="col-lg-1">Trajet :</label>
@@ -65,6 +64,7 @@ if(isset($_POST["bp_valider"])){
 
 
 	</form>
+ </div> 	
 <?php
 }
 ?>

@@ -21,7 +21,7 @@
         </section>
  </div>
 
- 
+ </div></div>
  
       <div class="row marketing">
       <h2><center>Les 10 derniers trajets du site</center></h2>

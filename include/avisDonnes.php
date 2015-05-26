@@ -19,7 +19,11 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
     $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
     $trajet=mysqli_fetch_array($resTrajet);
     
-    ?>        
+    ?> 
+    <div class="page-header">
+        <h1>Les avis que vous avez donné : </h1>
+        <p class="lead">N'hésitez pas à dire ce que vous avez pensé des conducteurs ! </p>
+    </div>          
 
     <div class="row marketing">
         <div class="col-lg-12">
