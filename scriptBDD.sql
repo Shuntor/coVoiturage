@@ -2,7 +2,7 @@ create table Villes (
 idVille int NOT NULL AUTO_INCREMENT,
 nomV varchar(150),
 cp int,
-constraint pk_villes PRIMARY KEY(idVille)
+constraint pk_Villes PRIMARY KEY(idVille)
 ) ;
 
 create table CompteUtilisateur (
@@ -18,7 +18,7 @@ mail varchar (150),
 telephone varchar (150),
 mdp varchar(150),
 constraint pk_compteUtilisateur PRIMARY KEY(idU),
-constraint fk_compteUtilisateur_villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
+constraint fk_compteUtilisateur_Villes FOREIGN KEY(ville) REFERENCES Villes(idVille)
 ) ;
 
 create table Voitures (

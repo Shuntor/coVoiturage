@@ -7,10 +7,10 @@ if(isset($_POST["bp_valider"])){
 	$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
     
     // on met à jour la moyenne de l'utilisateur
-    $req="SELECT AVG(note) FROM avis WHERE idReceveur='".$idConducteur."'";
+    $req="SELECT AVG(note) FROM Avis WHERE idReceveur='".$idConducteur."'";
     $res=mysqli_query($conn, $req) OR die ('Erreur select moyenne avis :'.mysqli_error($conn));
     $note=mysqli_fetch_row($res);
-    $req="UPDATE compteUtilisateur set moyenne='" . $note[0] . "' where idU='".$idConducteur."'";
+    $req="UPDATE CompteUtilisateur set moyenne='" . $note[0] . "' where idU='".$idConducteur."'";
     $res=mysqli_query($conn, $req) OR die ('Erreur insert moyenne avis :'.mysqli_error($conn));
     
 	?>
