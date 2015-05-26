@@ -81,7 +81,7 @@
 							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
 				<?php }?>
 			</select></td>
-			<td>Heure : <input type="time" name="hD" placeholder="13:00"></td>
+			<td>Heure : <input type="text" name="hD" placeholder="13:00"></td>
 		</tr>
 		
 		<tr><td>Lieu d'arrivée :</td>
@@ -91,7 +91,7 @@
 							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
 				<?php }?>
 			</select></td>
-			<td>Heure : <input type="time" name="hA" placeholder="14:00"></td>
+			<td>Heure : <input type="text" name="hA" placeholder="14:00"></td>
 		</tr>
 		<tr><td>Voiture : </td><td>
 			<select class="form-control" name="voiture">
