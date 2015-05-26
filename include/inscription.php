@@ -184,8 +184,7 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
 
 
  <div class="row marketing">
-        <div class="col-lg-12">
-          <div class="form-group annonce">
+          <div class="col-lg-12 form-group annonce">
           <h6>M'inscrire...</h6>
           <ul >
             <form method="post" action="" class="col-lg-8" onSubmit="valider_formulaire(this)">
@@ -231,8 +230,7 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
             
               
               
-          </ul>
-          </div>                 
+          </ul>         
         </div>
       </div>
 

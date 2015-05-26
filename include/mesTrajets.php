@@ -1,5 +1,6 @@
 
 <?php
+    
     $req="SELECT 1 FROM Voitures WHERE idU='".$_SESSION['idU'] ."'";
     $res=mysqli_query($conn, $req) or die ('Erreur select check voiture'.mysqli_error($conn));
     if (mysqli_num_rows($res) < 1)
@@ -8,7 +9,7 @@
         <a href='?p=gestionProfil'>Aller à la gestion de mon profil...</a></div>";
     }
         
-	if(isset($_POST["bp_valider"]))
+	if(isset($_POST["bp_valider"])&& !empty($_POST['villeDepart']) && !empty($_POST['villeDestination']))
 			{
 
 				//echo $_POST['dateTrajet']." - ".$_POST['lieuDepart']." - ".$_POST['hD']." - ".$_POST['lieuArrivee']." - ".$_POST['hA']." - ".$_POST['voiture'];
@@ -32,9 +33,41 @@
                 date_default_timezone_set('Europe/Paris');
                 $exp_date = str_replace('/', '-', $_POST['dateTrajet']);
 				$timestamp = strtotime($exp_date);
+                
+                    // On cherche ou insère la ville de départ
+                    $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
+                    $resChercheD=mysqli_query($conn, $reqChercheD);
+                    if (($villeD=mysqli_fetch_row($resChercheD)) != NULL)
+                        $idVilleD=$villeD[0];
+                    else
+                    {
+                        $reqInsertD="INSERT INTO Villes (nomV) VALUES ('" .$_POST['villeDepart']. "');";
+                        $resInsertD=mysqli_query($conn, $reqInsertD);
+                        $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
+                        $resChercheD=mysqli_query($conn, $reqChercheD);
+                        $villeD=mysqli_fetch_row($resChercheD);
+                        $idVilleD=$villeD[0];
+                    }
+
+
+                    // On cherche ou insère la ville d'arrivée
+                    $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
+                    $resChercheA=mysqli_query($conn, $reqChercheA);
+                    if (($villeA=mysqli_fetch_row($resChercheA)) != NULL)
+                        $idVilleA=$villeA[0];
+                    else
+                    {
+                        $reqInsertA="INSERT INTO Villes (nomV) VALUES ('" .$_POST['villeDestination']. "');";
+                        $resInsertA=mysqli_query($conn, $reqInsertA);
+                        $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
+                        $resChercheA=mysqli_query($conn, $reqChercheA);
+                        $villeA=mysqli_fetch_row($resChercheA);
+                        $idVilleA=$villeA[0];
+                    }
 
 				//requete permettant d insérer le trajet dans la base de donnée
-				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur, idVoiture) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$_POST['lieuDepart']."','".$_POST['lieuArrivee']."','".$_SESSION['idU']."','".$_POST['voiture']."')";
+				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur, idVoiture) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$idVilleD."','".$idVilleA."','".$_SESSION['idU']."','".$_POST['voiture']."')";
+                print_r($requete);
 				$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
 
 				?>
@@ -58,11 +91,11 @@
 				$req="SELECT * FROM Voitures WHERE idU='" . $_SESSION['idU'] . "'";
 				$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
 				/*$res=mysqli_fetch_array($req);*/
-				$reqVilles="SELECT * FROM Villes ;";
-				$reqVilles=mysqli_query($conn, $reqVilles) or die('Erreur select : '.mysqli_error($conn));
-				while ($res = mysqli_fetch_array($reqVilles)){ 
-					$villes[] = $res;
-				}
+                
+                
+                
+                
+				
 ?>					
 
 						<!-- création du formulaire de saisie -->
@@ -72,6 +105,7 @@
     <h1>Saisie d'un trajet : </h1>
     <p class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> 	</p>
   </div> 
+    <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
 
 		<center><table class="table table-bordered">
@@ -80,21 +114,18 @@
 
 		<tr><td>Lieu de départ :</td>
 			<td>
-				<select class="form-control" name="lieuDepart">
-				<?php foreach ($villes as $res) {?>
-							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
-				<?php }?>
-			</select></td>
+			
+                    <input id="ville" type="text" name="villeDepart" class="form-control" placeholder="Ex: Toulouse, Foix...">
+                    
+                    </td>
 			<td>Heure : <input type="text" name="hD" placeholder="13:00"></td>
 		</tr>
 		
 		<tr><td>Lieu d'arrivée :</td>
 			<td>
-				<select class="form-control" name="lieuArrivee">
-				<?php foreach ($villes as $res) {?>
-							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
-				<?php }?>
-			</select></td>
+                    <input id="ville2" type="text" name="villeDestination" class="form-control" placeholder="Ex: Bordeaux, Mérignac...">
+                    
+                    </td>
 			<td>Heure : <input type="text" name="hA" placeholder="14:00"></td>
 		</tr>
 		<tr><td>Voiture : </td><td>

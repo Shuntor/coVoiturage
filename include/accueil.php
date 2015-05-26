@@ -1,3 +1,5 @@
+
+    <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 <div class="jumbotron formRecherche">
          <section>
          <h1>RECHERCHE</h1>
@@ -6,11 +8,11 @@
                 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Départ :</label> 
-                    <input value="Toulouse" id= "text" type="text" name="villeDepart" class="form-control" placeholder="Ex: Toulouse,Paris,...">
+                    <input id="ville" type="text" name="villeDepart" class="form-control" placeholder="Ex: Toulouse, Foix...">
                 </div> 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Arrivée :</label> 
-                    <input value="Bordeaux" id= "text" type="text" name="villeDestination" class="form-control" placeholder="Ex: Toulouse,Paris,...">
+                    <input id="ville2" type="text" name="villeDestination" class="form-control" placeholder="Ex: Bordeaux, Mérignac...">
                 </div> 
                 <div class="form-group col-lg-4">   
                     <label for="texte">Date (jj/mm/aaaa) :</label> 

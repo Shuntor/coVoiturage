@@ -46,9 +46,9 @@ else
 
       <div class="row">
         <div class="col-lg-6">
-          <div class="panel panel-primary">
+          <div class="annonce panel">
             <div class="panel-heading">
-              <h3 class="panel-title">Carte</h3>
+              <h3><strong><i>Carte</i></strong></h3>
             </div>
             <div class="panel-body">
                     <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -96,9 +96,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="panel panel-primary">
+          <div class="annonce panel">
             <div class="panel-heading">
-              <h3 class="panel-title"><strong><?=$villeDepart['nomV']?> &rArr; <?=$villeArrivee['nomV']?></strong></h3>
+              <h3><strong><i><?=$villeDepart['nomV']?> &rArr; <?=$villeArrivee['nomV']?></i></strong></h3>
             </div>
             <div class="panel-body" id="details-trajet">
                 <ul>
@@ -115,9 +115,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       <div class="row">
         <div class="col-lg-6">
-          <div class="panel panel-primary">
+          <div class="annonce panel">
             <div class="panel-heading">
-              <h3 class="panel-title">Voiture</h3>
+              <h3><strong><i>Voiture</i></strong></h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -130,9 +130,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="panel panel-primary">
+          <div class="annonce panel">
             <div class="panel-heading">
-              <h3 class="panel-title">Conducteur</h3>
+              <h3><strong><i>Conducteur</i></strong></h3>
             </div>
             <div class="panel-body">
                 <ul>

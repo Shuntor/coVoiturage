@@ -1,18 +1,40 @@
 <?php
-if(isset($_POST["bp_rechercher"])){
-	$reqVilleD="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
-	$reqVilleA="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
-	$reqVilleD=mysqli_query($conn, $reqVilleD) or die('Erreur select : '.mysqli_error($conn));
-	$reqVilleA=mysqli_query($conn, $reqVilleA) or die('Erreur select : '.mysqli_error($conn));
-	$idVilleD=mysqli_fetch_row($reqVilleD);
-	$idVilleD=$idVilleD[0];
-	$idVilleA=mysqli_fetch_row($reqVilleA);
-	$idVilleA=$idVilleA[0];
+if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_POST['villeDestination'])){
+    
+    $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
+    $resChercheD=mysqli_query($conn, $reqChercheD);
+    if (($villeD=mysqli_fetch_row($resChercheD)) != NULL)
+        $idVilleD=$villeD[0];
+    else
+        $idVilleD=-1;
+    
+    
+    $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
+    $resChercheA=mysqli_query($conn, $reqChercheA);
+    if (($villeA=mysqli_fetch_row($resChercheA)) != NULL)
+        $idVilleA=$villeA[0];
+    else
+        $idVilleA=-1;
+        
+
+
+        
+	// $reqVilleD="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
+	// $reqVilleA="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
+	// $reqVilleD=mysqli_query($conn, $reqVilleD) or die('Erreur select : '.mysqli_error($conn));
+	// $reqVilleA=mysqli_query($conn, $reqVilleA) or die('Erreur select : '.mysqli_error($conn));
+	// $idVilleD=mysqli_fetch_row($reqVilleD);
+	// $idVilleD=$idVilleD[0];
+	// $idVilleA=mysqli_fetch_row($reqVilleA);
+	// $idVilleA=$idVilleA[0];
 
 	// echo $_POST['date'];
     if (!empty($_POST['date']))
     {
-	$date=strtotime($_POST['date']);
+				//On transforme la date en timestamp
+                date_default_timezone_set('Europe/Paris');
+                $exp_date = str_replace('/', '-', $_POST['date']);
+				$date = strtotime($exp_date);
 
 	$req="SELECT * FROM Trajets WHERE idVilleDepart=".$idVilleD." 
 			AND idVilleDestination=".$idVilleA." 
@@ -54,9 +76,16 @@ if(isset($_POST["bp_rechercher"])){
 					// echo "Date : ".$res['dateT']."  Heure de depart : ".$res['heureD']."  Heure d'arrivée : ".$res['heureA'];
 				}
 
-}
+
+                
+} else {
 	
 	
 ?>
+
+    <div class="col-lg-12 alert alert-danger">Formulaire de recherche incomplet</div>
+    <?php
+    }
+    ?>
 	</div>
 </div>
