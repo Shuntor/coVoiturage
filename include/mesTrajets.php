@@ -67,7 +67,6 @@
 
 				//requete permettant d insérer le trajet dans la base de donnée
 				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur, idVoiture) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$idVilleD."','".$idVilleA."','".$_SESSION['idU']."','".$_POST['voiture']."')";
-                print_r($requete);
 				$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
 
 				?>
