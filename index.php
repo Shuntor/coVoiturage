@@ -35,6 +35,7 @@
 			$("#datepicker").datepicker();
 		});
 	</script>
+    <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
     <title>CovoiturageEtudiant.com</title>
 
     <!-- Bootstrap core CSS -->

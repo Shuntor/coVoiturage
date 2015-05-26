@@ -51,7 +51,7 @@ else
               <h3 class="panel-title">Carte</h3>
             </div>
             <div class="panel-body">
-                    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
 
 
