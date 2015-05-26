@@ -73,7 +73,7 @@
 
 		<center><table class="table table-bordered">
 		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
-		<tr><td>Quel jour souhaitez vous voyager ? <input type="date" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
+		<tr><td>Quel jour souhaitez vous voyager ? <input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
 		<tr><td>Lieu de départ :</td>
 			<td>
 				<select class="form-control" name="lieuDepart">
