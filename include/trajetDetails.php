@@ -51,7 +51,47 @@ else
               <h3 class="panel-title">Carte</h3>
             </div>
             <div class="panel-body">
-              Google maps
+                    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+
+
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var mapOptions = {
+    zoom: 7
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+  calcRoute();
+}
+
+function calcRoute() {
+  var request = {
+      origin: '<?=$villeDepart['nomV']?>',
+      destination: '<?=$villeArrivee['nomV']?>',
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC
+
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      $('#details-trajet ul').append('<br><li class="list-unstyled">Distance : <strong>' + response.routes[0].legs[0].distance.text + '</strong></li>');
+      $('#details-trajet ul').append('<li class="list-unstyled">Durée : <strong>' + response.routes[0].legs[0].duration.text + '</strong></li>');
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+                <div id="map-canvas" style="height:400px"></div>
+
             </div>
           </div>
         </div>
@@ -60,7 +100,7 @@ else
             <div class="panel-heading">
               <h3 class="panel-title"><strong><?=$villeDepart['nomV']?> &rArr; <?=$villeArrivee['nomV']?></strong></h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" id="details-trajet">
                 <ul>
                 <li class="list-unstyled">Date : <strong><?=date('d/m/Y', $trajet['dateT']); ?></strong></li><br/>
                 <li class="list-unstyled">Ville de départ : <strong><?=$villeDepart['nomV']?></strong></li>
