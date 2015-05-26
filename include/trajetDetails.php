@@ -4,7 +4,7 @@ $trajet=false;
 
 if(isset($_GET['t']))
 {
-    $res=mysqli_query($conn, "select * from trajets where idT='".mysqli_real_escape_string($conn, $_GET['t'])."'");
+    $res=mysqli_query($conn, "select * from Trajets where idT='".mysqli_real_escape_string($conn, $_GET['t'])."'");
     $trajet=mysqli_fetch_array($res);
 }
 
@@ -29,15 +29,15 @@ else
     $resConducteur=mysqli_query($conn, $reqConducteur) OR die('Erreur select conducteur : ' . mysqli_error($conn));
     $conducteur=mysqli_fetch_array($resConducteur);
     
-    $reqVilleDepart = "SELECT * FROM villes WHERE idVille='" . $trajet['idVilleDepart'] . "'";
+    $reqVilleDepart = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDepart'] . "'";
     $resVilleDepart = mysqli_query($conn, $reqVilleDepart) OR die ('Erreur select villeDepart : ' . mysqli_error($conn));
     $villeDepart = mysqli_fetch_array($resVilleDepart);
     
-    $reqVilleArrivee = "SELECT * FROM villes WHERE idVille='" . $trajet['idVilleDestination'] . "'";
+    $reqVilleArrivee = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDestination'] . "'";
     $resVilleArrivee = mysqli_query($conn, $reqVilleArrivee) OR die ('Erreur select villeArrivee : ' . mysqli_error($conn));
     $villeArrivee = mysqli_fetch_array($resVilleArrivee);
     
-    $reqVoiture = "SELECT * FROM voitures WHERE idV='" . $trajet['idVoiture'] . "'";
+    $reqVoiture = "SELECT * FROM Voitures WHERE idV='" . $trajet['idVoiture'] . "'";
     $resVoiture = mysqli_query($conn, $reqVoiture) OR die ('Erreur select voiture : ' . mysqli_error($conn));
     $voiture = mysqli_fetch_array($resVoiture);
     

@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         
         if ($modifValides)
         {
-            $query  = "UPDATE compteutilisateur SET ";
+            $query  = "UPDATE CompteUtilisateur SET ";
             $query .= "nomU='" . addslashes($_POST['nom']) . "', ";
             $query .= "prenomU='" . addslashes($_POST['prenom']) . "', ";
             $query .= "age='" . addslashes($_POST['age']) . "', ";
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
     else if (isset($_POST['voiture']))
     {
-        $query = "INSERT INTO voitures (couleur, marque, nbPlace, annee, idU) VALUES (";
+        $query = "INSERT INTO Voitures (couleur, marque, nbPlace, annee, idU) VALUES (";
         $query .= "'" . addslashes($_POST['couleur']) . "', ";
         $query .= "'" . addslashes($_POST['marque']) . "', ";
         $query .= "'" . addslashes($_POST['nbPlace']) . "', ";

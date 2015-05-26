@@ -29,7 +29,7 @@
  <?php
  
      /* On récupère les derniers trajets de 1 à 5 */
-    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, t.idT as idT from compteutilisateur c, trajets t, villes v1, villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 0,5";
+    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, t.idT as idT from CompteUtilisateur c, trajets t, Villes v1, Villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 0,5";
     
     
 				$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
@@ -56,7 +56,7 @@
  <?php
  
      /* On récupère les derniers trajets de 5 à 10 */
-    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from compteutilisateur c, trajets t, villes v1, villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 5,5";
+    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from CompteUtilisateur c, trajets t, Villes v1, Villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 5,5";
     
     
 				$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
