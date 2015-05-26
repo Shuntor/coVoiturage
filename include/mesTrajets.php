@@ -75,7 +75,9 @@
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
 
 		<center><table class="table table-bordered">
-		<tr><td>Quel jour souhaitez vous voyager ? <input type="date" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
+		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
+		<tr><td>Quel jour souhaitez vous voyager ? <input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
+
 		<tr><td>Lieu de départ :</td>
 			<td>
 				<select class="form-control" name="lieuDepart">
@@ -83,7 +85,7 @@
 							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
 				<?php }?>
 			</select></td>
-			<td>Heure : <input type="time" name="hD" placeholder="13:00"></td>
+			<td>Heure : <input type="text" name="hD" placeholder="13:00"></td>
 		</tr>
 		
 		<tr><td>Lieu d'arrivée :</td>
@@ -93,7 +95,7 @@
 							  <option value=<?php echo $res['idVille']; ?> ><?php echo $res['nomV']." - ".$res['cp']; ?></option>
 				<?php }?>
 			</select></td>
-			<td>Heure : <input type="time" name="hA" placeholder="14:00"></td>
+			<td>Heure : <input type="text" name="hA" placeholder="14:00"></td>
 		</tr>
 		<tr><td>Voiture : </td><td>
 			<select class="form-control" name="voiture">
