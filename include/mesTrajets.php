@@ -46,7 +46,7 @@
                 ?>
                 
 				<!-- Il faut décorer ça  --><br />
-                <strong> Format de l'heure incorrect ! Merci d'utiliser heures:minutes ! <br />Comme 14:33 par exemple.<br/><br />
+                <strong> Format de l'heure incorrect ! Merci d'utiliser heures:minutes ! <br />Comme 14:33 par exemple.<br/><br /> </strong>
 				<a href="index.php?p=mesTrajets"> Retourner à mes Trajets </a>
                 
                 <?php } ?>
@@ -68,11 +68,13 @@
 						<!-- création du formulaire de saisie -->
 
 
-<legend>Saisie d'un trajet</legend>
+  <div class="page-header">
+    <h1>Saisie d'un trajet : </h1>
+    <p class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> 	</p>
+  </div> 
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
 
 		<center><table class="table table-bordered">
-		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
 		<tr><td>Quel jour souhaitez vous voyager ? <input type="date" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
 		<tr><td>Lieu de départ :</td>
 			<td>
@@ -100,7 +102,7 @@
 			<?php }?>
 			</select></td>
 		</tr>
-		</table>
+		</table></center>
 		
 		<!--bloc contenant le bouton valider-->
 		<div>
@@ -108,30 +110,37 @@
 		</div>
 	</form>
     <br />
-    <h2> Mes 20 trajets proposés recemment</h2>
-    <?php
-    
-    /* On récupère les trajets de l'utilisateur courant */
-    $reqTrajets="select v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from trajets t, villes v1, villes v2 where t.idConducteur = '" . $_SESSION['idU'] . "' and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 20";
-    
-    
-				$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
-				while ($trajet = mysqli_fetch_array($resTrajets)){ ?>
-					
-    		<div class="form-group annonce mesTrajets">
+
+<!-- Affichage des précédents trajets -->
+
+
+  
+      <h2><center>Mes 20 derniers trajets :</center></h2>
+    <div class="col-lg-12" >
+	    <?php
+	    
+	    /* On récupère les trajets de l'utilisateur courant */
+	    $reqTrajets="select v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from Trajets t, Villes v1, Villes v2 where t.idConducteur = '" . $_SESSION['idU'] . "' and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 20";
+		$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
+		while ($trajet = mysqli_fetch_array($resTrajets)){ ?>
+				
+		<div class="form-group annonce mesTrajets col-lg-5 " style="margin-left:50px;margin-right:20;">
           <h4><?php echo $trajet['villeDepart']." > ".$trajet['villeArrivee']; ?></h4>
           <ul >
             <li class="list-unstyled">Point de Rendez-vous : <?php echo $trajet['villeDepart'] ?></li>
             <li class="list-unstyled">Point d'Arrivée : <?php echo $trajet['villeArrivee'] ?></li>
             <li class="list-unstyled">Date : <?php echo date('d/m/Y', $trajet['date']); ?></li>
             <li class="list-unstyled">Heure de Départ : <?php echo $trajet['heureDepart'] ?> </li>
-            <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $trajet['heureArrivee'] ?> 
+            <li class="list-unstyled">Heure d'Arrrivée prévue : <?php echo $trajet['heureArrivee'] ?> </li>
           </ul>
-            <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
-          </div> 
-				<?php
-                }
-    ?>
+          	<a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
+        </div>
+    	
+		<?php
+        }
+		?>
+		      
+    </div>
     
     
     
