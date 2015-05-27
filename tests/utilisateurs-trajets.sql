@@ -1,8 +1,8 @@
-INSERT INTO Villes(nomV,cp) VALUES	("Toulouse", "31000"),
-									("La Rochelle", "17000"),
-									("Pamiers", "09100"),
-									("Rochefort", "17300"),
-									("Bordeaux", "33000");
+INSERT INTO Villes(nomV,cp) VALUES	('Toulouse', '31000'),
+									('La Rochelle', '17000'),
+									('Pamiers', '09100'),
+									('Rochefort', '17300'),
+									('Bordeaux', '33000');
 insert into Villes (idVille, nomV, cp) values
 (100, 'Merignac', 45000),
 (101, 'Foix', 09000),
@@ -19,8 +19,8 @@ insert into Voitures (couleur, marque, nbPlace, annee, idU) values
 ('rouge', 'ferrari', 2, 1999, 'emeric.tosi@gmail.com'),
 ('marron', 'renault 4L', 4, 1973, 'massip.thomas@gmail.com'),
 ('noire', 'K2000', 3, 1980, 'cantal.guillaume@gmail.com'),
-("rouge", "Faucon Millenium", 10, 3032, "a"),
-("Gold Edition", "Faucon", 4, 1999, "a");
+('rouge', 'Faucon Millenium', 10, 3032, 'a'),
+('Gold Edition', 'Faucon', 4, 1999, 'a');
 
 insert into Trajets (idT, dateT, heureD, heureA, idVilleDestination, idVilleDepart, idConducteur, idVoiture) VALUES
 (100, 1432857600, '14:00:00', '18:00:00', 100, 101, 'emeric.tosi@gmail.com', 1),

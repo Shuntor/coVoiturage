@@ -25,7 +25,7 @@ else
         <?php
     }
     
-    $reqConducteur="SELECT * FROM compteUtilisateur WHERE idU='" . $trajet['idConducteur'] . "'";
+    $reqConducteur="SELECT * FROM CompteUtilisateur WHERE idU='" . $trajet['idConducteur'] . "'";
     $resConducteur=mysqli_query($conn, $reqConducteur) OR die('Erreur select conducteur : ' . mysqli_error($conn));
     $conducteur=mysqli_fetch_array($resConducteur);
     
