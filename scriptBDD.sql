@@ -1,5 +1,5 @@
 create table Villes (
-idVille int NOT NULL AUTO_INCREMENT,
+idVille serial NOT NULL,
 nomV varchar(150),
 cp int,
 constraint pk_Villes PRIMARY KEY(idVille)
@@ -22,7 +22,7 @@ constraint fk_compteUtilisateur_Villes FOREIGN KEY(ville) REFERENCES Villes(idVi
 ) ;
 
 create table Voitures (
-idV int NOT NULL AUTO_INCREMENT,
+idV serial NOT NULL,
 couleur varchar(150),
 marque varchar(150),
 nbPLace int,
@@ -33,7 +33,7 @@ constraint fk_voitures_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtili
 ) ;
 
 create table Trajets (
-idT int NOT NULL AUTO_INCREMENT,
+idT serial NOT NULL,
 dateT int,
 heureD time,
 heureA time,
