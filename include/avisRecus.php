@@ -18,12 +18,14 @@ $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
     $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
     $trajet=mysqli_fetch_array($resTrajet);
 
-
+    $reqMoyenne="SELECT sum(note) FROM Avis WHERE idReceveur='".$_SESSION['idU']."';";
+    $reqMoyenne=mysqli_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.mysqli_error($conn));
+    $reqMoyenne= mysqli_fetch_row($reqMoyenne);
 
     ?> 
   <div class="page-header">
     <h1>Les avis que vous avez reçu : </h1>
-    <p class="lead">Votre moyenne est de : </p>
+    <p class="lead">Votre moyenne est de : <?php echo $reqMoyenne[0]; ?> </p>
   </div>       
 
     <div class="row marketing">

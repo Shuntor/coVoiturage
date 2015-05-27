@@ -41,9 +41,8 @@ if(mysqli_num_rows($reqPostuler)==0){
 
 
       ?>
-      <div class="row marketing">
         <div class="col-lg-12">
-            <div class="form-group annonce prochainsVoyages">
+
            <!--    <h8 class="col-lg-12">Mes prochains voyages </h8> -->
               
               <div class="form-group annonce prochainsVoyageDetails">
@@ -59,9 +58,7 @@ if(mysqli_num_rows($reqPostuler)==0){
             <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
           </div> 
                 
-            </div>
         </div>         
-      </div>
     
   <?php }
 } 
