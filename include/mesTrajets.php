@@ -37,7 +37,7 @@
                     // On cherche ou insère la ville de départ
                     $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
                     $resChercheD=pg_query($conn, $reqChercheD);
-                    if (($villeD=pg_fetch_row($resChercheD)) != NULL)
+                    if (($villeD=pg_query($resChercheD)) != NULL)
                         $idVilleD=$villeD[0];
                     else
                     {
@@ -45,7 +45,7 @@
                         $resInsertD=pg_query($conn, $reqInsertD);
                         $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
                         $resChercheD=pg_query($conn, $reqChercheD);
-                        $villeD=pg_fetch_row($resChercheD);
+                        $villeD=pg_query($resChercheD);
                         $idVilleD=$villeD[0];
                     }
 
@@ -53,7 +53,7 @@
                     // On cherche ou insère la ville d'arrivée
                     $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
                     $resChercheA=pg_query($conn, $reqChercheA);
-                    if (($villeA=pg_fetch_row($resChercheA)) != NULL)
+                    if (($villeA=pg_query($resChercheA)) != NULL)
                         $idVilleA=$villeA[0];
                     else
                     {
@@ -61,7 +61,7 @@
                         $resInsertA=pg_query($conn, $reqInsertA);
                         $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
                         $resChercheA=pg_query($conn, $reqChercheA);
-                        $villeA=pg_fetch_row($resChercheA);
+                        $villeA=pg_query($resChercheA);
                         $idVilleA=$villeA[0];
                     }
 

@@ -3,7 +3,7 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
     
     $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
     $resChercheD=pg_query($conn, $reqChercheD);
-    if (($villeD=pg_fetch_row($resChercheD)) != NULL)
+    if (($villeD=pg_query($resChercheD)) != NULL)
         $idVilleD=$villeD[0];
     else
         $idVilleD=-1;
@@ -11,7 +11,7 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
     
     $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
     $resChercheA=pg_query($conn, $reqChercheA);
-    if (($villeA=pg_fetch_row($resChercheA)) != NULL)
+    if (($villeA=pg_query($resChercheA)) != NULL)
         $idVilleA=$villeA[0];
     else
         $idVilleA=-1;
@@ -23,9 +23,9 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
 	// $reqVilleA="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
 	// $reqVilleD=pg_query($conn, $reqVilleD) or die('Erreur select : '.pg_last_error($conn));
 	// $reqVilleA=pg_query($conn, $reqVilleA) or die('Erreur select : '.pg_last_error($conn));
-	// $idVilleD=pg_fetch_row($reqVilleD);
+	// $idVilleD=pg_query($reqVilleD);
 	// $idVilleD=$idVilleD[0];
-	// $idVilleA=pg_fetch_row($reqVilleA);
+	// $idVilleA=pg_query($reqVilleA);
 	// $idVilleA=$idVilleA[0];
 
 	// echo $_POST['date'];

@@ -10,7 +10,7 @@ if(isset($_POST["bp_valider"])){
     // on met à jour la moyenne de l'utilisateur
     $req="SELECT AVG(note) FROM Avis WHERE idReceveur='".$idConducteur."'";
     $res=pg_query($conn, $req) OR die ('Erreur select moyenne avis :'.pg_last_error($conn));
-    $note=pg_fetch_row($res);
+    $note=pg_query($res);
     $req="UPDATE CompteUtilisateur set moyenne='" . $note[0] . "' where idU='".$idConducteur."'";
     $res=pg_query($conn, $req) OR die ('Erreur insert moyenne avis :'.pg_last_error($conn));
     

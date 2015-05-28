@@ -4,8 +4,8 @@
 /* vérif si un avis est présent dans la base données */
 
 $reqAvis="SELECT * FROM avis;";
-$reqAvis=mysqli_query($conn, $reqAvis) or die('Erreur select : '.mysqli_error($conn));
-if(mysqli_num_rows($reqAvis)==0){
+$reqAvis=pg_query($conn, $reqAvis) or die('Erreur select : '.pg_error($conn));
+if(pg_num_rows($reqAvis)==0){
                     echo "<p class=\"lead\"> Vous n'avez reçu aucun avis </p>";
 }
 
@@ -20,7 +20,7 @@ $req=pg_query($conn, $req) or die('Erreur select : '.pg_last_error($conn));
 
     $reqMoyenne="SELECT AVG(note) FROM Avis WHERE idReceveur='".$_SESSION['idU']."';";
     $reqMoyenne=pg_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.pg_last_error($conn));
-    $moyenne= pg_fetch_row($reqMoyenne);
+    $moyenne= pg_query($reqMoyenne);
     
     if ($moyenne[0])
     {
