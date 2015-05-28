@@ -22,7 +22,7 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
         <p class="lead">N'hésitez pas à dire ce que vous avez pensé des conducteurs ! </p>
     </div>          
 <?php
-
+    
     while ($res = mysqli_fetch_array($req)){  
     /* On selectionne les infos de l'utilisateur qui a reçu la note */
     $reqReceveur="SELECT * FROM CompteUtilisateur WHERE idU = '".$res['idReceveur'] . "'";
