@@ -195,13 +195,17 @@
           {include("./include/identification.php");}
         else if($_GET['p']=='deconnexion')
           {include("./include/deconnexion.php");}
+        else if($_GET['p']=='faq')
+          {include("./include/faq.html");}
+        else if($_GET['p']=='qsn')
+          {include("./include/qsn.html");}
       ?>
 <!-- ___________________________________________________________________________________________________________________________________________________ -->
 </div>
 
       <footer class="footer">
         <p>&copy; STRI 2015 </p>
-          <p><a href="faq.html">FAQ </a> | <a href="qsn.html">Qui sommes-nous? </a> | <a href="nouscontacter.html">Nous contacter </a>  </p>
+          <p><a href="?p=faq">FAQ </a> | <a href="?p=qsn">Qui sommes-nous? </a> | <a href="nouscontacter.html">Nous contacter </a>  </p>
         <?php
             if (isset($_SESSION['idU']))
                 echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>";
