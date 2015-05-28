@@ -162,32 +162,32 @@ echo '</pre>';
         
                 <p><label for="nom" class="col-lg-3">Nom :</label>
                 <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($utilisateur['nomU']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <p><label for="prenom" class="col-lg-3">Prénom :</label>
                 <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($utilisateur['prenomU']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <p><label for="pays" class="col-lg-3">Pays :</label>
                 <input type="text" name="pays" id="pays" value="<?= htmlspecialchars($utilisateur['pays']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <p><label for="age" class="col-lg-3">Age :</label>
                 <input type="text" name="age" id="age" value="<?= htmlspecialchars($utilisateur['age']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
                 <INPUT type="radio" name="genre" value="m" <?php if ($utilisateur['genre'] == 'm') echo 'checked' ?> > Homme 
                 <INPUT type="radio" name="genre" value="f" <?php if ($utilisateur['genre'] == 'f') echo 'checked' ?> > Femme </p>
-                <br><br>
+                <br>
 
                 <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>
                 <input type="text" name="mail" id="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <p><label for="telephone" class="col-lg-3">Téléphone :</label>
                 <input type="text" name="telephone" id="telephone" value="<?= htmlspecialchars($utilisateur['telephone']) ?>"/></p>
-                <br><br>
+                <br>
                 
                 <em>Changer Mot de Passe (laisser vide si vous ne voulez pas le changer):</em>
                 <p><label for="ancienMdp" class="col-lg-3">Ancien Mot de Passe :</label>
@@ -204,7 +204,7 @@ echo '</pre>';
                 <br><br>
                 
                 <input type="hidden" name="infos" />
-                <input type="submit" value="Modifier mes informations">
+                <input class="btn btn-lg btn-success bouton" type="submit" value="Modifier mes informations">
                 
             </form>
             <br /><br />
@@ -213,22 +213,22 @@ echo '</pre>';
         
                 <p><label for="couleur" class="col-lg-3">Couleur :</label>
                 <input type="text" name="couleur" id="couleur" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="marque" class="col-lg-3">Marque :</label>
                 <input type="text" name="marque" id="marque" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="nbPlace" class="col-lg-3">Nombre de places :</label>
                 <input type="text" name="nbPlace" id="nbPlace" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="annee" class="col-lg-3">Année :</label>
                 <input type="text" name="annee" id="annee" /></p>
-                <br><br>
+                <br>
                 
                 <input type="hidden" name="voiture"/>
-                <input type="submit" value="Ajouter voiture">
+                <input class="btn btn-lg btn-success bouton" type="submit" value="Ajouter voiture">
                 
             </form>
             
