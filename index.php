@@ -123,7 +123,7 @@
           <h3 class="logo"><a href="index.php?p="> <img src="static/images/logo2.png" alt="Acceuil du site" /> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Covoiturage-Etudiant.com</h3>
          <!-- Cas d'un visiteur -->  
           <?php if (!(isset($_SESSION['idU']))){?> 
-          <ul class="nav navVisiteur">    
+          <!-- <ul class="nav navVisiteur">     -->
             <nav>     
 
               <ul class="nav  nav-justified">
@@ -148,7 +148,7 @@
             </ul>
            </nav>
 
-          </ul>
+          <!-- </ul> -->
             <?php }else{ ?>
                 
                 
