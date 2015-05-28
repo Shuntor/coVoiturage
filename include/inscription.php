@@ -84,7 +84,10 @@ if(mysqli_num_rows($result)>=1)
     
 if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || empty($_POST['pays']) || empty($_POST['genre']) || empty($_POST['mail'])|| empty($_POST['telephone']) || empty($_POST['inscriptionMdp']) || empty($_POST['inscriptionConfMdp']))
 	{
-		echo "<h2>ERREUR : tous les champs n'ont pas été renseignés</h2>";
+		
+         
+        echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Tous les champs n'ont pas été renseignés</p> </div>";
+       
 	}
     
     
@@ -146,33 +149,39 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
         mysqli_close($conn);
                                   //header('Location: index.php');
                                   
-            echo "<h2>Inscription réalisé avec succés !</h2>";
-            echo "<a href='?p='>Retour à l'accueil</a>";
+           
+            echo " <div class=\"infoSucces col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/success.ico\" />   SUCCES : Inscription réalisé avec succés !</p><a href='?p='>Retour à l'accueil</a> </div>";
+            
                              }
                              else
                              {
-                                 echo "<h2>Adresse mail déja utilisée</h2>";
+                                 
+                                 echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Adresse e-mail déjà utilisée</p> </div>";
                              }
                             
                          }
                          else
                          {
-                             echo "<h2>Mots de passes différents</h2>";
+                             echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Mots de passe différents</p> </div>";
+                             
                          }
                      }
                      else
                      {
-                         echo "<h2>Numéro de téléphone non valide</h2>";
+                          echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Numéro de téléphone non valide</p> </div>";
+                         
                      }
             }
             else 
             {
-                echo "<h2>Age non valide</h2>";
+                echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Age non valide</p> </div>";
+                
             }
         }
         else 
         {
-            echo "<h2>Adresse Mail invalide</h2>"; 
+            echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Adress e-mail non valide</p> </div>";
+            
         }
         
   
@@ -183,7 +192,7 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
 
 
 
- <div class="row marketing">
+ <div class="row marketing col-lg-12">
           <div class="col-lg-12 form-group annonce">
           <h6>M'inscrire...</h6>
           <ul >
@@ -191,32 +200,32 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
         
                 <p><label for="nom" class="col-lg-3">Nom :</label>
                 <input type="text" name="nom" id="nom" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="prenom" class="col-lg-3">Prénom :</label>
                 <input type="text" name="prenom" id="prenom" /></p>
-                <br><br>
+                <br>
                 
                   <p><label for="pays" class="col-lg-3">Pays :</label>
                 <input type="text" name="pays" id="pays" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="age" class="col-lg-3">Age :</label>
                 <input type="text" name="age" id="age" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="genre" class="col-lg-3">Genre :</label>
                 <INPUT type="radio" name="genre" value="m"> Homme 
                 <INPUT type="radio" name="genre" value="f"> Femme </p>
-                <br><br>
+                <br>
                 
                  <p><label for="telephone" class="col-lg-3">Téléphone (ex:0102030405) :</label>
                 <input type="text" name="telephone" id="telephone" /></p>
-                <br><br>
+                <br>
                 
                 <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>
                 <input type="text" name="mail" id="mail" /></p>
-                <br><br>
+                <br>
                                 
                 <p><label for="inscriptionMdp" class="col-lg-3">Mot de Passe :</label>
                 <input type="password" name="inscriptionMdp" id="inscriptionMDP" /></p>
@@ -224,8 +233,10 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
                 <input type="password" name="inscriptionConfMdp" id="inscriptionConfMdp" /></p>
                 <br><br>
                 
-                <input type="submit" value="Valider"  name="valider" >
+                <input class="btn btn-lg btn-success bouton" type="submit" value="Valider"  name="valider" >
                 
+                
+                <!--<input type="submit" value="Valider"  name="valider" > -->
             </form>
             
               
