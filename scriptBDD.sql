@@ -56,14 +56,14 @@ note int,
 constraint pk_avis PRIMARY KEY(idDonneur, idReceveur, idT),
 constraint fk_idDonneur FOREIGN KEY(idDonneur) REFERENCES CompteUtilisateur(idU) ON DELETE CASCADE,
 constraint fk_idReceveur FOREIGN KEY(idReceveur) REFERENCES CompteUtilisateur(idU) ON DELETE CASCADE,
-constraint fk_idT FOREIGN KEY(idT) REFERENCES Trajets(idT)
+constraint fk_idT FOREIGN KEY(idT) REFERENCES Trajets(idT) ON DELETE CASCADE
 ) ;
 
 create table Etapes (
 idVilleEtapes int,
 heurePassage int,
 idT int,
-constraint fk_etapes_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
+constraint fk_etapes_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT) ON DELETE CASCADE,
 constraint fk_etape_ville FOREIGN KEY(idVilleEtapes) REFERENCES Villes(idVille),
 constraint pk_etapes PRIMARY KEY(idT,idVilleEtapes)
 ) ;
@@ -74,5 +74,5 @@ idU varchar(150),
 idT int,
 constraint fk_postuler_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
 constraint fk_postuler_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU) ON DELETE CASCADE,
-constraint pk_postuler PRIMARY KEY(idT,idU)
+constraint pk_postuler PRIMARY KEY(idT,idU) 
 ) ;

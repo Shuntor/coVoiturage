@@ -201,7 +201,7 @@
 
       <footer class="footer">
         <p>&copy; STRI 2015 </p>
-          <p><a href="faq.html">FAQ </a> | <a href="qsn.html">Qui sommes-nous? </a> | <a href="nouscontacter.html">Nous contacter </a>  </p>
+          <p><a href="faq.html">FAQ </a> | <a href="qsn.html">Qui sommes-nous? </a> | <a href="nouscontacter.html">Nous contacter </a>  | <a href="?p=admin">Admin </a> </p>
         <?php
             if (isset($_SESSION['idU']))
                 echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>";
