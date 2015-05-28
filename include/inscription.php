@@ -86,8 +86,8 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
 	{
 		
          
-        echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Tous les champs n'ont pas été renseignés</p> </div>";
-       
+        
+        echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR : Tous les champs n'ont pas été renseignés!</div>";
 	}
     
     
@@ -150,38 +150,38 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
                                   //header('Location: index.php');
                                   
            
-            echo " <div class=\"infoSucces col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/success.ico\" />   SUCCES : Inscription réalisé avec succés !</p><a href='?p='>Retour à l'accueil</a> </div>";
+            echo " <div class=\"alert alert-success col-lg-12\" role=\"alert\">ERREUR: Adresse e-mail déjà utilisée!</div>";
             
                              }
                              else
                              {
                                  
-                                 echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Adresse e-mail déjà utilisée</p> </div>";
+                                 echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR: Adresse e-mail déjà utilisée!</div>";
                              }
                             
                          }
                          else
                          {
-                             echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Mots de passe différents</p> </div>";
                              
+                             echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR : Mots de passe différents!</div>";
                          }
                      }
                      else
                      {
-                          echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Numéro de téléphone non valide</p> </div>";
-                         
+                          
+                          echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR : Numéro de téléphone non valide!</div>";
                      }
             }
             else 
             {
-                echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Age non valide</p> </div>";
                 
+                echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR : Age non valide!</div>";
             }
         }
         else 
         {
-            echo " <div class=\"infoErreur col-lg-8\"> <p class=\"infoMessage\"><img src=\"icon/Error.ico\" />   ERREUR : Adress e-mail non valide</p> </div>";
-            
+           
+            echo " <div class=\"alert alert-danger col-lg-12\" role=\"alert\">ERREUR : Adress e-mail non valide!</div>";
         }
         
   

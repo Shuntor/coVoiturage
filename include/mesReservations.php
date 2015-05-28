@@ -41,11 +41,11 @@ if(mysqli_num_rows($reqPostuler)==0){
 
 
       ?>
-        <div class="col-lg-12">
+        
 
            <!--    <h8 class="col-lg-12">Mes prochains voyages </h8> -->
               
-              <div class="form-group annonce prochainsVoyageDetails">
+              <div class="form-group annonce4 prochainsVoyageDetails col-lg-12">
               <h4><?php echo $villeD['nomV']." > ".$villeA['nomV']  ?></h4>
               <ul >
                 <li class="list-unstyled">Conducteur : <?php echo $compteUtilisateur['prenomU']." ".$compteUtilisateur['nomU'] ;?></li>
@@ -58,7 +58,7 @@ if(mysqli_num_rows($reqPostuler)==0){
             <a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
           </div> 
                 
-        </div>         
+                
     
   <?php }
 } 
