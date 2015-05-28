@@ -35,7 +35,7 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
 
     <div class="row marketing col-lg-12">
         <div class="col-lg-12">
-            <div class="form-group annonce5 avis">
+            <div class="form-group annonce5 avis col-lg-12">
                 <li >Trajet : <strong><?php echo $trajet['depart'] ?> → <?= $trajet['dest'] ?> (<?= date("d/m/Y", $trajet['date']) ?>)</strong></li>
                 <li >Conducteur : <strong><?php echo $receveur['prenomU']." ".$receveur['nomU']; ?> </strong> <strong>(<?php echo $receveur['idU'] ?>)</strong></li>
                 <li >Note : <strong><i><?php echo $res['note']; ?>/5</i></strong></li>
