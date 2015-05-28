@@ -187,8 +187,7 @@ echo '</pre>';
                 
                 <p><label for="telephone" class="col-lg-2">Téléphone :</label>
                 <input type="text" name="telephone" id="telephone" value="<?= htmlspecialchars($utilisateur['telephone']) ?>"/></p>
-                <br>
-                <fieldset>
+                <br><br>
                 <em>Changer Mot de Passe (laisser vide si vous ne voulez pas le changer) :</em><br /><br />
                 <p><label for="ancienMdp" class="col-lg-4">Ancien Mot de Passe :</label>
                 <input type="password" name="ancienMdp" id="ancienMdp" /></p>
@@ -202,14 +201,14 @@ echo '</pre>';
                 <p><label for="confMdp" class="col-lg-4">Confirmer nouveau Mot de Passe :</label>
                 <input type="password" name="confMdp" id="confMdp" /></p>
                 <br><br>
-                </fieldset>
                 <input type="hidden" name="infos" />
                 <input class="btn btn-lg btn-success bouton" type="submit" value="Modifier mes informations">
                 
             </form>
             <br /><br />
-            <h2>Ajouter Voitures</h2>
+            
             <form method="post" action="?p=gestionProfil">
+            <legend>Ajouter Voitures</legend>
         
                 <p><label for="couleur" class="col-lg-3">Couleur :</label>
                 <input type="text" name="couleur" id="couleur" /></p>
