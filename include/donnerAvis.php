@@ -27,10 +27,10 @@ if(isset($_POST["bp_valider"])){
 ?> 
 <div class="page-header">
     <h1>Saisie d'un avis :</h1>
-	<form method="post" action="index.php?p=mesAvis" onSubmit="return verif(this)">
+	<form role="form" method="post" action="index.php?p=mesAvis" onSubmit="return verif(this)">
 		
 		<p><label for="trajet" class="col-lg-1">Trajet :</label>
-		<select class="" name="trajet">
+		<select class="form-group" name="trajet">
 		<?php while ($resPostuler = mysqli_fetch_array($reqPostuler)){ 
         
             /* On récup les infos du trajet */
@@ -42,20 +42,20 @@ if(isset($_POST["bp_valider"])){
 					  <option value=<?php echo "'" . $resPostuler['idT']."/".$resPostuler['idConducteur'] . "'"?> ><?php echo  $trajet['depart'] . " → ".$trajet['dest'] . " / " . $resPostuler['idConducteur'] . " / " . date('d/m/Y', $resPostuler['dateT']); ?></option>
 		<?php }?>
 		</select></p><br>
-
+    <div class="form-group ">
 		<p><label for="note" class="col-lg-1">Note :</label>
-        <select class="" name="note">
+        <select class="form-group" name="note">
         	<?php 
         	for ($i=0; $i < 6 ; $i++) { 	
         		echo "<option value=".$i." >".$i."</option>";        		
         	}
         	?>
         </select>
-        </p>
-        <br><br>
+        </p></div>
+        <br>
 
         <p><label for="texte" class="col-lg-1">Avis :</label>
-		<TEXTAREA name="texte" rows=4 cols=40>C'était super !</TEXTAREA></p>
+		<TEXTAREA class="form-control col-lg-4" style="margin-bottom:20px" name="texte" rows=4 cols=40>C'était super !</TEXTAREA></p>
         <br><br>
 		
 		<!--bloc contenant le bouton valider-->
