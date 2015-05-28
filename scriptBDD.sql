@@ -1,5 +1,5 @@
 create table Villes (
-idVille int NOT NULL AUTO_INCREMENT,
+idVille serial,
 nomV varchar(150),
 cp int,
 constraint pk_Villes PRIMARY KEY(idVille)
@@ -20,7 +20,7 @@ constraint pk_compteUtilisateur PRIMARY KEY(idU)
 ) ;
 
 create table Voitures (
-idV int NOT NULL AUTO_INCREMENT,
+idV serial,
 couleur varchar(150),
 marque varchar(150),
 nbPLace int,
@@ -32,14 +32,14 @@ ON DELETE CASCADE
 ) ;
 
 create table Trajets (
-idT int NOT NULL AUTO_INCREMENT,
+idT serial,
 dateT int,
 heureD time,
 heureA time,
-idVilleDestination int,
-idVilleDepart int,
+idVilleDestination serial,
+idVilleDepart serial,
 idConducteur varchar(150),
-idVoiture int,
+idVoiture serial,
 constraint pk_trajet PRIMARY KEY(idT),
 constraint fk_trajet_compteUtilisateur FOREIGN KEY(idConducteur) REFERENCES CompteUtilisateur(idU) ON DELETE CASCADE,
 constraint fk_trajet_ville_depart FOREIGN KEY(idVilleDepart) REFERENCES Villes(idVille),
@@ -50,7 +50,7 @@ constraint fk_trajet_id_voiture FOREIGN KEY(idVoiture) REFERENCES Voitures(idV)
 create table Avis (
 idDonneur varchar(150),
 idReceveur varchar(150),
-idT int,
+idT serial,
 texte varchar(500),
 note int,
 constraint pk_avis PRIMARY KEY(idDonneur, idReceveur, idT),
@@ -60,9 +60,9 @@ constraint fk_idT FOREIGN KEY(idT) REFERENCES Trajets(idT)
 ) ;
 
 create table Etapes (
-idVilleEtapes int,
+idVilleEtapes serial,
 heurePassage int,
-idT int,
+idT serial,
 constraint fk_etapes_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
 constraint fk_etape_ville FOREIGN KEY(idVilleEtapes) REFERENCES Villes(idVille),
 constraint pk_etapes PRIMARY KEY(idT,idVilleEtapes)
@@ -71,7 +71,7 @@ constraint pk_etapes PRIMARY KEY(idT,idVilleEtapes)
 create table Postuler (
 nbPlace int,
 idU varchar(150),
-idT int,
+idT serial,
 constraint fk_postuler_trajet FOREIGN KEY(idT) REFERENCES Trajets(idT),
 constraint fk_postuler_compteUtilisateur FOREIGN KEY(idU) REFERENCES CompteUtilisateur(idU) ON DELETE CASCADE,
 constraint pk_postuler PRIMARY KEY(idT,idU)
