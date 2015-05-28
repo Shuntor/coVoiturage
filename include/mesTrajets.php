@@ -106,17 +106,18 @@
   </div> 
     <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
-        <div class="col-lg-2"></div>
-		<center><div class="annonce2 col-lg-8"><table class="table table-bordered tableauTrajet col-lg-8" >
+        <div class="col-lg-1"></div>
+		<center><div class="annonce2 col-lg-10"><table class="table tableauTrajet col-lg-8" >
 		<caption class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
-		<tr><td>Quel jour souhaitez vous voyager ? </td><td><input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015">            </td></tr>
+		<tr><td>Quel jour souhaitez vous voyager ? </td><td><input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015">            </td><td></td></tr>
 
 		<tr><td>Lieu de départ :</td>
 			<td>
 			
                     <input id="ville" type="text" name="villeDepart" class="form-control" placeholder="Ex: Toulouse, Foix...">
                     
-                    </td>
+            </td>
+            
 			<td>Heure : <input type="text" name="hD" placeholder="13:00"></td>
 		</tr>
 		
@@ -125,14 +126,14 @@
                     <input id="ville2" type="text" name="villeDestination" class="form-control" placeholder="Ex: Bordeaux, Mérignac...">
                     
                     </td>
-			<td>Heure : <input type="text" name="hA" placeholder="14:00"></td>
+			<td>Heure : <input class="chHeure"type="text" name="hA" placeholder="14:00"></td>
 		</tr>
 		<tr><td>Voiture : </td><td>
 			<select class="form-control" name="voiture">
 			<?php while ($resVoitures = mysqli_fetch_array($req)){ ?>
 						  <option value=<?php echo $resVoitures['idV']; ?> ><?php echo $resVoitures['marque']." ".$resVoitures['couleur']." (".$resVoitures['nbPLace']." places)"; ?></option>
 			<?php }?>
-			</select></td>
+			</select></td> <td></td>
 		</tr>
 		</table></div></center>
 		<div class="col-lg-2"></div>

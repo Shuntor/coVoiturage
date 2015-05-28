@@ -270,13 +270,17 @@ margin-left:30px;
     margin-top:30px;   
 }
 
-/*
+.chHeure{
+    display:inline-block;
+}
+
 td
 {
-    border: 2px black solid;
-    padding: 10px; 
     
-}*/
+    padding: 10px; 
+    vertical-align: middle;
+    
+}
 
 
 
