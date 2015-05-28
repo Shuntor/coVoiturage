@@ -160,56 +160,55 @@ echo '</pre>';
           <ul >
             <form method="post" action="?p=gestionProfil">
         
-                <p><label for="nom" class="col-lg-3">Nom :</label>
+                <p><label for="nom" class="col-lg-2">Nom :</label>
                 <input type="text" name="nom" id="nom" value="<?= htmlspecialchars($utilisateur['nomU']) ?>"/></p>
                 <br>
                 
-                <p><label for="prenom" class="col-lg-3">Prénom :</label>
+                <p><label for="prenom" class="col-lg-2">Prénom :</label>
                 <input type="text" name="prenom" id="prenom" value="<?= htmlspecialchars($utilisateur['prenomU']) ?>"/></p>
                 <br>
                 
-                <p><label for="pays" class="col-lg-3">Pays :</label>
+                <p><label for="pays" class="col-lg-2">Pays :</label>
                 <input type="text" name="pays" id="pays" value="<?= htmlspecialchars($utilisateur['pays']) ?>"/></p>
                 <br>
                 
-                <p><label for="age" class="col-lg-3">Age :</label>
+                <p><label for="age" class="col-lg-2">Age :</label>
                 <input type="text" name="age" id="age" value="<?= htmlspecialchars($utilisateur['age']) ?>"/></p>
                 <br>
                 
-                <p><label for="genre" class="col-lg-3">Genre :</label>
+                <p><label for="genre" class="col-lg-2">Genre :</label>
                 <INPUT type="radio" name="genre" value="m" <?php if ($utilisateur['genre'] == 'm') echo 'checked' ?> > Homme 
                 <INPUT type="radio" name="genre" value="f" <?php if ($utilisateur['genre'] == 'f') echo 'checked' ?> > Femme </p>
                 <br>
 
-                <p><label for="mail" class="col-lg-3">Adresse e-mail :</label>
+                <p><label for="mail" class="col-lg-2">Adresse e-mail :</label>
                 <input type="text" name="mail" id="mail" value="<?= htmlspecialchars($utilisateur['mail']) ?>"/></p>
                 <br>
                 
-                <p><label for="telephone" class="col-lg-3">Téléphone :</label>
+                <p><label for="telephone" class="col-lg-2">Téléphone :</label>
                 <input type="text" name="telephone" id="telephone" value="<?= htmlspecialchars($utilisateur['telephone']) ?>"/></p>
-                <br>
-                
-                <em>Changer Mot de Passe (laisser vide si vous ne voulez pas le changer):</em>
-                <p><label for="ancienMdp" class="col-lg-3">Ancien Mot de Passe :</label>
+                <br><br>
+                <em>Changer Mot de Passe (laisser vide si vous ne voulez pas le changer) :</em><br /><br />
+                <p><label for="ancienMdp" class="col-lg-4">Ancien Mot de Passe :</label>
                 <input type="password" name="ancienMdp" id="ancienMdp" /></p>
                 <br />
                 
-                <p><label for="nouveauMdp" class="col-lg-3">Nouveau Mot de Passe :</label>
+                <p><label for="nouveauMdp" class="col-lg-4">Nouveau Mot de Passe :</label>
                 <input type="password" name="nouveauMdp" id="nouveauMDP" /></p>
                 <br />
                 
               
-                <p><label for="confMdp" class="col-lg-3">Confirmer nouveau Mot de Passe :</label>
+                <p><label for="confMdp" class="col-lg-4">Confirmer nouveau Mot de Passe :</label>
                 <input type="password" name="confMdp" id="confMdp" /></p>
                 <br><br>
-                
                 <input type="hidden" name="infos" />
                 <input class="btn btn-lg btn-success bouton" type="submit" value="Modifier mes informations">
                 
             </form>
             <br /><br />
-            <h2>Ajouter Voitures</h2>
+            
             <form method="post" action="?p=gestionProfil">
+            <legend>Ajouter Voitures</legend>
         
                 <p><label for="couleur" class="col-lg-3">Couleur :</label>
                 <input type="text" name="couleur" id="couleur" /></p>
