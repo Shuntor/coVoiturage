@@ -201,13 +201,16 @@
           {include("./include/faq.html");}
         else if($_GET['p']=='qsn')
           {include("./include/qsn.html");}
+        else if($_GET['p']=='contact')
+          {include("./include/contact.phpl");}
+
       ?>
 <!-- ___________________________________________________________________________________________________________________________________________________ -->
 </div>
 
       <footer class="footer">
         <p>&copy; STRI 2015 </p>
-          <p><a href="?p=faq">FAQ </a> | <a href="?p=qsn">Qui sommes-nous? </a> | <a href="">Nous contacter </a>  </p>
+          <p><a href="?p=faq">FAQ </a> | <a href="?p=qsn">Qui sommes-nous? </a> | <a href="?p=contact">Nous contacter </a>  </p>
         <?php
             if (isset($_SESSION['idU']))
                 echo "Vous êtes connecté en tant que : <strong>".$_SESSION['prenomU']." - ".$_SESSION['nomU']."</strong>";
