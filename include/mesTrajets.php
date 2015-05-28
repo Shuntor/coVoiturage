@@ -102,14 +102,14 @@
 <div class="form-group annonce col-lg-12">
   <div class="page-header">
     <h1>Saisie d'un trajet : </h1>
-    <p class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> 	</p>
+    
   </div> 
     <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
-
-		<center><table class=" tableauTrajet">
-		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
-		<tr><td>Quel jour souhaitez vous voyager ? <input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
+        <div class="col-lg-2"></div>
+		<center><div class="annonce2 col-lg-8"><table class="table table-bordered tableauTrajet col-lg-8" >
+		<caption class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
+		<tr><td>Quel jour souhaitez vous voyager ? </td><td><input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015">            </td></tr>
 
 		<tr><td>Lieu de départ :</td>
 			<td>
@@ -134,20 +134,21 @@
 			<?php }?>
 			</select></td>
 		</tr>
-		</table></center>
-		
+		</table></div></center>
+		<div class="col-lg-2"></div>
 		<!--bloc contenant le bouton valider-->
-		<div>
-			<input type='submit' value='Valider' name='bp_valider' />
+		<div class="col-lg-12">
+			<center><input class="btn btn-lg btn-success bouton" type='submit' value='Valider' name='bp_valider' /></center>
 		</div>
 	</form>
     <br />
+    </div>
 
 <!-- Affichage des précédents trajets -->
 
 
   
-      <h2><center>Mes 20 derniers trajets :</center></h2>
+      <div class="partie2 col-lg-12"><h2><center>Mes 20 derniers trajets :</center></h2>
     <div class="col-lg-12" >
 	    <?php
 	    
@@ -167,12 +168,13 @@
           </ul>
           	<a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
         </div>
-</div>    	
+</div>  
+</div>
 		<?php
         }
 		?>
 		      
-    </div>
+   
     
    
     

@@ -46,6 +46,21 @@ list-style-type:none;
     
 }
 
+.annonce2
+{
+    
+font-size: 15px; 
+Background-color: white;
+border-radius: 15px 15px 15px 15px; 
+box-shadow:5px 5px #a0a0a0;
+padding:5px;
+    padding-bottom:10px;
+padding-left:20px;
+list-style-type:none; 
+    margin-bottom:20px; 
+    
+}
+
 .header
 {
 /*padding-left:25px;*/
@@ -54,7 +69,7 @@ list-style-type:none;
 .cadre_logo
 {
 padding-bottom: 0px;
-    padding:0px;
+    margin-left:18px;
     border-radius: 0px 0px 5px 5px;
 }
 
@@ -242,16 +257,26 @@ margin-left:30px;
     padding:5px;
 }
 
+
+
 .tableauTrajet{
-    border-radius:20px 20px 20px 20px;
-    border: 2px black outset;
+    
+    background-color: white;
+    font-weight:bold;
+    
 }
 
+.partie2{
+    margin-top:30px;   
+}
+
+/*
 td
 {
     border: 2px black solid;
-    padding: 10px;
-}
+    padding: 10px; 
+    
+}*/
 
 
 
