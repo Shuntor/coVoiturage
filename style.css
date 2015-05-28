@@ -84,6 +84,17 @@ list-style-type:none;
     margin-bottom:10px;
 }
 
+.annonce5{
+       font-size: 15px; 
+Background-color: #C1C1C1;
+border-radius: 15px 15px 15px 15px; 
+box-shadow:5px 5px #a0a0a0;
+padding:5px;
+    padding-bottom:10px;
+padding-left:20px;
+list-style-type:none; 
+}
+
 .header
 {
 /*padding-left:25px;*/
@@ -330,5 +341,6 @@ td
 btn-classique{
     margin-left:10px;   
 }
+
 
 

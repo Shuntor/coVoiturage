@@ -37,14 +37,14 @@ $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
     <p class="lead">Votre moyenne est de : <?php echo $reqMoyenne[0]; ?> </p>
   </div>       
 
-    <div class="row marketing">
+    <div class="row marketing col-lg-12">
         <div class="col-lg-12">
-            <div class="form-group annonce avis">
+           <div class="form-group annonce5 avis col-lg-12">
                 <li >Trajet : <strong><?php echo $trajet['depart'] ?> → <?= $trajet['dest'] ?> (<?= date("d/m/Y", $trajet['date']) ?>)</strong></li>
                 <li >Passager : <strong><?php echo $donneur['prenomU']." ".$donneur['nomU']; ?> </strong> <strong>(<?php echo $donneur['idU'] ?>)</strong></li>
                 <li >Note : <strong><i><?php echo $res['note']; ?>/5</i></strong></li>
                 <p >Commentaire : <br /><i><strong><?php echo $res['texte']; ?></i> </strong></p>
-            </div>                 
+            </div>               
         </div>
     </div>
 
