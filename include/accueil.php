@@ -1,6 +1,6 @@
 
     <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
-<div class="jumbotron formRecherche">
+<div class="jumbotron formRecherche col-lg-12">
          <section>
          <h1>RECHERCHE</h1>
          <p class="lead">Rechercher votre trajet.</p>
@@ -56,4 +56,4 @@
  </div>
  </div>
  
-      </div>
+      

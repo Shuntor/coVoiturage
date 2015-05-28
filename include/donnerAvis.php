@@ -1,3 +1,4 @@
+<div class="annonce3 col-lg-12">
 <?php
 if(isset($_POST["bp_valider"])){
 	$explode= explode("/", $_POST['trajet']);
@@ -59,12 +60,13 @@ if(isset($_POST["bp_valider"])){
 		
 		<!--bloc contenant le bouton valider-->
 		<div>
-			<input type='submit' value='Valider' name='bp_valider' />
+			<input class="btn btn-lg btn-classique btn-success bouton" type='submit' value='Valider' name='bp_valider' />
 		</div>
 
 
 	</form>
- </div> 	
+ </div> 
+</div>
 <?php
 }
 ?>

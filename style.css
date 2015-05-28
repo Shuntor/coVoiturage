@@ -61,6 +61,18 @@ list-style-type:none;
     
 }
 
+.annonce3{
+       font-size: 15px; 
+    Background-color: #eeeeee;
+border-radius: 0px 0px 15px 15px; 
+box-shadow:5px 5px #a0a0a0;
+padding:5px;
+    padding-bottom:10px;
+padding-left:20px;
+list-style-type:none; 
+    margin-top:0px;
+}
+
 .header
 {
 /*padding-left:25px;*/
@@ -99,7 +111,7 @@ margin-top:40px;
 
 .formRecherche
 {
-margin-top:200px;
+margin-top:10px;
 box-shadow:5px 5px #a0a0a0;
 }
 
@@ -172,6 +184,8 @@ padding-bottom:25px;
 {
 background-color:black;
 color:white;
+    padding-right:0px;
+    padding-left:0px;
 }
 
 .prochainsVoyageDetails
@@ -279,8 +293,30 @@ td
     
     padding: 10px; 
     vertical-align: middle;
-    
+    padding-left:0px;
+    padding-right:0px;
 }
 
+.barreIndex{
+    padding-left:0px;
+    padding-right:0px;  
+}
+
+.barreAvis{
+    margin-top:0px;  
+    padding-right:0px;
+    padding-left:0px;
+    border-radius:5px 5px 0px 0px;
+}
+
+.bouton1{
+    margin-left:0px;   
+}
+
+
+
+btn-classique{
+    margin-left:10px;   
+}
 
 

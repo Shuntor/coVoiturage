@@ -1,3 +1,4 @@
+<div class="annonce3 col-lg-12">
 <?php
 
 /* Affichage des avis qu'on a donné */
@@ -40,3 +41,4 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
     <?php
     }
 ?>
+</div>
