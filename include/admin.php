@@ -3,21 +3,21 @@ if ($_SESSION['idU']='a') {
 
   if (isset($_POST['supprimer'])) { 
     $suppression="DELETE FROM CompteUtilisateur  WHERE idU='".$_POST['idU']."';";
-    $suppression=mysqli_query($conn, $suppression) or die('Erreur delete : '.mysqli_error($conn));
+    $suppression=pg_query($conn, $suppression) or die('Erreur delete : '.pg_error($conn));
   }
 
   if (isset($_POST['supprimerT'])) {  
     $suppressionP="DELETE FROM Postuler  WHERE idT='".$_POST['idT']."';";
-    $suppressionP=mysqli_query($conn, $suppressionP) or die('Erreur delete : '.mysqli_error($conn));
+    $suppressionP=pg_query($conn, $suppressionP) or die('Erreur delete : '.pg_error($conn));
 
     $suppressionE="DELETE FROM Etapes  WHERE idT='".$_POST['idT']."';";
-    $suppressionE=mysqli_query($conn, $suppressionE) or die('Erreur delete : '.mysqli_error($conn));
+    $suppressionE=pg_query($conn, $suppressionE) or die('Erreur delete : '.pg_error($conn));
 
     $suppressionA="DELETE FROM Avis  WHERE idT='".$_POST['idT']."';";
-    $suppressionA=mysqli_query($conn, $suppressionA) or die('Erreur delete : '.mysqli_error($conn));
+    $suppressionA=pg_query($conn, $suppressionA) or die('Erreur delete : '.pg_error($conn));
 
     $suppressionT="DELETE FROM Trajets  WHERE idT='".$_POST['idT']."';";
-    $suppressionT=mysqli_query($conn, $suppressionT) or die('Erreur delete : '.mysqli_error($conn));
+    $suppressionT=pg_query($conn, $suppressionT) or die('Erreur delete : '.pg_error($conn));
 
   }
 
@@ -31,9 +31,9 @@ if ($_SESSION['idU']='a') {
    
       /* On récupère les derniers utilisateurs de 1 à 10 */
       $reqUtilisateur="SELECT * FROM CompteUtilisateur  where idU!='".$_SESSION['idU']."'";
-    $reqUtilisateur=mysqli_query($conn, $reqUtilisateur) or die('Erreur select : '.mysqli_error($conn));
+    $reqUtilisateur=pg_query($conn, $reqUtilisateur) or die('Erreur select : '.pg_error($conn));
 
-      while ($utilisateur = mysqli_fetch_array($reqUtilisateur)){
+      while ($utilisateur = pg_fetch_array($reqUtilisateur)){
               ?>
             
           <div class="form-group annonce mesutilisateurs col-lg-5 " style="margin-left:50px;margin-right:50;">
@@ -70,15 +70,15 @@ if ($_SESSION['idU']='a') {
               FROM Trajets t, Postuler p, CompteUtilisateur c, Voitures v  
               WHERE t.idT=p.idT AND t.idConducteur=c.idU AND v.idV=t.idVoiture 
               ORDER by t.idT;";
-    $reqSelecTrajet=mysqli_query($conn, $reqSelecTrajet) or die('Erreur select : '.mysqli_error($conn));
+    $reqSelecTrajet=pg_query($conn, $reqSelecTrajet) or die('Erreur select : '.pg_error($conn));
 
 
 
 
-      while ($trajet = mysqli_fetch_array($reqSelecTrajet)){
+      while ($trajet = pg_fetch_array($reqSelecTrajet)){
           $reqVille="SELECT vD.nomV, vA.nomV FROM Villes vD, Villes vA WHERE vD.idVille=".$trajet['idVilleDepart']." AND vA.idVille=".$trajet['idVilleDestination'].";";
-          $reqVille=mysqli_query($conn, $reqVille) or die('Erreur select : '.mysqli_error($conn));
-          $ville=mysqli_fetch_row($reqVille);
+          $reqVille=pg_query($conn, $reqVille) or die('Erreur select : '.pg_error($conn));
+          $ville=pg_fetch_row($reqVille);
               ?>
             
           <div class="form-group annonce mesutilisateurs col-lg-5 " style="margin-left:50px;margin-right:50;">
