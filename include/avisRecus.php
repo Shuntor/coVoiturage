@@ -16,6 +16,28 @@ if(mysqli_num_rows($reqAvis)==0){
 $req="SELECT * FROM Avis WHERE idReceveur = '".$_SESSION['idU'] . "'";
 
 $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
+
+    $reqMoyenne="SELECT AVG(note) FROM Avis WHERE idReceveur='".$_SESSION['idU']."';";
+    $reqMoyenne=mysqli_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.mysqli_error($conn));
+    $moyenne= mysqli_fetch_row($reqMoyenne);
+    
+    if ($moyenne[0])
+    {
+?>
+  <div class="page-header">
+    <h1>Les avis que vous avez reçu : </h1>
+    <p class="lead">Votre moyenne est de : <?php echo $moyenne[0]; ?> </p>
+  </div>       
+<?php
+    }
+    else
+    {
+        ?>
+    <div class="page-header">
+        <h1>Aucun avis reçu !</h1>
+    </div>          
+<?php
+    }
     while ($res = mysqli_fetch_array($req)){  
     /* On selectionne les infos de l'utilisateur qui a donné la note */
     $reqDonneur="SELECT * FROM CompteUtilisateur WHERE idU = '".$res['idDonneur'] ."'";
@@ -27,15 +49,7 @@ $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
     $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
     $trajet=mysqli_fetch_array($resTrajet);
 
-    $reqMoyenne="SELECT sum(note) FROM Avis WHERE idReceveur='".$_SESSION['idU']."';";
-    $reqMoyenne=mysqli_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.mysqli_error($conn));
-    $reqMoyenne= mysqli_fetch_row($reqMoyenne);
-
     ?> 
-  <div class="page-header">
-    <h1>Les avis que vous avez reçu : </h1>
-    <p class="lead">Votre moyenne est de : <?php echo $reqMoyenne[0]; ?> </p>
-  </div>       
 
     <div class="row marketing col-lg-12">
         <div class="col-lg-12">

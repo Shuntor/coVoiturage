@@ -15,6 +15,13 @@ $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));*/
 
 $req="SELECT * FROM Avis WHERE idDonneur = '".$_SESSION['idU'] . "'";
 $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
+?>
+
+    <div class="page-header">
+        <h1>Les avis que vous avez donné : </h1>
+        <p class="lead">N'hésitez pas à dire ce que vous avez pensé des conducteurs ! </p>
+    </div>          
+<?php
 
     while ($res = mysqli_fetch_array($req)){  
     /* On selectionne les infos de l'utilisateur qui a reçu la note */
@@ -28,11 +35,6 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
     $trajet=mysqli_fetch_array($resTrajet);
     
     ?> 
-    <div class="page-header">
-        <h1>Les avis que vous avez donné : </h1>
-        <p class="lead">N'hésitez pas à dire ce que vous avez pensé des conducteurs ! </p>
-    </div>          
-
     <div class="row marketing col-lg-12">
         <div class="col-lg-12">
             <div class="form-group annonce5 avis col-lg-12">
