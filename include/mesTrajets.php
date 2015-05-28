@@ -169,12 +169,12 @@
           </ul>
           	<a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
         </div>
-</div>  
-</div>
+
 		<?php
         }
 		?>
-		      
+</div>  
+</div>
    
     
    
