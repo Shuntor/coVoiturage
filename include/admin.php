@@ -37,7 +37,7 @@ if ($_SESSION['idU']='a') {
 	            ?>
 						
 	    		<div class="form-group annonce mesutilisateurs col-lg-5 " style="margin-left:50px;margin-right:50;">
-	          <h4><?php echo $utilisateur['prenomU']." > ".$utilisateur['nomU']; ?></h4>
+	          <h4><?php echo $utilisateur['prenomU']." ".$utilisateur['nomU']; ?></h4>
 	          <ul >
 	            <li class="list-unstyled">ID : <?php echo $utilisateur['idU']; ?></li>
 	            <li class="list-unstyled">Prenom: <?php echo $utilisateur['prenomU']; ?></li>
@@ -66,15 +66,16 @@ if ($_SESSION['idU']='a') {
 	 <?php
 	 
 	    /* On récupère les derniers utilisateurs de 1 à 10 */
-	    $reqSuprTrajet="SELECT t.idT, t.dateT, t.heureD, t.heureA, t.idVilleDestination, t.idVilleDepart, t.idConducteur, t.idVoiture, c.nomU, v.marque 
+	    $reqSelecTrajet="SELECT DISTINCT t.idT, t.dateT, t.heureD, t.heureA, t.idVilleDestination, t.idVilleDepart, t.idConducteur, t.idVoiture, c.nomU, v.marque 
 	    				FROM Trajets t, Postuler p, CompteUtilisateur c, Voitures v  
-	    				WHERE t.idT=p.idT AND p.idU=c.idU AND v.idU=c.idU  ;";
-		$reqSuprTrajet=mysqli_query($conn, $reqSuprTrajet) or die('Erreur select : '.mysqli_error($conn));
+	    				WHERE t.idT=p.idT AND t.idConducteur=c.idU AND v.idV=t.idVoiture 
+	    				ORDER by t.idT;";
+		$reqSelecTrajet=mysqli_query($conn, $reqSelecTrajet) or die('Erreur select : '.mysqli_error($conn));
 
 
 
 
-			while ($trajet = mysqli_fetch_array($reqSuprTrajet)){
+			while ($trajet = mysqli_fetch_array($reqSelecTrajet)){
 					$reqVille="SELECT vD.nomV, vA.nomV FROM Villes vD, Villes vA WHERE vD.idVille=".$trajet['idVilleDepart']." AND vA.idVille=".$trajet['idVilleDestination'].";";
 					$reqVille=mysqli_query($conn, $reqVille) or die('Erreur select : '.mysqli_error($conn));
 					$ville=mysqli_fetch_row($reqVille);
