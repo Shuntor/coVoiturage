@@ -233,7 +233,7 @@ margin-left:30px;
     
 }
 
-.nav
+.navhh
 {
     background-image: linear-gradient(to bottom, #3C3C3C 0px, #222 100%);
     border: outside;
@@ -330,6 +330,7 @@ td
     padding-right:0px;
     padding-left:0px;
     border-radius:5px 5px 0px 0px;
+    
 }
 
 .bouton1{

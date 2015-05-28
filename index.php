@@ -153,7 +153,7 @@
                 
                 
          <nav>     
-          <ul class="nav nav-justified right">
+          <ul class="nav nav-justified right navhh">
             <li><a class= "boutonNav" href="index.php?p=">Accueil</a></li>
             <li><a class= "boutonNav" href="?p=gestionProfil">Mon Compte</a></li>
             <li><a class= "boutonNav" href="?p=mesTrajets">Mes Trajets</a></li>
