@@ -31,11 +31,11 @@
  <?php
  
      /* On récupère les derniers trajets de 1 à 10 */
-    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, t.idT as idT from CompteUtilisateur c, Trajets t, Villes v1, Villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 0,10";
+    $reqTrajets="select c.idU, c.prenomU, c.nomU, v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, t.idT as idT from CompteUtilisateur c, Trajets t, Villes v1, Villes v2 where c.idU = t.idConducteur and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 10";
     
     
-				$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
-				while ($trajet = mysqli_fetch_array($resTrajets)){
+				$resTrajets=pg_query($conn, $reqTrajets) or die('Erreur select : '.pg_last_error($conn));
+				while ($trajet = pg_fetch_array($resTrajets)){
                     ?>
 					
     		<div class="form-group annonce mesTrajets col-lg-5 " style="margin-left:50px;margin-right:50;">

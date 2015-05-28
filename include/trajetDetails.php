@@ -4,8 +4,8 @@ $trajet=false;
 
 if(isset($_GET['t']))
 {
-    $res=mysqli_query($conn, "select * from Trajets where idT='".mysqli_real_escape_string($conn, $_GET['t'])."'");
-    $trajet=mysqli_fetch_array($res);
+    $res=pg_query($conn, "select * from Trajets where idT='".pg_escape_string($conn, $_GET['t'])."'");
+    $trajet=pg_fetch_array($res);
 }
 
 if(!$trajet)
@@ -19,27 +19,27 @@ else
     if(isset($_POST['Postuler']) && isset($_SESSION['idU']))
     {
         $req="INSERT INTO Postuler (nbPlace, idU, idT) VALUES (1, '".$_SESSION['idU']."',".$_GET['t'].")";
-        $res=mysqli_query($conn, $req) or die ('Erreur insert Postulation : '. mysqli_error($conn));
+        $res=pg_query($conn, $req) or die ('Erreur insert Postulation : '. pg_last_error($conn));
         ?>
         <div class="col-lg-12 alert alert-success">Vous avez bien postulé sur ce trajet !</div>
         <?php
     }
     
     $reqConducteur="SELECT * FROM CompteUtilisateur WHERE idU='" . $trajet['idConducteur'] . "'";
-    $resConducteur=mysqli_query($conn, $reqConducteur) OR die('Erreur select conducteur : ' . mysqli_error($conn));
-    $conducteur=mysqli_fetch_array($resConducteur);
+    $resConducteur=pg_query($conn, $reqConducteur) OR die('Erreur select conducteur : ' . pg_last_error($conn));
+    $conducteur=pg_fetch_array($resConducteur);
     
     $reqVilleDepart = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDepart'] . "'";
-    $resVilleDepart = mysqli_query($conn, $reqVilleDepart) OR die ('Erreur select villeDepart : ' . mysqli_error($conn));
-    $villeDepart = mysqli_fetch_array($resVilleDepart);
+    $resVilleDepart = pg_query($conn, $reqVilleDepart) OR die ('Erreur select villeDepart : ' . pg_last_error($conn));
+    $villeDepart = pg_fetch_array($resVilleDepart);
     
     $reqVilleArrivee = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDestination'] . "'";
-    $resVilleArrivee = mysqli_query($conn, $reqVilleArrivee) OR die ('Erreur select villeArrivee : ' . mysqli_error($conn));
-    $villeArrivee = mysqli_fetch_array($resVilleArrivee);
+    $resVilleArrivee = pg_query($conn, $reqVilleArrivee) OR die ('Erreur select villeArrivee : ' . pg_last_error($conn));
+    $villeArrivee = pg_fetch_array($resVilleArrivee);
     
     $reqVoiture = "SELECT * FROM Voitures WHERE idV='" . $trajet['idVoiture'] . "'";
-    $resVoiture = mysqli_query($conn, $reqVoiture) OR die ('Erreur select voiture : ' . mysqli_error($conn));
-    $voiture = mysqli_fetch_array($resVoiture);
+    $resVoiture = pg_query($conn, $reqVoiture) OR die ('Erreur select voiture : ' . pg_last_error($conn));
+    $voiture = pg_fetch_array($resVoiture);
     
     ?>
     
@@ -154,8 +154,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
       {
           // On vérifie si on a pas déjà postulé à ce trajet
           $req="SELECT 1 FROM Postuler WHERE idU='".$_SESSION['idU']."' AND idT='".$_GET['t']."'";
-          $res=mysqli_query($conn, $req) or die ('Erreur select postuler ligne 102 : '. mysqli_error($conn));
-          if(mysqli_num_rows($res) != 0)
+          $res=pg_query($conn, $req) or die ('Erreur select postuler ligne 102 : '. pg_last_error($conn));
+          if(pg_num_rows($res) != 0)
           {
               ?>
           <div class="alert alert-info">Vous avez déjà postulé à ce trajet !</div>

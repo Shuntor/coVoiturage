@@ -9,9 +9,9 @@ $query = "SELECT *
 FROM CompteUtilisateur
 WHERE idU = '".addslashes($_SESSION['idU']) . "';";
 
-$result = mysqli_query($conn,$query) or die (mysqli_error($conn));
+$result = pg_query($conn,$query) or die (pg_last_error($conn));
 
-$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$row = pg_fetch_array($result);
 
 $utilisateur = $row;
 
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $query .= "telephone='" . addslashes($_POST['telephone']) . "' ";
             $query .= "WHERE idU='" . $_SESSION['idU'] . "';";
             
-            mysqli_query($conn,$query) or die (mysqli_error($conn));
+            pg_query($conn,$query) or die (pg_last_error($conn));
             //print_r($result);
             echo "Modifications effectués !";
         }
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $query .= "'" . addslashes($_POST['nbPlace']) . "', ";
         $query .= "'" . addslashes($_POST['annee']) . "', ";
         $query .= "'" . ($_SESSION['idU']) . "');";
-        mysqli_query($conn,$query) or die (mysqli_error($conn));
+        pg_query($conn,$query) or die (pg_last_error($conn));
         ?>
         <div class="col-lg-12 alert alert-success">Voiture inséré avec succés !</div>
         <?php
@@ -134,9 +134,9 @@ $query = "SELECT *
 FROM CompteUtilisateur
 WHERE idU = '".addslashes($_SESSION['idU']) . "';";
 
-$result = mysqli_query($conn,$query) or die (mysqli_error($conn));
+$result = pg_query($conn,$query) or die (pg_last_error($conn));
 
-$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$row = pg_fetch_array($result);
 
 $utilisateur = $row;
 

@@ -8,11 +8,11 @@
 
 /* Requete sur Postuler, on récupère tous les trajets */ 
 $reqPostuler="SELECT * FROM Postuler WHERE idU='".$_SESSION['idU']."';";
-$reqPostuler=mysqli_query($conn, $reqPostuler) or die('Erreur select : '.mysqli_error($conn));
-if(mysqli_num_rows($reqPostuler)==0){
+$reqPostuler=pg_query($conn, $reqPostuler) or die('Erreur select : '.pg_last_error($conn));
+if(pg_num_rows($reqPostuler)==0){
                     echo "C'est vide !";
 }else{
-  while ($res = mysqli_fetch_array($reqPostuler)){ 
+  while ($res = pg_fetch_array($reqPostuler)){ 
     $postuler[] = $res;
   }
  
@@ -21,22 +21,22 @@ if(mysqli_num_rows($reqPostuler)==0){
   foreach ($postuler as $res) { 
      
       $reqTrajets="SELECT * FROM Trajets where idT=".$res['idT'].";";
-      $reqTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
-      $trajet=mysqli_fetch_array($reqTrajets);
+      $reqTrajets=pg_query($conn, $reqTrajets) or die('Erreur select : '.pg_last_error($conn));
+      $trajet=pg_fetch_array($reqTrajets);
 
       
       /* Requete sur CompteUtilisateur */
       $reqCU="SELECT prenomU, nomU FROM CompteUtilisateur WHERE idU='".$trajet['idConducteur']."';";
-      $reqCU=mysqli_query($conn, $reqCU) or die('Erreur select : '.mysqli_error($conn));
-      $compteUtilisateur=mysqli_fetch_array($reqCU, MYSQLI_ASSOC);
+      $reqCU=pg_query($conn, $reqCU) or die('Erreur select : '.pg_last_error($conn));
+      $compteUtilisateur=pg_fetch_array($reqCU);
 
       /* Requete sur les villes */
       $reqVilleD="SELECT * FROM Villes WHERE idVille=".$trajet['idVilleDepart'].";";
       $reqVilleA="SELECT * FROM Villes WHERE idVille=".$trajet['idVilleDestination'].";";
-      $reqVilleD=mysqli_query($conn, $reqVilleD) or die('Erreur select : '.mysqli_error($conn));
-      $reqVilleA=mysqli_query($conn, $reqVilleA) or die('Erreur select : '.mysqli_error($conn));
-      $villeD=mysqli_fetch_array($reqVilleD);
-      $villeA=mysqli_fetch_array($reqVilleA);
+      $reqVilleD=pg_query($conn, $reqVilleD) or die('Erreur select : '.pg_last_error($conn));
+      $reqVilleA=pg_query($conn, $reqVilleA) or die('Erreur select : '.pg_last_error($conn));
+      $villeD=pg_fetch_array($reqVilleD);
+      $villeA=pg_fetch_array($reqVilleA);
 
 
 

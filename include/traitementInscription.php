@@ -53,7 +53,7 @@ if (isset($_POST['inscriptionConfMdp']))
 }
 
 $query= "INSERT INTO CompteUtilisateur (nomU, prenomU, adresse, age, genre, ville, pays, cp, mail, telephone, mdp) VALUES ('$nom', '$prenom', '$adresse', '$age', '$genre', '$ville', '$pays', '$cp', '$mail', '$telephone', '$inscriptionMdp')";
-mysqli_query($conn, $query) or die ("echec de la requete inscription");
+pg_query($conn, $query) or die ("echec de la requete inscription");
 
 mysqli_close($conn);
 

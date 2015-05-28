@@ -5,14 +5,14 @@ if(isset($_POST["bp_valider"])){
 	$idT=$explode[0];
 	$idConducteur=$explode[1];
 	$requete="INSERT INTO Avis(idDonneur, idReceveur, idT, texte, note) values('".$_SESSION['idU']."','".$idConducteur."',".$idT.",'".addslashes($_POST['texte'])."',".$_POST['note'].");";
-	$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
+	$resultat = pg_query($conn, $requete) OR die('Erreur insertion : '.pg_last_error($conn));
     
     // on met à jour la moyenne de l'utilisateur
     $req="SELECT AVG(note) FROM Avis WHERE idReceveur='".$idConducteur."'";
-    $res=mysqli_query($conn, $req) OR die ('Erreur select moyenne avis :'.mysqli_error($conn));
-    $note=mysqli_fetch_row($res);
+    $res=pg_query($conn, $req) OR die ('Erreur select moyenne avis :'.pg_last_error($conn));
+    $note=pg_fetch_row($res);
     $req="UPDATE CompteUtilisateur set moyenne='" . $note[0] . "' where idU='".$idConducteur."'";
-    $res=mysqli_query($conn, $req) OR die ('Erreur insert moyenne avis :'.mysqli_error($conn));
+    $res=pg_query($conn, $req) OR die ('Erreur insert moyenne avis :'.pg_last_error($conn));
     
 	?>
 
@@ -22,7 +22,7 @@ if(isset($_POST["bp_valider"])){
 }else{
 
 	$reqPostuler="SELECT * FROM Postuler p, Trajets t WHERE (p.idU='".$_SESSION['idU']."' AND p.idT=t.idT AND p.idT NOT IN (SELECT idT FROM Avis WHERE idDonneur ='".$_SESSION['idU']."' ));";
-	$reqPostuler = mysqli_query($conn, $reqPostuler) OR die('Erreur select : '.mysqli_error($conn));
+	$reqPostuler = pg_query($conn, $reqPostuler) OR die('Erreur select : '.pg_last_error($conn));
 
 ?> 
 <div class="page-header">
@@ -31,12 +31,12 @@ if(isset($_POST["bp_valider"])){
 		
 		<p><label for="trajet" class="col-lg-1">Trajet :</label>
 		<select class="form-group" name="trajet">
-		<?php while ($resPostuler = mysqli_fetch_array($reqPostuler)){ 
+		<?php while ($resPostuler = pg_fetch_array($reqPostuler)){ 
         
             /* On récup les infos du trajet */
             $reqTrajet="select v1.nomV as depart, v2.nomV as dest, t.dateT as date from Trajets t, Villes v1, Villes v2 WHERE t.idT=".$resPostuler['idT']." AND v1.idVille=idVilleDepart AND v2.idVille=idVilleDestination";
-            $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
-            $trajet=mysqli_fetch_array($resTrajet);
+            $resTrajet=pg_query($conn, $reqTrajet) or die ('Erreur select l14: '.pg_last_error($conn));
+            $trajet=pg_fetch_array($resTrajet);
         
         ?>
 					  <option value=<?php echo "'" . $resPostuler['idT']."/".$resPostuler['idConducteur'] . "'"?> ><?php echo  $trajet['depart'] . " → ".$trajet['dest'] . " / " . $resPostuler['idConducteur'] . " / " . date('d/m/Y', $resPostuler['dateT']); ?></option>

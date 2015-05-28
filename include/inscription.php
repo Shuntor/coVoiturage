@@ -71,8 +71,8 @@ function verifMdp($inscriptionMdp, $inscriptionConfMdp)
 
 function verifIdLibre($mail, $conn)
 {
-   $result = mysqli_query($conn, "SELECT idU FROM CompteUtilisateur WHERE idU='$mail'");
-if(mysqli_num_rows($result)>=1)
+   $result = pg_query($conn, "SELECT idU FROM CompteUtilisateur WHERE idU='$mail'");
+if(pg_num_rows($result)>=1)
     {
         return 0;
     }
@@ -144,9 +144,9 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
                              if (verifIdLibre($mail, $conn) === 1)
                              {
                              $query= "INSERT INTO CompteUtilisateur (idU, nomU, prenomU, age, genre, pays, mail, telephone, mdp) VALUES ('$mail', '$nom', '$prenom', '$age', '$genre', '$pays', '$mail', '$telephone',  '$inscriptionMdp')";
-        mysqli_query($conn, $query) or die (mysqli_error($conn));
+        pg_query($conn, $query) or die (pg_last_error($conn));
 
-        mysqli_close($conn);
+        pg_close($conn);
                                   //header('Location: index.php');
                                   
            

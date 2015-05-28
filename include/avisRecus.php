@@ -15,11 +15,12 @@ if(mysqli_num_rows($reqAvis)==0){
 
 $req="SELECT * FROM Avis WHERE idReceveur = '".$_SESSION['idU'] . "'";
 
-$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
+
+$req=pg_query($conn, $req) or die('Erreur select : '.pg_last_error($conn));
 
     $reqMoyenne="SELECT AVG(note) FROM Avis WHERE idReceveur='".$_SESSION['idU']."';";
-    $reqMoyenne=mysqli_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.mysqli_error($conn));
-    $moyenne= mysqli_fetch_row($reqMoyenne);
+    $reqMoyenne=pg_query($conn, $reqMoyenne) or die ('Erreur select moyenne : '.pg_last_error($conn));
+    $moyenne= pg_fetch_row($reqMoyenne);
     
     if ($moyenne[0])
     {
@@ -38,17 +39,17 @@ $req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
     </div>          
 <?php
     }
-    while ($res = mysqli_fetch_array($req)){  
+    while ($res = pg_fetch_array($req)){  
+
     /* On selectionne les infos de l'utilisateur qui a donné la note */
     $reqDonneur="SELECT * FROM CompteUtilisateur WHERE idU = '".$res['idDonneur'] ."'";
-    $reqDonneur=mysqli_query($conn, $reqDonneur) or die('Erreur select : '.mysqli_error($conn));
-    $donneur=mysqli_fetch_array($reqDonneur);
+    $reqDonneur=pg_query($conn, $reqDonneur) or die('Erreur select : '.pg_last_error($conn));
+    $donneur=pg_fetch_array($reqDonneur);
     
     /* On récup les infos du trajet */
     $reqTrajet="select v1.nomV as depart, v2.nomV as dest, t.dateT as date from Trajets t, Villes v1, Villes v2 WHERE t.idT=".$res['idT']." AND v1.idVille=idVilleDepart AND v2.idVille=idVilleDestination";
-    $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
-    $trajet=mysqli_fetch_array($resTrajet);
-
+    $resTrajet=pg_query($conn, $reqTrajet) or die ('Erreur select l14: '.pg_last_error($conn));
+    $trajet=pg_fetch_array($resTrajet);
     ?> 
 
     <div class="row marketing col-lg-12">

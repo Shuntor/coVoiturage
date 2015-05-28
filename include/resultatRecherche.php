@@ -2,16 +2,16 @@
 if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_POST['villeDestination'])){
     
     $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
-    $resChercheD=mysqli_query($conn, $reqChercheD);
-    if (($villeD=mysqli_fetch_row($resChercheD)) != NULL)
+    $resChercheD=pg_query($conn, $reqChercheD);
+    if (($villeD=pg_fetch_row($resChercheD)) != NULL)
         $idVilleD=$villeD[0];
     else
         $idVilleD=-1;
     
     
     $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
-    $resChercheA=mysqli_query($conn, $reqChercheA);
-    if (($villeA=mysqli_fetch_row($resChercheA)) != NULL)
+    $resChercheA=pg_query($conn, $reqChercheA);
+    if (($villeA=pg_fetch_row($resChercheA)) != NULL)
         $idVilleA=$villeA[0];
     else
         $idVilleA=-1;
@@ -21,11 +21,11 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
         
 	// $reqVilleD="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
 	// $reqVilleA="SELECT idVille FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
-	// $reqVilleD=mysqli_query($conn, $reqVilleD) or die('Erreur select : '.mysqli_error($conn));
-	// $reqVilleA=mysqli_query($conn, $reqVilleA) or die('Erreur select : '.mysqli_error($conn));
-	// $idVilleD=mysqli_fetch_row($reqVilleD);
+	// $reqVilleD=pg_query($conn, $reqVilleD) or die('Erreur select : '.pg_last_error($conn));
+	// $reqVilleA=pg_query($conn, $reqVilleA) or die('Erreur select : '.pg_last_error($conn));
+	// $idVilleD=pg_fetch_row($reqVilleD);
 	// $idVilleD=$idVilleD[0];
-	// $idVilleA=mysqli_fetch_row($reqVilleA);
+	// $idVilleA=pg_fetch_row($reqVilleA);
 	// $idVilleA=$idVilleA[0];
 
 	// echo $_POST['date'];
@@ -46,7 +46,7 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
 			AND idVilleDestination=".$idVilleA.";";
     }
 
-	$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
+	$req=pg_query($conn, $req) or die('Erreur select : '.pg_last_error($conn));
 
 ?>
 <h1> Resultat de la recherche : </h1>
@@ -54,11 +54,11 @@ if(isset($_POST["bp_rechercher"]) && !empty($_POST['villeDepart']) && !empty($_P
         <div class="col-lg-6">
 <?php 
 
-	while ($res = mysqli_fetch_array($req)){ 
+	while ($res = pg_fetch_array($req)){ 
 		/*On va cherchr les informations relatifs au conducteur */
 		$reqConducteur="SELECT * from CompteUtilisateur WHERE idU ='".$res['idConducteur'] . "'";
-		$reqConducteur=mysqli_query($conn, $reqConducteur);
-		$conducteur=mysqli_fetch_array($reqConducteur, MYSQLI_ASSOC);
+		$reqConducteur=pg_query($conn, $reqConducteur);
+		$conducteur=pg_fetch_array($reqConducteur);
 		?>
 		<div class="form-group annonce">
           <h4><?php echo $_POST['villeDepart']." > ".$_POST['villeDestination']; ?></h4>
