@@ -242,30 +242,16 @@ margin-left:30px;
     padding:5px;
 }
 
-.error_msg_003, .success_msg_003, .info_msg_003, .warning_msg_003{
- width: 500px;
- height: auto;
- margin: 0px;
- padding: 2px 4px;
- font: bold 13px Arial,sans-serif;
- padding: 7px 0px 5px 5px;
- -moz-border-radius: 6px 6px 6px 6px;
- }
- 
-.error_msg_003{
- border:solid 1px #fb2929;
- background:#fb8592;
- color: #B10009;
- }
+.tableauTrajet{
+    border-radius:20px 20px 20px 20px;
+    border: 2px black outset;
+}
 
-.msg_003_image{
- width: 16px;
- height: 16px;
- float: left;
- margin: 0px 7px;
- }
+td
+{
+    border: 2px black solid;
+    padding: 10px;
+}
 
-.error_msg_003 #image{ background: url("icon/Error.png") no-repeat;}
-.success_msg_003 #image{ background: url("icon/success_icon_16.png") no-repeat;}
-.info_msg_003 #image{ background: url("icon/info_icon_16.png") no-repeat;}
-.warning_msg_003 #image{background: url("icon/warning_icon_16.png") no-repeat;}
+
+

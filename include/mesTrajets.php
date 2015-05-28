@@ -99,7 +99,7 @@
 
 						<!-- création du formulaire de saisie -->
 
-
+<div class="form-group annonce col-lg-12">
   <div class="page-header">
     <h1>Saisie d'un trajet : </h1>
     <p class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> 	</p>
@@ -107,7 +107,7 @@
     <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 	<form method="post" action="index.php?p=mesTrajets" onSubmit="return verif(this)">
 
-		<center><table class="table table-bordered">
+		<center><table class=" tableauTrajet">
 		<caption>Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
 		<tr><td>Quel jour souhaitez vous voyager ? <input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015"></td></tr>
 
@@ -167,14 +167,14 @@
           </ul>
           	<a class="btn btn-lg btn-success bouton" href="?p=trajetDetails&amp;t=<?=$trajet['idT']?>" role="button">Voir Détails...</a></li>
         </div>
-    	
+</div>    	
 		<?php
         }
 		?>
 		      
     </div>
     
-    
+   
     
 	<?php
 }?>
