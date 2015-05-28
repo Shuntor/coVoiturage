@@ -1,6 +1,13 @@
 <div class="annonce3 col-lg-12">
 <?php
 
+/* vérif si un avis est présent dans la base données */
+
+$reqAvis="SELECT * FROM avis;";
+$reqAvis=mysqli_query($conn, $reqAvis) or die('Erreur select : '.mysqli_error($conn));
+if(mysqli_num_rows($reqAvis)==0){
+                    echo "<p class=\"lead\"> Vous n'avez donné aucun avis </p>";
+}
 /* Affichage des avis qu'on a donné */
 
 /*$req="SELECT * FROM Avis WHERE idDonneur = '".$_SESSION['idU']."'";
@@ -40,5 +47,6 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
 
     <?php
     }
+
 ?>
 </div>

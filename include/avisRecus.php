@@ -1,6 +1,14 @@
 <div class="annonce3 col-lg-12">
     <?php
 
+/* vérif si un avis est présent dans la base données */
+
+$reqAvis="SELECT * FROM avis;";
+$reqAvis=mysqli_query($conn, $reqAvis) or die('Erreur select : '.mysqli_error($conn));
+if(mysqli_num_rows($reqAvis)==0){
+                    echo "<p class=\"lead\"> Vous n'avez reçu aucun avis </p>";
+}
+
 /* Affichage des avis qu'on a reçu */
 
 /*$req="SELECT * FROM Avis WHERE idReceveur = '".$_SESSION['idU']."'";*/
