@@ -150,7 +150,7 @@ if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['age']) || e
                                   //header('Location: index.php');
                                   
            
-            echo " <div class=\"alert alert-success col-lg-12\" role=\"alert\">ERREUR: Adresse e-mail déjà utilisée!</div>";
+            echo " <div class=\"alert alert-success col-lg-12\" role=\"alert\">Nouvel utilisateur enregistré !</div>";
             
                              }
                              else

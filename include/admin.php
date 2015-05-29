@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['idU']='a') {
+if ($_SESSION['idU']=='a') {
 
 	if (isset($_POST['supprimer'])) {	
 		$suppression="DELETE FROM CompteUtilisateur  WHERE idU='".$_POST['idU']."';";

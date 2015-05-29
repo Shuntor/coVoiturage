@@ -3,7 +3,7 @@
 
 /* vérif si un avis est présent dans la base données */
 
-$reqAvis="SELECT * FROM avis;";
+$reqAvis="SELECT * FROM Avis;";
 $reqAvis=mysqli_query($conn, $reqAvis) or die('Erreur select : '.mysqli_error($conn));
 if(mysqli_num_rows($reqAvis)==0){
                     echo "<p class=\"lead\"> Vous n'avez reçu aucun avis </p>";
