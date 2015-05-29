@@ -1,8 +1,10 @@
-INSERT INTO Villes(nomV,cp) VALUES	('Toulouse', '31000'),
-									('La Rochelle', '17000'),
-									('Pamiers', '09100'),
-									('Rochefort', '17300'),
-									('Bordeaux', '33000');
+INSERT INTO Villes(nomV,cp) VALUES 
+('Toulouse', '31000'),
+('La Rochelle', '17000'),
+('Pamiers', '09100'),
+('Rochefort', '17300'),
+('Bordeaux', '33000');
+
 insert into Villes (idVille, nomV, cp) values
 (100, 'Merignac', 45000),
 (101, 'Foix', 09000),

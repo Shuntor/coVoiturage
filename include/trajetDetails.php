@@ -1,13 +1,27 @@
 ﻿<?php
 
-$trajet=false;
+/*
+ * Nom : trajetDetails.php
+ * Description : Sur cette page on affiche la carte du trajet avec son itinéraire,
+ *               les détails du conducteur, de sa voiture, et la possibilité pour
+ *               l'utilisateur de postuler à ce trajet s'il est connecté.
+ * Pages appelées : trajetDetails.php
+ */
 
+ /*
+  * On récupère l'ID du trajet qui a été passé dans l'URL
+  * et on extrait les informations de ce trajet de la BDD
+  */
+$trajet=false;
 if(isset($_GET['t']))
 {
     $res=mysqli_query($conn, "select * from Trajets where idT='".mysqli_real_escape_string($conn, $_GET['t'])."'");
     $trajet=mysqli_fetch_array($res);
 }
 
+/*
+ * Si rien n'est retourné par la BDD, alors l'ID est invalide
+ */
 if(!$trajet)
 {
     ?>
@@ -16,6 +30,10 @@ if(!$trajet)
 }
 else
 {
+    /*
+     * Si l'utilisateur a postulé pour le trajet de la page, on vérifie qu'il est bien connecté
+     * et on valide sa place sur le trajet.
+     */
     if(isset($_POST['Postuler']) && isset($_SESSION['idU']))
     {
         $req="INSERT INTO Postuler (nbPlace, idU, idT) VALUES (1, '".$_SESSION['idU']."',".$_GET['t'].")";
@@ -25,18 +43,30 @@ else
         <?php
     }
     
+    /*
+     * Récupération des infos du conducteur de la BDD
+     */
     $reqConducteur="SELECT * FROM CompteUtilisateur WHERE idU='" . $trajet['idConducteur'] . "'";
     $resConducteur=mysqli_query($conn, $reqConducteur) OR die('Erreur select conducteur : ' . mysqli_error($conn));
     $conducteur=mysqli_fetch_array($resConducteur);
     
+    /*
+     * Récupération des détails de la ville de départ
+     */
     $reqVilleDepart = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDepart'] . "'";
     $resVilleDepart = mysqli_query($conn, $reqVilleDepart) OR die ('Erreur select villeDepart : ' . mysqli_error($conn));
     $villeDepart = mysqli_fetch_array($resVilleDepart);
     
+    /*
+     * Récupération des détails de la ville d'arrivée
+     */
     $reqVilleArrivee = "SELECT * FROM Villes WHERE idVille='" . $trajet['idVilleDestination'] . "'";
     $resVilleArrivee = mysqli_query($conn, $reqVilleArrivee) OR die ('Erreur select villeArrivee : ' . mysqli_error($conn));
     $villeArrivee = mysqli_fetch_array($resVilleArrivee);
     
+    /*
+     * Récupération des détails de la voiture du trajet
+     */
     $reqVoiture = "SELECT * FROM Voitures WHERE idV='" . $trajet['idVoiture'] . "'";
     $resVoiture = mysqli_query($conn, $reqVoiture) OR die ('Erreur select voiture : ' . mysqli_error($conn));
     $voiture = mysqli_fetch_array($resVoiture);
@@ -52,43 +82,40 @@ else
             </div>
             <div class="panel-body">
                     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
+                    <script>
+                    var directionsDisplay;
+                    var directionsService = new google.maps.DirectionsService();
+                    var map;
 
+                    function initialize() {
+                      directionsDisplay = new google.maps.DirectionsRenderer();
+                      var mapOptions = {
+                        zoom: 7
+                      }
+                      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                      directionsDisplay.setMap(map);
+                      calcRoute();
+                    }
 
-var directionsDisplay;
-var directionsService = new google.maps.DirectionsService();
-var map;
+                    function calcRoute() {
+                      var request = {
+                          origin: '<?=$villeDepart['nomV']?>',
+                          destination: '<?=$villeArrivee['nomV']?>',
+                          travelMode: google.maps.TravelMode.DRIVING,
+                          unitSystem: google.maps.UnitSystem.METRIC
 
-function initialize() {
-  directionsDisplay = new google.maps.DirectionsRenderer();
-  var mapOptions = {
-    zoom: 7
-  }
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  directionsDisplay.setMap(map);
-  calcRoute();
-}
+                      };
+                      directionsService.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                          directionsDisplay.setDirections(response);
+                          $('#details-trajet ul').append('<br><li class="list-unstyled">Distance : <strong>' + response.routes[0].legs[0].distance.text + '</strong></li>');
+                          $('#details-trajet ul').append('<li class="list-unstyled">Durée : <strong>' + response.routes[0].legs[0].duration.text + '</strong></li>');
+                        }
+                      });
+                    }
 
-function calcRoute() {
-  var request = {
-      origin: '<?=$villeDepart['nomV']?>',
-      destination: '<?=$villeArrivee['nomV']?>',
-      travelMode: google.maps.TravelMode.DRIVING,
-      unitSystem: google.maps.UnitSystem.METRIC
-
-  };
-  directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-      $('#details-trajet ul').append('<br><li class="list-unstyled">Distance : <strong>' + response.routes[0].legs[0].distance.text + '</strong></li>');
-      $('#details-trajet ul').append('<li class="list-unstyled">Durée : <strong>' + response.routes[0].legs[0].duration.text + '</strong></li>');
-    }
-  });
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                    </script>
 
                 <div id="map-canvas" style="height:400px"></div>
 
@@ -150,9 +177,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       <div class="col-lg-12">
       <?php
+      /*
+       * On vérifie bien que l'utilisateur est connecté pour pouvoir postuler
+       */
       if(isset($_SESSION['idU']))
       {
-          // On vérifie si on a pas déjà postulé à ce trajet
+          /*
+           * On vérifie si l'utilsateur n'a pas déjà postulé à ce trajet
+           */
           $req="SELECT 1 FROM Postuler WHERE idU='".$_SESSION['idU']."' AND idT='".$_GET['t']."'";
           $res=mysqli_query($conn, $req) or die ('Erreur select postuler ligne 102 : '. mysqli_error($conn));
           if(mysqli_num_rows($res) != 0)
@@ -162,7 +194,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <?php
           }
           
-          // On vérifie si on est pas le conducteur
+          /*
+           * On vérifie si l'utilisateur n'est pas le conducteur
+           */
           else if ($conducteur['idU'] == $_SESSION['idU'])
           {
               

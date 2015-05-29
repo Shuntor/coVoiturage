@@ -1,54 +1,76 @@
 <?php
 
-// TODO : tests des valeurs + garder le zéro devant le CP
+/*
+ * Nom : gestionProfil.php
+ * Description : Sur cette page l'utilisateur peut modifier ses informations
+ *               personnelles, son mot de passe, et ajouter des voitures.
+ * Pages appelées : index.php gestionProfil.php
+ */
 
+/*
+ * Si l'utilisateur n'est pas connecté on le redirige vers la page d'accueil
+ */
 if (!isset($_SESSION['idU']))
     header ("Location: index.php");
 
+
+/*
+ * On récupère les informations de notre utilisateur déjà présentes dans la BDD
+ */
 $query = "SELECT *
 FROM CompteUtilisateur
 WHERE idU = '".addslashes($_SESSION['idU']) . "';";
-
 $result = mysqli_query($conn,$query) or die (mysqli_error($conn));
-
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
 $utilisateur = $row;
 
+/*
+ * On vérifie que les données du formulaire sont valides
+ */
 $modifValides = TRUE;
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if (isset($_POST['infos']))
     {
-        // prenom
+        /*
+         * On vérifie que prénom n'est pas vide
+         */
         if (empty($_POST['prenom']))
         {
             echo "Prenom vide !<br/>";
             $modifValides = FALSE;
         }
         
-        //nom
+        /*
+         * On vérifie que le nom n'est pas vide
+         */
         if (empty($_POST['nom']))
         {
             echo "Nom vide !<br/>";
             $modifValides = FALSE;
         }
         
-        //pays
+        /*
+         * On vérifie que le pays n'est pas vide
+         */
         if (empty($_POST['pays']))
         {
             echo "Payse vide !<br/>";
             $modifValides = FALSE;
         }
         
-        //genre
+        /*
+         * On vérifie que le genre n'est pas vide
+         */
         if (empty($_POST['genre']))
         {
             echo "Genre vide !<br/>";
             $modifValides = FALSE;
         }
         
-        //mail
+        /*
+         * On vérifie que le mail n'est pas vide et qu'il est valide
+         */
         if (empty($_POST['mail']))
         {
             echo "Mail vide !<br/>";
@@ -60,14 +82,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $modifValides = FALSE;
         }
         
-        //telephone
+        /*
+         * On vérifie que le telephone n'est pas vide
+         */
         if (empty($_POST['telephone']))
         {
             echo "Téléphone vide !<br/>";
             $modifValides = FALSE;
         }
         
-        //age
+        /*
+         * On vérifie que l'age n'est pas vide et qu'il est valide
+         */
         if (empty($_POST['age']))
         {
             echo "Age vide !<br />";
@@ -79,7 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $modifValides = FALSE;
         }
         
-        //mdp
+        /*
+         * Si l'utilisateur a modifié son mot de passe, on vérifie
+         * qu'il l'a bien retapé
+         */
         if (!empty($_POST['nouveauMdp']))
         {
             if ($_POST['ancienMdp'] != $utilisateur['mdp'])
@@ -94,6 +123,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             }
         }
         
+        /*
+         * Si les champs du formulaire sont valides, on effectue les modifications dans la BDD
+         * de ses informations personnelles
+         */
         if ($modifValides)
         {
             $query  = "UPDATE CompteUtilisateur SET ";
@@ -109,12 +142,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $query .= "WHERE idU='" . $_SESSION['idU'] . "';";
             
             mysqli_query($conn,$query) or die (mysqli_error($conn));
-            //print_r($result);
             echo "Modifications effectués !";
         }
         else
             echo "Aucune modification effectué !";
     }
+    
+    /*
+     * Si l'utilisateur a rajouter une voiture, on l'ajoute dans la BDD
+     */
     else if (isset($_POST['voiture']))
     {
         $query = "INSERT INTO Voitures (couleur, marque, nbPlace, annee, idU) VALUES (";
@@ -130,26 +166,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
 }
     
+/*
+ * On re-recupère les informations de l'utilisateur qui ont été mises à jour
+ * On s'en servira pour l'affichage dans le formulaire
+ */
 $query = "SELECT *
 FROM CompteUtilisateur
 WHERE idU = '".addslashes($_SESSION['idU']) . "';";
-
 $result = mysqli_query($conn,$query) or die (mysqli_error($conn));
-
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
 $utilisateur = $row;
-
-
-/*
-echo '<pre>';
-print_r($result);
-print_r($utilisateur);
-print_r($_SESSION);
-print_r($_SERVER);
-print_r($_POST);
-echo '</pre>';
-*/
 
 ?>
 

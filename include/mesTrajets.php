@@ -1,6 +1,18 @@
-
 <?php
+
+/*
+ * Nom : mesTrajets.php
+ * Description : Sur cette page on peut proposer un nouveau trajet avec les
+ *               details de celui-ci (ville départ, ville d'arrivée, heures de
+ *               départs et d'arrivée, et type de voiture).
+ *               On affiche également les 20 derniers trajets que l'utilisateur
+ *               a proposé.
+ * Pages appelées : trajetDetails.php mesTrajets.php
+ */
     
+    /*
+     * On vérifie que l'utilisateur a bien une voiture d'enregistré
+     */
     $req="SELECT 1 FROM Voitures WHERE idU='".$_SESSION['idU'] ."'";
     $res=mysqli_query($conn, $req) or die ('Erreur select check voiture'.mysqli_error($conn));
     if (mysqli_num_rows($res) < 1)
@@ -8,33 +20,50 @@
         echo "<div class='col-lg-12 alert alert-danger'>Pas de voiture ! Ajoutez une voiture avant de continuer !<br/>
         <a href='?p=gestionProfil'>Aller à la gestion de mon profil...</a></div>";
     }
-        
+    
+    /*
+     * On vérifie que les champs ville de départ et ville d'arrivée ne sont pas vides
+     */
 	if(isset($_POST["bp_valider"])&& !empty($_POST['villeDepart']) && !empty($_POST['villeDestination']))
 			{
 
-				//echo $_POST['dateTrajet']." - ".$_POST['lieuDepart']." - ".$_POST['hD']." - ".$_POST['lieuArrivee']." - ".$_POST['hA']." - ".$_POST['voiture'];
                 $formValide=true;
+                
+                /*
+                 * On vérifie qu'il y a bien une voiture pour le trajet
+                 */
                 if (empty($_POST['voiture']))
                 {
                     $formValide=false;
                     echo "<div class='col-lg-12 alert alert-danger'><strong>Pas de voiture ! Ajoutez une voiture avant de continuer !<br/>
                     <a href='?p=gestionProfil'>Aller à la gestion de mon profil...</a></strong></div>";
                 }
+                
+                /*
+                 * On vérifie qu'une date est bien prévue pour le trajet
+                 */
                 if (empty($_POST['dateTrajet']))
                 {
                     $formValide=false;
                     echo "<div class='col-lg-12 alert alert-danger'>Date vide !</div>";
                 }
+                
+                /*
+                 * On vérifie que le champ heure est correctement rempli et valide
+                 */
                 if (preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hA']) && preg_match("/(2[0-3]|[01][0-9]):[0-5][0-9]/", $_POST['hD']) && $formValide)
                 {
                 
-				//On transforme la date en timestamp
+                    /*
+                     * On transforme la date (texte) en timestamp (nombre)
+                     */
+                    date_default_timezone_set('Europe/Paris');
+                    $exp_date = str_replace('/', '-', $_POST['dateTrajet']);
+                    $timestamp = strtotime($exp_date);
                 
-                date_default_timezone_set('Europe/Paris');
-                $exp_date = str_replace('/', '-', $_POST['dateTrajet']);
-				$timestamp = strtotime($exp_date);
-                
-                    // On cherche ou insère la ville de départ
+                    /*
+                     * On cherche si la ville de départ existe dans notre BDD, sinon on l'insère
+                     */
                     $reqChercheD="SELECT * FROM Villes WHERE nomV='".$_POST['villeDepart']."';";
                     $resChercheD=mysqli_query($conn, $reqChercheD);
                     if (($villeD=mysqli_fetch_row($resChercheD)) != NULL)
@@ -49,8 +78,9 @@
                         $idVilleD=$villeD[0];
                     }
 
-
-                    // On cherche ou insère la ville d'arrivée
+                    /*
+                     * On cherche si la ville d'arrivée existe dans notre BDD, sinon on l'insère
+                     */
                     $reqChercheA="SELECT * FROM Villes WHERE nomV='".$_POST['villeDestination']."';";
                     $resChercheA=mysqli_query($conn, $reqChercheA);
                     if (($villeA=mysqli_fetch_row($resChercheA)) != NULL)
@@ -65,39 +95,43 @@
                         $idVilleA=$villeA[0];
                     }
 
-				//requete permettant d insérer le trajet dans la base de donnée
+				/*
+                 * On insère le trajet avec toutes ses caractéristiques dans la BDD
+                 */
 				$requete="insert into Trajets(dateT, heureD, heureA, idVilleDepart, idVilleDestination, idConducteur, idVoiture) values('".$timestamp."','".$_POST['hD']."','".$_POST['hA']."','".$idVilleD."','".$idVilleA."','".$_SESSION['idU']."','".$_POST['voiture']."')";
 				$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
-
 				?>
 
-				<!-- Il faut décorer ça  -->
-				<strong> Saisie enregistrée ! </strong><br><br />
-				<a href="index.php?p="> Retourner à l'accueil </a>
-				<?php } else {
+                <div class='col-lg-12 alert alert-success'><strong>Saisie enregistrée !<br/>
+                <a href='?p=gestionProfil'>Retourner à l'accueil</a></strong></div>
+                
+				<?php
+                }
+                else
+                {
                 ?>
                 
-				<!-- Il faut décorer ça  --><br />
-                <strong> Format de l'heure incorrect ! Merci d'utiliser heures:minutes ! <br />Comme 14:33 par exemple.<br/><br /> </strong>
-				<a href="index.php?p=mesTrajets"> Retourner à mes Trajets </a>
+				<div class='col-lg-12 alert alert-danger'><strong>Format de l'heure incorrect ! Merci d'utiliser heures:minutes ! <br />Comme 14:33 par exemple.<br/></strong>
+				<a href="index.php?p=mesTrajets">Retourner à mes Trajets</a></div>
                 
-                <?php } ?>
+                <?php
+                }
+                ?>
                 
 				
 								
-				<?php
-			}else{
+            <?php
+			}
+            else
+            {
+                /*
+                 * On récupère les informations des voitures de l'utilisateur
+                 */
 				$req="SELECT * FROM Voitures WHERE idU='" . $_SESSION['idU'] . "'";
 				$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));
-				/*$res=mysqli_fetch_array($req);*/
                 
-                
-                
-                
-				
-?>					
 
-						<!-- création du formulaire de saisie -->
+            ?>					
 
 <div class="form-group annonce col-lg-12">
   <div class="page-header">
@@ -109,7 +143,7 @@
         <div class="col-lg-1"></div>
 		<center><div class="annonce2 col-lg-10"><table class="table tableauTrajet col-lg-8" >
 		<caption class="lead">Saisie des informations du trajet de <?php echo $_SESSION["prenomU"]." ".$_SESSION["nomU"]; ?> </caption>
-		<tr><td>Quel jour souhaitez vous voyager ? </td><td><input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015">            </td><td></td></tr>
+		<tr><td>Quel jour souhaitez vous voyager ?</td><td><input type="text" id="datepicker" name="dateTrajet" placeholder="Ex: 15/10/2015">            </td><td></td></tr>
 
 		<tr><td>Lieu de départ :</td>
 			<td>
@@ -130,7 +164,11 @@
 		</tr>
 		<tr><td>Voiture : </td><td>
 			<select class="form-control" name="voiture">
-			<?php while ($resVoitures = mysqli_fetch_array($req)){ ?>
+			<?php
+            /*
+             * On boucle sur toutes les voitures de l'utilisateur et on affiche chacune d'elles comme une option
+             */
+            while ($resVoitures = mysqli_fetch_array($req)){ ?>
 						  <option value=<?php echo $resVoitures['idV']; ?> ><?php echo $resVoitures['marque']." ".$resVoitures['couleur']." (".$resVoitures['nbPLace']." places)"; ?></option>
 			<?php }?>
 			</select></td> <td></td>
@@ -153,9 +191,15 @@
     <div class="col-lg-12" >
 	    <?php
 	    
-	    /* On récupère les trajets de l'utilisateur courant */
+	    /*
+         * On récupère les 20 derniers trajets de l'utilisateur courant
+         */
 	    $reqTrajets="select v1.nomV as villeDepart, v2.nomV as villeArrivee, t.dateT as date, t.heureD as heureDepart, t.heureA as heureArrivee, idT from Trajets t, Villes v1, Villes v2 where t.idConducteur = '" . $_SESSION['idU'] . "' and v1.idVille = t.idVilleDepart and v2.idVille = t.idVilleDestination ORDER BY t.dateT LIMIT 20";
 		$resTrajets=mysqli_query($conn, $reqTrajets) or die('Erreur select : '.mysqli_error($conn));
+        
+        /*
+         * On affiche chacun des 20 trajets dans un bloc html
+         */
 		while ($trajet = mysqli_fetch_array($resTrajets)){ ?>
 				
 		<div class="form-group annonce mesTrajets col-lg-5 " style="margin-left:50px;margin-right:20;">
