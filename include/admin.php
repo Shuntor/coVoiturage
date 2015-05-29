@@ -1,21 +1,34 @@
 <?php
-if ($_SESSION['idU']=='a') {
+/* Nom : admin.php
+ * Description : Page ou l'administrateur pourra supprimer des utilisateurs et des trajets
+ * Pages appelées : -   
+ */
 
-	if (isset($_POST['supprimer'])) {	
+// On commence par vérifier que l'utilisateur est bien l'administrateur (dans le cas présent son identifiant est 'a')
+if ($_SESSION['idU']=='a') { 
+
+	// Si le bouton supprimé d'un utilisateur utilisé
+	if (isset($_POST['supprimer'])) {
+		//Suppression de l'utilisateur avec suppression des clés étrangères en cascade
 		$suppression="DELETE FROM CompteUtilisateur  WHERE idU='".$_POST['idU']."';";
 		$suppression=mysqli_query($conn, $suppression) or die('Erreur delete : '.mysqli_error($conn));
 	}
 
+	// Si le bouton d'un trajet a été utilisé
 	if (isset($_POST['supprimerT'])) {	
+		// Suppresion du trajet dans la table Postuler
 		$suppressionP="DELETE FROM Postuler  WHERE idT='".$_POST['idT']."';";
 		$suppressionP=mysqli_query($conn, $suppressionP) or die('Erreur delete : '.mysqli_error($conn));
 
+		// Suppresion du trajet dans la table Etapes
 		$suppressionE="DELETE FROM Etapes  WHERE idT='".$_POST['idT']."';";
 		$suppressionE=mysqli_query($conn, $suppressionE) or die('Erreur delete : '.mysqli_error($conn));
 
+		// Suppresion du trajet dans la table Avis
 		$suppressionA="DELETE FROM Avis  WHERE idT='".$_POST['idT']."';";
 		$suppressionA=mysqli_query($conn, $suppressionA) or die('Erreur delete : '.mysqli_error($conn));
 
+		// Et enfin la suppresion du trajet dans la table Trajets
 		$suppressionT="DELETE FROM Trajets  WHERE idT='".$_POST['idT']."';";
 		$suppressionT=mysqli_query($conn, $suppressionT) or die('Erreur delete : '.mysqli_error($conn));
 
@@ -29,7 +42,7 @@ if ($_SESSION['idU']=='a') {
 	 	<form method="post" action="index.php?p=admin" onSubmit="return verif(this)">
 	 <?php
 	 
-	    /* On récupère les derniers utilisateurs de 1 à 10 */
+	    /* On récupère les utilisateurs inscrits au site */
 	    $reqUtilisateur="SELECT * FROM CompteUtilisateur  where idU!='".$_SESSION['idU']."'";
 		$reqUtilisateur=mysqli_query($conn, $reqUtilisateur) or die('Erreur select : '.mysqli_error($conn));
 
@@ -65,7 +78,7 @@ if ($_SESSION['idU']=='a') {
 	 	<form method="post" action="index.php?p=admin" onSubmit="return verif(this)">
 	 <?php
 	 
-	    /* On récupère les derniers utilisateurs de 1 à 10 */
+	    /* On récupère les trajets */
 	    $reqSelecTrajet="SELECT DISTINCT t.idT, t.dateT, t.heureD, t.heureA, t.idVilleDestination, t.idVilleDepart, t.idConducteur, t.idVoiture, c.nomU, v.marque 
 	    				FROM Trajets t, Postuler p, CompteUtilisateur c, Voitures v  
 	    				WHERE t.idT=p.idT AND t.idConducteur=c.idU AND v.idV=t.idVoiture 
@@ -75,7 +88,8 @@ if ($_SESSION['idU']=='a') {
 
 
 
-			while ($trajet = mysqli_fetch_array($reqSelecTrajet)){
+			while ($trajet = mysqli_fetch_array($reqSelecTrajet)){ //Tant que des trajets peuent être récupéré
+					//Requête que recherche le nom de la ville
 					$reqVille="SELECT vD.nomV, vA.nomV FROM Villes vD, Villes vA WHERE vD.idVille=".$trajet['idVilleDepart']." AND vA.idVille=".$trajet['idVilleDestination'].";";
 					$reqVille=mysqli_query($conn, $reqVille) or die('Erreur select : '.mysqli_error($conn));
 					$ville=mysqli_fetch_row($reqVille);
@@ -103,7 +117,7 @@ if ($_SESSION['idU']=='a') {
 	 </div>
 	 </div>
 <?php
-}else{
+}else{ //Cas où l'utilisateur n'est pas admin
 	echo "Vous n'êtes pas administrateur !";
 
 }

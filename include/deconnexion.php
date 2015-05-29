@@ -1,5 +1,12 @@
 ﻿<?php
-	session_destroy();
+/* Nom : deconnexion.php
+ * Description : Script de deconnexion
+ * Pages appelées : Redrecton vers l'accueil   
+ */
+	//On détruit la session
+	session_destroy(); 
+
+	//On va chercher les donnée du serveur 
 	$host  = $_SERVER['HTTP_HOST'];
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	$extra = 'index.php?p=';
