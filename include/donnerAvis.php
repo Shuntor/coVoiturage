@@ -1,9 +1,18 @@
+<!--
+    * Nom:donnerAvis.php
+    
+    * Description: contenu de l'onglet "Donner un avis" en damandant de quel trajet il s'agit, la note, et un petit texte d'accompagnement.
+    
+    * Pages appelées: index.php
+-->
+
 <div class="annonce3 col-lg-12">
 <?php
 if(isset($_POST["bp_valider"])){
 	$explode= explode("/", $_POST['trajet']);
 	$idT=$explode[0];
 	$idConducteur=$explode[1];
+    /*Requete permettant d'ajouter un avis dans la table avis*/
 	$requete="INSERT INTO Avis(idDonneur, idReceveur, idT, texte, note) values('".$_SESSION['idU']."','".$idConducteur."',".$idT.",'".addslashes($_POST['texte'])."',".$_POST['note'].");";
 	$resultat = mysqli_query($conn, $requete) OR die('Erreur insertion : '.mysqli_error($conn));
     
@@ -20,7 +29,7 @@ if(isset($_POST["bp_valider"])){
 	<a href="index.php?p="> Retourner à l'accueil </a>
 	<?php
 }else{
-
+    /*Requete permettant de récupérer tous les trajets auquel l'utilisateur s'est inscrit */
 	$reqPostuler="SELECT * FROM Postuler p, Trajets t WHERE (p.idU='".$_SESSION['idU']."' AND p.idT=t.idT AND p.idT NOT IN (SELECT idT FROM Avis WHERE idDonneur ='".$_SESSION['idU']."' ));";
 	$reqPostuler = mysqli_query($conn, $reqPostuler) OR die('Erreur select : '.mysqli_error($conn));
 
@@ -33,7 +42,7 @@ if(isset($_POST["bp_valider"])){
 		<select class="form-group" name="trajet">
 		<?php while ($resPostuler = mysqli_fetch_array($reqPostuler)){ 
         
-            /* On récup les infos du trajet */
+            /* On récupère les infos du trajet */
             $reqTrajet="select v1.nomV as depart, v2.nomV as dest, t.dateT as date from Trajets t, Villes v1, Villes v2 WHERE t.idT=".$resPostuler['idT']." AND v1.idVille=idVilleDepart AND v2.idVille=idVilleDestination";
             $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
             $trajet=mysqli_fetch_array($resTrajet);

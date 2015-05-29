@@ -1,4 +1,11 @@
-
+<!--
+    * Nom:accueil.php
+    
+    * Description: Page d'accueil du site internet avec le module de recherche de trajet
+                  
+    
+    * Pages appelées: trajetDetails.php
+-->
     <script src="http://maps.google.com/maps/api/js?libraries=places&region=fr&language=fr"></script>
 <div class="jumbotron formRecherche col-lg-12">
          <section>

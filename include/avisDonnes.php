@@ -1,3 +1,10 @@
+<!--
+    * Nom:avisDonnees.php
+    
+    * Description: contenu de l'onglet "Avis Donnés", permettant à l'utilisateur de voir les avis qu'il a donné
+    
+    * Pages appelées: 
+-->
 <div class="annonce3 col-lg-12">
 <?php
 
@@ -10,8 +17,7 @@ if(mysqli_num_rows($reqAvis)==0){
 }
 /* Affichage des avis qu'on a donné */
 
-/*$req="SELECT * FROM Avis WHERE idDonneur = '".$_SESSION['idU']."'";
-$req=mysqli_query($conn, $req) or die('Erreur select : '.mysqli_error($conn));*/
+
 
 $req="SELECT * FROM Avis WHERE idDonneur = '".$_SESSION['idU'] . "'";
 $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
@@ -29,7 +35,7 @@ $req=mysqli_query($conn, $req) or die('Erreur select l5: '.mysqli_error($conn));
     $reqReceveur=mysqli_query($conn, $reqReceveur) or die('Erreur select l9: '.mysqli_error($conn));
     $receveur=mysqli_fetch_array($reqReceveur);
     
-    /* On récup les infos du trajet */
+    /* On récupère les infos du trajet */
     $reqTrajet="select v1.nomV as depart, v2.nomV as dest, t.dateT as date from Trajets t, Villes v1, Villes v2 WHERE t.idT=".$res['idT']." AND v1.idVille=idVilleDepart AND v2.idVille=idVilleDestination";
     $resTrajet=mysqli_query($conn, $reqTrajet) or die ('Erreur select l14: '.mysqli_error($conn));
     $trajet=mysqli_fetch_array($resTrajet);
