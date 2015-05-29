@@ -109,7 +109,7 @@
   <body>
 
 
-  <?php include 'connect.php';/*include 'fonctions.php'; */ ?>
+  <?php include 'connect_pg.php';/*include 'fonctions.php'; */ ?>
 <?php 
  
 ?>
